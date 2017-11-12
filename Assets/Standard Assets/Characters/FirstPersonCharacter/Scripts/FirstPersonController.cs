@@ -96,7 +96,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				sneaking = true;
 			else
 				sneaking = false;
-			if (Input.GetButtonDown ("Crouch")) {
+			if (Input.GetButtonDown ("Crouch") && m_CharacterController.isGrounded) {
 				crouching = !crouching;
 				actuallyCrouched = true;
 			}
