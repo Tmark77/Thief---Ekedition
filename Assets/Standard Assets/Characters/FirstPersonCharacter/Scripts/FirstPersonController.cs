@@ -50,7 +50,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool sneaking = false;
 		private bool running = false;
 		private bool crouching = false;
-
+		private bool actuallyCrouched = false;
         // Use this for initialization
         private void Start()
         {
@@ -96,8 +96,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				sneaking = true;
 			else
 				sneaking = false;
-			if (Input.GetButtonDown ("Crouch")) 
+			if (Input.GetButtonDown ("Crouch")) {
 				crouching = !crouching;
+				actuallyCrouched = true;
+			}
             if (Input.GetButton ("Run")) {
 				running = true;
 				sneaking = false;
@@ -130,9 +132,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void PlayLandingSound()
         {
-            if (crouching)
+			if (actuallyCrouched)
             {
                 m_AudioSource.clip = null;
+				actuallyCrouched = false;
             }
             else
             {
