@@ -51,6 +51,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool running = false;
 		private bool crouching = false;
 		private bool actuallyCrouched = false;
+
+		public Camera RPcam;
+		public Camera LPcam;
+		public Camera basicCam;
         // Use this for initialization
         private void Start()
         {
@@ -69,28 +73,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         // Update is called once per frame
         private void Update()
-        {
-			
-            RotateView();
-            // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
+		{
+			m_Camera.transform.position = basicCam.transform.position;
 
-            if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
-            {
-                StartCoroutine(m_JumpBob.DoBobCycle());
-                PlayLandingSound();
-                m_MoveDir.y = 0f;
-                m_Jumping = false;
-            }
-            if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
-            {
-                m_MoveDir.y = 0f;
-            }
+			RotateView ();
+			// the jump state needs to read here to make sure it is not missed
+			if (!m_Jump) {
+				m_Jump = CrossPlatformInputManager.GetButtonDown ("Jump");
+			}
 
-            m_PreviouslyGrounded = m_CharacterController.isGrounded;
+			if (!m_PreviouslyGrounded && m_CharacterController.isGrounded) {
+				StartCoroutine (m_JumpBob.DoBobCycle ());
+				PlayLandingSound ();
+				m_MoveDir.y = 0f;
+				m_Jumping = false;
+			}
+			if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded) {
+				m_MoveDir.y = 0f;
+			}
+
+			m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
 			if (Input.GetButton ("Sneak"))
 				sneaking = true;
@@ -100,11 +102,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				crouching = !crouching;
 				actuallyCrouched = true;
 			}
-            if (Input.GetButton ("Run")) {
+			if (Input.GetButton ("Run")) {
 				running = true;
 				sneaking = false;
 			} else
 				running = false;
+
+			if (Input.GetButton ("Right Peek")) {
+				if (running == false && m_Jumping == false) {
+					m_Camera.transform.position = RPcam.transform.position;
+					m_Camera.transform.rotation = RPcam.transform.rotation;
+				}
+			}
+
+			if (Input.GetButton ("Left Peek")) {
+				if (running == false && m_Jumping == false) {
+					m_Camera.transform.position = LPcam.transform.position;
+					m_Camera.transform.rotation = LPcam.transform.rotation;
+				}
+			}
 
 			currentSpeed = m_WalkSpeed;
 
@@ -113,21 +129,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				m_CharacterController.height = 0.6f;
 			} else
 				m_CharacterController.height = 1.8f;
-            if (sneaking)
+			if (sneaking)
 				currentSpeed += sneakSpeed;
 			if (running)
 				currentSpeed += m_RunSpeed;
 			if (currentSpeed < minimumSpeed)
 				currentSpeed = minimumSpeed;
 
-			if (Input.GetButton ("Right Peek")) {
 
-			}
-
-			if (Input.GetButton ("Left Peek")) {
-
-			}
-                
         }
         
         private void PlayLandingSound()

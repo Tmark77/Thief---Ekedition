@@ -6,31 +6,27 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class Climbing : MonoBehaviour {
 
 	private bool canClimb;
-	private Rigidbody rb;
-	private RigidbodyFirstPersonController cc;
 	public Animator anim;
 	public Camera climbCam;
 	public Camera mainCam;
+	public Transform playerObject;
 
 	public static bool alatetVisible;
 
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>();
-		cc = GetComponent<RigidbodyFirstPersonController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 
-		if(canClimb && Input.GetKeyDown(KeyCode.E))
+		if(canClimb && Input.GetKeyDown(KeyCode.F))
 			{
 			mainCam.depth = 0;
 			climbCam.depth = 1;
-			//cc.enabled = false;
-			rb.useGravity = false;
-			rb.isKinematic = false;
+			MouseLook.XSensitivity = 0;
+			MouseLook.YSensitivity = 0;
 			anim.SetTrigger ("Climb");
 			StartCoroutine (afterClimb ());
 			}
@@ -40,10 +36,10 @@ public class Climbing : MonoBehaviour {
 		yield return new WaitForSeconds (2);
 		mainCam.depth = 1;
 		climbCam.depth = 0;
-		//cc.enabled = true;
-		rb.useGravity = true;
-		rb.isKinematic = true;
-		transform.position = climbCam.transform.position;
+		MouseLook.XSensitivity = 2;
+		MouseLook.YSensitivity = 2;
+		anim.SetTrigger ("NoClimb");
+		playerObject.position = climbCam.transform.position;
 	}
 
 	void OnTriggerEnter(Collider other)
