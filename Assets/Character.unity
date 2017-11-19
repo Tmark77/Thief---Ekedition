@@ -120,6 +120,8 @@ GameObject:
   - component: {fileID: 48943846}
   - component: {fileID: 48943845}
   - component: {fileID: 48943844}
+  - component: {fileID: 48943848}
+  - component: {fileID: 48943849}
   m_Layer: 0
   m_Name: RPcam
   m_TagString: Untagged
@@ -197,6 +199,29 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!65 &48943848
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 48943842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &48943849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 48943842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3acde4c84da28f4895fa3605974e99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &57784657
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +727,7 @@ GameObject:
   - component: {fileID: 358845859}
   m_Layer: 8
   m_Name: Blocks3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1234,7 +1259,7 @@ GameObject:
   - component: {fileID: 587525740}
   m_Layer: 8
   m_Name: Blocks2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1316,7 +1341,7 @@ GameObject:
   - component: {fileID: 595296209}
   m_Layer: 8
   m_Name: Ramp (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2139,7 +2164,7 @@ GameObject:
   - component: {fileID: 1222784966}
   m_Layer: 8
   m_Name: Ramp (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2222,7 +2247,7 @@ GameObject:
   - component: {fileID: 1260603721}
   m_Layer: 8
   m_Name: Ramp (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2305,7 +2330,7 @@ GameObject:
   - component: {fileID: 1375875577}
   m_Layer: 8
   m_Name: Ramp
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2388,7 +2413,7 @@ GameObject:
   - component: {fileID: 1615496707}
   m_Layer: 8
   m_Name: Blocks1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2827,6 +2852,8 @@ GameObject:
   - component: {fileID: 1859883511}
   - component: {fileID: 1859883510}
   - component: {fileID: 1859883509}
+  - component: {fileID: 1859883513}
+  - component: {fileID: 1859883514}
   m_Layer: 0
   m_Name: LPcam
   m_TagString: Untagged
@@ -2904,6 +2931,29 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!65 &1859883513
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1859883507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1859883514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1859883507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8557180c2a6efca4b973b106272193fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1900024817
 GameObject:
   m_ObjectHideFlags: 0
@@ -3122,7 +3172,7 @@ GameObject:
   - component: {fileID: 2103206797}
   m_Layer: 8
   m_Name: Ramp (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

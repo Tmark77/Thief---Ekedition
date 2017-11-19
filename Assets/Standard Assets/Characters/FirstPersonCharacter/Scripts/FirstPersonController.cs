@@ -55,6 +55,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public Camera RPcam;
 		public Camera LPcam;
 		public Camera basicCam;
+		public static bool canPeekR = false;
+		public static bool canPeekL = false;
         // Use this for initialization
         private void Start()
         {
@@ -69,7 +71,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
         }
-
 
         // Update is called once per frame
         private void Update()
@@ -109,16 +110,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				running = false;
 
 			if (Input.GetButton ("Right Peek")) {
-				if (running == false && m_Jumping == false) {
-					m_Camera.transform.position = RPcam.transform.position;
-					m_Camera.transform.rotation = RPcam.transform.rotation;
+				if (canPeekR == false) {
+					if (running == false && m_Jumping == false) {
+						m_Camera.transform.position = RPcam.transform.position;
+						m_Camera.transform.rotation = RPcam.transform.rotation;
+					}
 				}
 			}
 
 			if (Input.GetButton ("Left Peek")) {
-				if (running == false && m_Jumping == false) {
-					m_Camera.transform.position = LPcam.transform.position;
-					m_Camera.transform.rotation = LPcam.transform.rotation;
+				if (canPeekL == false) {
+					if (running == false && m_Jumping == false) {
+						m_Camera.transform.position = LPcam.transform.position;
+						m_Camera.transform.rotation = LPcam.transform.rotation;
+					}
 				}
 			}
 
