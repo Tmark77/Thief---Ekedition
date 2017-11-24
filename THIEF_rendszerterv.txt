@@ -1,0 +1,71 @@
+A rendszer célja: 
+A játék közben használt stratégiai, hang érzékelési és vizuális tájékozódási készségek fejlesztése, szórakozás és kikapcsolódás közben.
+
+Követelmények:
+A játékos tudjon lassan, óvatosan és gyorsan, hangosan, valamint a kettõ közötti módon is mozogni.
+
+A játékosnak van lehetõsége kihajolni fedezékek mögül, hogy körülkémleljen a lebukás minimális veszélye mellett.
+
+Lehet bizonyos felszerelési tárgyakat használni, úgymint: íj (különbözõ vesszõkkel), bunkósbot stb. melyeket késõbb specifikálunk részletesen. A tárgyak közt könnyedén, gombokkal lehet váltogatni.
+Speciális nyílvesszõk használata. Sima vesszõk a sebzés okozáshoz, víz nyílvesszõk a nyílt lángok kioltásához és a vérfoltok feltakarításához, moha vesszõk puha felület létrehozásához, zajkeltõ vesszõ figyelem elterelésre, kötél nyíl, ami puha anyagba lõve megakad és a lelógó kötélen felmászhatunk.
+
+A fények és árnyékok meghatározóak legyenek a rejtõzködésben. Minél sötétebb részen vagyunk, annál nehezebben vesznek észre az õrök.
+
+A játékos minden lépése csapjon zajt. A zaj mértéke attól függjön, hogy milyen felületre és milyen intenzitással lépett.
+
+Lebukáskor az õrök megtámadnak, fegyvereikkel sebzést okoznak. Ha a játékos életereje eléri a 0-t, vége a játéknak.
+
+Zuhanásból is lehessen sérülni.
+
+Minden nem játékos karakter több állapot szerint mûködjön.
+
+A nyugodt állapotban az õrök zavartalanul álldogáljanak, vagy járõrözzenek a megszabott útvonalon. Minden hang és látvány az erõsségétõl függõen „gyanú” pontokat generál az azokat érzékelõ õrnél. Ha ez a pont elég magas, akkor az õr váltson keresõ állapotba.
+
+Minden õrnek legyen meg a képessége hogy bizonyos értéktárgyakat „ismer”.
+Keresõ állapotban az õr kutassa át a leggyanúsabb helyeket, a zajok forrását és az ismert tárgyak helyét. Ha a „gyanú” pontjai kellõen lecsökkennek, akkor váltson vissza nyugodt állapotba.
+
+Ha az õr nyugodt vagy keresõ állapotban egyértelmûen meglátja a játékost („gyanú” pontok alapján mûködjön) akkor üldözõ állapotba lépjen. Addig üldözze a játékos karaktert, míg meg nem öli, vagy el nem veszti a nyomát. Nyomelvesztés esetén visszavált keresõ állapotba.
+
+A nyugodt állapotú õrök a bunkósbottal megütve ájult állapotba jutnak. Ájult õr bizonyos idõ után felébred, gyanakvó állapotba kerül.
+
+Ha bármely nem játékos karakter életerõ pontjai elfogynak, halott állapotba kerül. Ebbõl nem juthat ki semmilyen módon.
+
+A halott és ájult állapotban lévõ karaktereket a játékos a vállára veheti és mozgathatja, elviheti s lerakhatja õket.
+
+Ájult vagy halott karakter észlelése esetén a nem játékos karakterek lépjenek keresõ állapotba.
+
+Alvó állapotban csak a zajok generálnak gyanú pontokat. Ebben az állapotban a karakter nem mozoghat. Minden egyéb tekintetben ez az állapot megegyezik a nyugodt állapottal.
+
+Fénybomba használatakor, ha egy õr látja a robbanást, akkor vak állapotba kerül. Ilyenkor semmit sem képes tenni, nem lát (de hall). Rövid idõ után átvált keresõ állapotba.
+
+Az értéktárgyakként megnevezett objektumokat a játékos megszerezheti, ha kellõ közelségbõl rájuk fókuszál és megnyomja a felvétel/használat gombot. minden értéktárgy rendelkezzen egy értékkel (egész szám) mely megszerzésekor hozzáadódik a játékos pénzéhez. Ebbõl a pénzbõl tud majd felszerelést vásárolni a következõ küldetésre.
+
+Minden küldetésen legyenek feladatok. Új feladatok akár küldetés közben is kaphatók, Ha minden aktív feladat teljesítve van egy adott küldetésen, akkor a küldetés sikeres, a játékos nyert és jöhet a következõ küldetés.
+
+Megkülönböztetünk kétféle fényforrást. A nyílt lángok kiolthatók víz nyíllal, míg a „védett fényforrások” nem. Mindazonáltal minden fényforrásnál beállítható legyen le-fel kapcsolás (lámpák), de ne kelljen kötelezõen megadni lekapcsolási módot.
+
+Minden objektumnak (kivéve víz és fények) legyen egy anyag tulajdonsága. Ez a tulajdonság határozza meg, hogy milyen zaj keletkezik ütközés során, lépéskor, lõhetõ-e bele kötél nyílvesszõ stb. Az anyagok az alábbiak lehetnek: puha, fa, kemény, fém, törékeny, üveg.
+
+Fogalmak:
+
+Ismeret: egy õr akkor ismer egy tárgyat, ha annak eltûnése gyanú pontokat generál számára.
+
+Zaj: Különbözõ, fõként a játékos által végrehajtott cselekvések eredményeként indukálódó esemény, mely gyanú pontokat generál azon õröknél, akik hallják. A gyanú pontok mennyisége a zaj erõsségétõl függ. A zajnak nem szabad átjutnia teljesen elkülönített helyiségekbe.
+
+Hallás: Az NJK-k azon képessége hogy érzékeljék a zajokat. Alapvetõen a  közelség függvénye, de több tényezõ is hatással van  rá.
+
+Játékos: Az az objektum, amit a Felhasználó irányít.
+
+Nem játékos karakterek (NJK): Azon mesterséges intelligenciával rendelkezõ objektumok melyeket nem a játékos irányít. Képesek észlelni a játékost, ami viselkedés változást idézhet elõ náluk.
+
+Õrök: Azon nem játékos karakterek, melyek a játékban ellenfélként mûködnek. Képesek életerõ veszteség okozására, mozgásra, és amennyiben észlelik a játékost, megtámadják.
+
+Észlelés: Egy NJK akkor észlel valamit (többnyire a Játékost) ha a gyanú pontjai kellõen magasak. Ez általában akkor lehetséges, ha az NJK látja a Játékost.
+
+Látás: Egy nem játékos karakter akkor lát egy objektumot, ha az objektum a kijelölt látómezejében helyezkedik el, nincs akadály az objektum valamely láthatósági pontja és a karakter látóközéppontja közt (maga a látni kívánt objektum nem számít akadálynak), és a karakter az objektum láthatósági zónáján belül van.
+
+Láthatósági zóna: Az az R sugarú tér, amin belül minden nem játékos karakter láthatja az objektumot. R az objektumra esõ fény intenzitásán múlik. A Játékos esetében az aktuális mozgási mód is számít. (guggolva kevesebb, futva több az R)
+
+Látó középpont: Az a pont egy nem játékos karakternél, ahonnan egyenes vonal húzásával (egy a látómezõben lévõ objektum láthatósági pontja felé) megállapítható a látás ténye.
+
+Láthatósági pont: Azon pontok egy objektumon belül melyekbe az NJK-k látó középpontjából egyenest húzunk a látás vizsgálatakor.
