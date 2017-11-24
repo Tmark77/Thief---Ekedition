@@ -83,7 +83,7 @@ public class IsInShadow : MonoBehaviour {
 	{
 		RaycastHit hit;
 		Physics.Linecast (lights [index].transform.position, obj.position, out hit);
-		if(hit.transform.name == "Player")
+		if(hit.transform.name == "Player" || hit.transform.name == "GlassWall")
 		return true;
 		else
 			return false;

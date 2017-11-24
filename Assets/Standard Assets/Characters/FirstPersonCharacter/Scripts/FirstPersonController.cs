@@ -52,9 +52,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool crouching = false;
 		private bool actuallyCrouched = false;
 
-		public Camera RPcam;
-		public Camera LPcam;
-		public Camera basicCam;
+		public Transform RPcam;
+		public Transform LPcam;
+		public Transform basicCam;
 		public static bool canPeekR = false;
 		public static bool canPeekL = false;
         // Use this for initialization
@@ -75,7 +75,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
 		{
-			m_Camera.transform.position = basicCam.transform.position;
+			m_Camera.transform.position = basicCam.position;
 
 			RotateView ();
 			// the jump state needs to read here to make sure it is not missed
@@ -112,8 +112,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if (Input.GetButton ("Right Peek")) {
 				if (canPeekR == false) {
 					if (running == false && m_Jumping == false) {
-						m_Camera.transform.position = RPcam.transform.position;
-						m_Camera.transform.rotation = RPcam.transform.rotation;
+						m_Camera.transform.position = RPcam.position;
+						m_Camera.transform.rotation = RPcam.rotation;
 					}
 				}
 			}
@@ -121,8 +121,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if (Input.GetButton ("Left Peek")) {
 				if (canPeekL == false) {
 					if (running == false && m_Jumping == false) {
-						m_Camera.transform.position = LPcam.transform.position;
-						m_Camera.transform.rotation = LPcam.transform.rotation;
+						m_Camera.transform.position = LPcam.position;
+						m_Camera.transform.rotation = LPcam.rotation;
 					}
 				}
 			}
