@@ -18,7 +18,7 @@ public class NoiseGeneration : MonoBehaviour {
 
 	}
 
-	void Noise()
+	public void Noise()
 	{
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 

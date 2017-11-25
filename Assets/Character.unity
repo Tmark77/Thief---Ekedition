@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 358845861}
   - component: {fileID: 358845860}
   - component: {fileID: 358845859}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Blocks3
   m_TagString: Wall
   m_Icon: {fileID: 0}

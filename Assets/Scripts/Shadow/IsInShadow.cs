@@ -83,10 +83,17 @@ public class IsInShadow : MonoBehaviour {
 	{
 		RaycastHit hit;
 		Physics.Linecast (lights [index].transform.position, obj.position, out hit);
-		if(hit.transform.name == "Player" || hit.transform.name == "GlassWall")
-		return true;
-		else
-			return false;
+
+		ThiefObject thiefObj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+
+		if (hit.transform.name == "Player" || thiefObj.material.SeeTrough ()) //javitás!
+			{
+				return true;
+			} 
+			else 
+			{
+				return false;
+			}
 	}
 
     // bool Hide(int index)
