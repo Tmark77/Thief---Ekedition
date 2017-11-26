@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gem : Valuable {
-
+public class Gold : Valuable {
+	//minden nemesfém ide tartozik
 	public override void Collide()
 	{
-		
+
 	}
 
 	public override void PickUp()
 	{
-		//Add to Gems
+		//Add to Gold
 		Destroy (gameObject);
 	}
 

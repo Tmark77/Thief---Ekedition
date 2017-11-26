@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoodMaterial : abstract_Material {
+public class SoftWoodMaterial : abstract_Material {
 	
 	public override float NoiseGeneration (float noise)
 	{
-		return noise *= 1.5f;
+		return noise *= 1f;
 	}
 
 	public override bool Soft()

@@ -59,24 +59,10 @@ public class IsInShadow : MonoBehaviour {
 					vF = BrightnessCalculate(lights[i].range, distance, vF);
 				}
 			}
-           // if(Hide(i) == true)
-           // {
-           //     fullDark++;
-           // }
 
         }
 
 		LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot:" + vF + "Overall: "+ (vH+vC+vF)/3;
-      //  if(fullDark == lights.Length)
-      //  {
-      //      fullHide = true;
-      //  }
-      //  else
-      //  {
-      //      fullHide = false;
-      //  }
-      //  fullDark = 0;
-      //  i = 0;
     }
 
 	bool VanRalatas (Transform obj, int index)
