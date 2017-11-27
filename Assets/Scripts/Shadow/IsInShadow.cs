@@ -62,7 +62,7 @@ public class IsInShadow : MonoBehaviour {
 
         }
 
-		LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot:" + vF + "Overall: "+ (vH+vC+vF)/3;
+		LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot: " + vF + "Overall: "+ (vH+vC+vF)/3;
     }
 
 	bool VanRalatas (Transform obj, int index)

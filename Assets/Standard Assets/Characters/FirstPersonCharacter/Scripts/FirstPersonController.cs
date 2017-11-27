@@ -44,6 +44,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		float currentSpeed;
 
+		public float CurrentSpeed{
+			get{
+				return currentSpeed;
+			}
+			set{
+				currentSpeed = value;
+			}
+		}
+
+
 		[SerializeField] public float sneakSpeed;
 		[SerializeField] public float crouchSpeed;
 		[SerializeField] public float minimumSpeed;

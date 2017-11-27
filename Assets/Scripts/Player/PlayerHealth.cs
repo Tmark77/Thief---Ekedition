@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class PlayerHealth : MonoBehaviour
 
 	Animator anim;                                              
 	AudioSource playerAudio;  
+	FirstPersonController firstPersonController;
 	//PlayerMovement playerMovement;                             
-	bool isDead;                                                
+	bool isDead = false;                                                
 	bool damaged;                                               
 
 
@@ -33,6 +35,10 @@ public class PlayerHealth : MonoBehaviour
 
 	void Update ()
 	{
+		if(Input.GetKeyDown(KeyCode.B)){
+			TakeDamage (10);
+		}
+
 		if(damaged)
 		{
 			damageImage.color = flashColour;
@@ -67,11 +73,12 @@ public class PlayerHealth : MonoBehaviour
 	{
 		isDead = true;
 
+		Debug.Log ("Halál");
 
-		anim.SetTrigger ("Die");
+		//anim.SetTrigger ("Die");
 
-		playerAudio.clip = deathClip;
-		playerAudio.Play ();
+		//playerAudio.clip = deathClip;
+		//playerAudio.Play ();
 
 		//playerMovement.enabled = false;
 	}       
