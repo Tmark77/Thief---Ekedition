@@ -5,8 +5,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public int startingHealth = 100;                            
-	public int currentHealth;                                   
+	public float startingHealth = 100;                            
+	public float currentHealth;                                   
 	public Slider healthSlider;                                 
 	public Image damageImage;                                   
 	public AudioClip deathClip;                                 
@@ -51,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
 	}
 
 
-	public void TakeDamage (int amount)
+	public void TakeDamage (float amount)
 	{
 		damaged = true;
 

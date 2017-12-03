@@ -67,6 +67,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public Transform basicCam;
 		public static bool canPeekR = false;
 		public static bool canPeekL = false;
+
+		private float minSurviveFall; //ennyi idő alatt a levegőben nem szerez sérülést a játékos
+		private float damageForSeconds; //sérülés mértéke 1 mp-enként a levegőben
+		private float airTime;
+
+		private PlayerHealth playerHealth; 
+
         // Use this for initialization
         private void Start()
         {
@@ -80,6 +87,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+			minSurviveFall = 1f;
+			damageForSeconds = 1.5f;
+			airTime = 0f;
+			playerHealth = GetComponent<PlayerHealth> ();
         }
 
         // Update is called once per frame
@@ -98,10 +110,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				PlayLandingSound ();
 				m_MoveDir.y = 0f;
 				m_Jumping = false;
+				if(airTime > minSurviveFall)
+				{
+					playerHealth.TakeDamage (damageForSeconds * airTime);
+				}
+				airTime = 0;
 			}
 			if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded) {
 				m_MoveDir.y = 0f;
 			}
+			if (!m_CharacterController.isGrounded && !m_Jump) {
+				airTime += Time.deltaTime;
+			}
+
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
