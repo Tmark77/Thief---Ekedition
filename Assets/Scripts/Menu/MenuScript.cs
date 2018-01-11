@@ -130,7 +130,7 @@ public class MenuScript : MonoBehaviour {
 
     public void StartLevel()
     {
-        SceneManager.LoadScene("Character");
+        SceneManager.LoadScene("TestLevel");
 
     }
 
