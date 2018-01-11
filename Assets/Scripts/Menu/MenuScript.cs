@@ -25,11 +25,8 @@ public class MenuScript : MonoBehaviour {
         quitMenu.enabled = false;
         inputMenu.enabled = false;
 
-        controlPanel = transform.Find("InputMenu_panel");
-        controlPanel.gameObject.SetActive(false);
+        //controlPanel = transform.Find("Layout");
         waitingForKey = false;
-
-        IterateButtons();
     }
 
     void Update()
@@ -75,6 +72,7 @@ public class MenuScript : MonoBehaviour {
         waitingForKey = true;
 
         yield return WaitForKey();
+        
 
         switch (keyName)
         {
@@ -127,6 +125,7 @@ public class MenuScript : MonoBehaviour {
         mainMenu.enabled = false;
         quitMenu.enabled = false;
         inputMenu.enabled = true;
+        IterateButtons();
     }
 
     public void StartLevel()
@@ -142,8 +141,6 @@ public class MenuScript : MonoBehaviour {
 
     public void IterateButtons()
     {
-        Debug.Log(controlPanel.childCount);
-        Debug.Log('a');
         for (int i = 0; i < controlPanel.childCount; i++)
         {
             if (controlPanel.GetChild(i).name == "Forward_button")
