@@ -20,25 +20,25 @@ public class NoiseGeneration : MonoBehaviour {
 
 	public void Noise()
 	{
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-
-        foreach(Collider nearbyObjects in colliders)
-        {
-            GetNoise g = nearbyObjects.GetComponent<GetNoise>();
-            float dist = Vector3.Distance(transform.position, nearbyObjects.transform.position);
-            if(g != null)
-            {
-                GetNoise.countdown = 10f;
-                if(dist < radius && dist > radius / 2)
-                {
-                    g.noiseMeter = noise / 2;
-                }
-                else
-                {
-                    g.noiseMeter = noise;
-                }
-            }
-        }
+       // Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+	   //
+       // foreach(Collider nearbyObjects in colliders)
+       // {
+       //     GetNoise g = nearbyObjects.GetComponent<GetNoise>();
+       //     float dist = Vector3.Distance(transform.position, nearbyObjects.transform.position);
+       //     if(g != null)
+       //     {
+       //         GetNoise.countdown = 10f;
+       //         if(dist < radius && dist > radius / 2)
+       //         {
+       //             g.noiseMeter = noise / 2;
+       //         }
+       //         else
+       //         {
+       //             g.noiseMeter = noise;
+       //         }
+       //     }
+       // }
 	}
 
 	void OnTriggerEnter(Collider col)

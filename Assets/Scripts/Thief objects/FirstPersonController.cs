@@ -187,6 +187,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_AudioSource.clip = m_LandSound;
                 m_AudioSource.Play();
                 m_NextStep = m_StepCycle + .5f;
+				HangAmiAkkorJonLetreHaRalepunkVagyUgrunkValamire (5f);
             }
         }
 
@@ -277,11 +278,37 @@ namespace UnityStandardAssets.Characters.FirstPerson
             int n = Random.Range(1, m_FootstepSounds.Length);
             m_AudioSource.clip = m_FootstepSounds[n];
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
+			// hang kiadás !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			HangAmiAkkorJonLetreHaRalepunkVagyUgrunkValamire(1f);
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
         }
 
+		private void HangAmiAkkorJonLetreHaRalepunkVagyUgrunkValamire(float vehemencia)
+		{
+			RaycastHit hit;
+			Physics.Raycast (transform.position, Vector3.down, out hit);
+			ThiefObject thiefObj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+			float noise = thiefObj.material.NoiseGeneration (5);
+
+			Collider[] colliders = Physics.OverlapSphere(transform.position, noise);
+
+			foreach(Collider nearbyObjects in colliders)
+			{
+				GetNoise g = nearbyObjects.GetComponent<GetNoise>();
+				float dist = Vector3.Distance(transform.position, nearbyObjects.transform.position);
+				//Debug.Log (noise);
+				if(g != null)
+				{
+					if(dist < noise)
+					{
+						g.noiseMeter = (int)(((noise-dist)*100/noise)*vehemencia); //a vehemencia az a hangerő által generált gyanú pontok száma. Ez egy konstans, majd kiemeljük később
+						Debug.Log(g.noiseMeter);
+					}
+				}
+			}
+		}
 
         private void UpdateCameraPosition(float speed)
         {
