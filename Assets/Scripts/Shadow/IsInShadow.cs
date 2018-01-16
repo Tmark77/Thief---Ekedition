@@ -67,19 +67,44 @@ public class IsInShadow : MonoBehaviour {
 
 	bool VanRalatas (Transform obj, int index)
 	{
-		RaycastHit hit;
-		Physics.Linecast (lights [index].transform.position, obj.position, out hit);
+		//RaycastHit hit;
+		//Physics.Linecast (lights [index].transform.position, obj.position, out hit);
+		//Physics.Raycast (lights [index].transform.position, obj.position-lights [index].transform.position, out hit);
 
-		ThiefObject thiefObj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+		RaycastHit[] hits = Physics.RaycastAll (lights [index].transform.position, obj.position - lights [index].transform.position, Vector3.Distance(lights[i].transform.position, obj.position));
 
-		if (hit.transform.name == "Player" || thiefObj.material.SeeTrough ()) //javitás!
+		List<ThiefObject> tf = new List<ThiefObject> ();
+		foreach (RaycastHit hit in hits) 
+		{
+			if (hit.collider.gameObject.GetComponent<ThiefObject> () != null) 
 			{
-				return true;
-			} 
-			else 
-			{
-				return false;
+				tf.Add (hit.collider.gameObject.GetComponent<ThiefObject> ());
 			}
+		}
+
+		int ind;
+		ind = 0;
+		if (tf.Count != 0) {
+			do {
+				if (! tf[ind].material.SeeTrough())
+				{
+					return false;
+				}
+				ind++;
+			} while(ind < tf.Count);
+		}
+		return true;
+
+
+	//	ThiefObject thiefObj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+	//	if (hit.transform.name == "Player" || thiefObj.material.SeeTrough ()) //javitás!
+	//		{
+	//			return true;
+	//		} 
+	//		else 
+	//		{
+	//			return false;
+	//		}
 	}
 
     // bool Hide(int index)
