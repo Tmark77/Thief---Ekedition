@@ -9,9 +9,9 @@ public class Gem : Valuable {
 		
 	}
 
-	public override void PickUp()
+	public override void PickUp(PlayerInventory inv)
 	{
-		//Add to Gems
+		inv.AddGem (value);
 		Destroy (gameObject);
 	}
 

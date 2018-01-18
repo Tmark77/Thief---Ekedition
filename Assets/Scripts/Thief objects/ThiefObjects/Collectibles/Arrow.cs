@@ -17,5 +17,9 @@ public class Arrow : Equipment {
 	public override void Collide()
 	{}
 
+	public override void Use ()
+	{
+		throw new System.NotImplementedException ();
+	}
 
 }

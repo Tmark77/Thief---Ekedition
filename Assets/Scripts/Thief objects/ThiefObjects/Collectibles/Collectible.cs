@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class Collectible : ThiefObject {
 
-	public abstract void PickUp ();
+	public abstract void PickUp (PlayerInventory inv);
 
 }

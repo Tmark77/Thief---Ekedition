@@ -6,9 +6,12 @@ public abstract class Equipment : Collectible {
 
 	public abstract void Collide ();
 
-	public override void PickUp()
+	public override void PickUp(PlayerInventory inv)
 	{
+		inv.NewItem (this.GetComponent<Equipment>());
+		gameObject.SetActive (false);
 		Destroy (gameObject);
-		//Add to inventory
 	}
+
+	public abstract void Use ();
 }

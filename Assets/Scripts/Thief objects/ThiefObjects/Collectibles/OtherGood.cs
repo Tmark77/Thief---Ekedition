@@ -9,9 +9,9 @@ public class OtherGood : Valuable {
 
 	}
 
-	public override void PickUp()
+	public override void PickUp(PlayerInventory inv)
 	{
-		//Add to otherGoods
+		inv.AddOtherValuable (value);
 		Destroy (gameObject);
 	}
 
