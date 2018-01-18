@@ -24,19 +24,19 @@ public class MenuScript : MonoBehaviour {
     void Start () {
         
         
-        myListeners = FindObjectsOfType(typeof(AudioListener)) as AudioListener[];
-        foreach (AudioListener thisListener in myListeners)
-        {
-            //Debug.Log(thisListener);
-            if (thisListener.name == "Main Camera")
-            {
-                thisListener.enabled = true;
-            }
-            else
-            {
-                thisListener.enabled = false;
-            }
-        }
+       myListeners = FindObjectsOfType(typeof(AudioListener)) as AudioListener[];
+       foreach (AudioListener thisListener in myListeners)
+       {
+           //Debug.Log(thisListener);
+           if (thisListener.name == "Main Camera")
+           {
+               thisListener.enabled = true;
+           }
+           else
+           {
+               thisListener.enabled = false;
+           }
+       }
 
         
         Time.timeScale = 0;

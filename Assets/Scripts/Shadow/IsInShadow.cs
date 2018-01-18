@@ -67,7 +67,7 @@ public class IsInShadow : MonoBehaviour {
         }
 
 		//LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot: " + vF + "Overall: "+ (vH+vC+vF)/3;
-		mesh.material.SetFloat ("_Emission", ((vH + vC + vF) / 3)*0.02f);
+		mesh.material.SetFloat ("_Emission", ((vH + vC + vF) / 3) * 0.02f);
     }
 
 	bool VanRalatas (Transform obj, int index)

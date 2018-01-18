@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
         backward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
         left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
         right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
-
+		
         jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "Space"));
         sneak = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("sneakKey", "LeftControl"));
         crounch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("crounchKey", "X"));
