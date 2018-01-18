@@ -102,8 +102,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			RotateView ();
 			// the jump state needs to read here to make sure it is not missed
 			if (!m_Jump) {
-				m_Jump = CrossPlatformInputManager.GetButtonDown ("Jump");
-			}
+				//m_Jump = CrossPlatformInputManager.GetButtonDown ("Jump");
+                //m_Jump = Input.GetKey(GameManager.GM.jump);
+                m_Jump = Input.GetKeyDown(GameManager.GM.jump);
+
+            }
 
 			if (!m_PreviouslyGrounded && m_CharacterController.isGrounded) {
 				StartCoroutine (m_JumpBob.DoBobCycle ());
@@ -126,21 +129,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-			if (Input.GetButton ("Sneak"))
+			if (Input.GetKey(GameManager.GM.sneak))
 				sneaking = true;
 			else
 				sneaking = false;
-			if (Input.GetButtonDown ("Crouch") && m_CharacterController.isGrounded) {
+			if (Input.GetKeyDown(GameManager.GM.crounch) && m_CharacterController.isGrounded) {
 				crouching = !crouching;
 				actuallyCrouched = true;
 			}
-			if (Input.GetButton ("Run")) {
+			if (Input.GetKey(GameManager.GM.run)) {
 				running = true;
 				sneaking = false;
 			} else
 				running = false;
 
-			if (Input.GetButton ("Right Peek")) {
+			if (Input.GetKey(GameManager.GM.rightPeek)) {
 				if (canPeekR == false) {
 					if (running == false && m_Jumping == false) {
 						m_Camera.transform.position = RPcam.position;
@@ -149,7 +152,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				}
 			}
 
-			if (Input.GetButton ("Left Peek")) {
+			if (Input.GetKey(GameManager.GM.leftPeek)) {
 				if (canPeekL == false) {
 					if (running == false && m_Jumping == false) {
 						m_Camera.transform.position = LPcam.position;
@@ -345,7 +348,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            m_IsWalking = !Input.GetKey(GameManager.GM.run);
 #endif
             // set the desired speed to be walking or running
             //speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
