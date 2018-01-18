@@ -9,9 +9,9 @@ public class Gold : Valuable {
 
 	}
 
-	public override void PickUp()
+	public override void PickUp(PlayerInventory inv)
 	{
-		//Add to Gold
+		inv.AddGold (value);
 		Destroy (gameObject);
 	}
 

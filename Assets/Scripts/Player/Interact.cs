@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour {
 
+	[SerializeField] public PlayerInventory inventory;
 	public Camera mainCam;
 
 	// Use this for initialization
@@ -27,7 +28,7 @@ public class Interact : MonoBehaviour {
 			ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
 
 			if (obj is Collectible) {
-				(obj as Collectible).PickUp ();
+				(obj as Collectible).PickUp (inventory);
 			}
 
 			if (obj is DynamicFieldObject) {
