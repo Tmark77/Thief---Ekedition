@@ -6,9 +6,11 @@ public abstract class Equipment : Collectible {
 
 	public abstract void Collide ();
 
+	protected int kod;
+
 	public override void PickUp(PlayerInventory inv)
 	{
-		inv.NewItem (this.GetComponent<Equipment>());
+		inv.NewItem (kod);
 		gameObject.SetActive (false);
 		Destroy (gameObject);
 	}

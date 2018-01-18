@@ -7,7 +7,7 @@ public class PlayerInventory : MonoBehaviour {
 	int collectedGemsValue;
 	int collectedGoldValue;
 	int collectedOtherValue;
-	List<Equipment> e = new List<Equipment>();
+	List<int> e = new List<int>();
 	int i;
 
 
@@ -35,16 +35,16 @@ public class PlayerInventory : MonoBehaviour {
 		
 	}
 
-	public void NewItem(Equipment item)
+	public void NewItem(int item)
 	{
 		e.Add (item);
 		i = e.Count - 1;
-		Debug.Log (item.name);
+		Debug.Log (item);
 	}
 
 	public void UseItem()
 	{
-		e [i].Use();
+		//e [i].Use();
 		e.RemoveAt (i);
 		NextItem ();
 

@@ -6,6 +6,7 @@ public class WaterArrow : Equipment {
 
 	// Use this for initialization
 	void Start () {
+		kod = 1;
 		
 	}
 	

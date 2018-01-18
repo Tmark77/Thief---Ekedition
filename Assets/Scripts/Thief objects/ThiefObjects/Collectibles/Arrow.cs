@@ -6,6 +6,7 @@ public class Arrow : Equipment {
 
 	// Use this for initialization
 	void Start () {
+		kod = 0;
 		
 	}
 	
@@ -13,6 +14,8 @@ public class Arrow : Equipment {
 	void Update () {
 		
 	}
+
+
 
 	public override void Collide()
 	{}
