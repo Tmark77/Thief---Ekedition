@@ -23,8 +23,9 @@ public class IsInShadow : MonoBehaviour {
     public int range;
 
 	float distance; //distance of two objects
-	//public Text LightGemTemp; //instead of Light Gem
-	public GameObject LightGem;
+	public Text LightGemTemp; //instead of Light Gem
+	public Renderer mesh;
+	public Material mat;
 
 	public Light[] lights; //array of Lights
     public bool fullHide; //character is in shadow or not
@@ -38,6 +39,8 @@ public class IsInShadow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
 
 		vH = 0;
 		vC = 0;
@@ -64,6 +67,7 @@ public class IsInShadow : MonoBehaviour {
         }
 
 		//LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot: " + vF + "Overall: "+ (vH+vC+vF)/3;
+		mesh.material.SetFloat ("_Emission", ((vH + vC + vF) / 3)*0.02f);
     }
 
 	bool VanRalatas (Transform obj, int index)
