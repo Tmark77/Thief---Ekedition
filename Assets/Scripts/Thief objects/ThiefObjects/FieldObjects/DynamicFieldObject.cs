@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class DynamicFieldObject : FieldObject {
 
-	public abstract void Interaction (bool withRightClick);
+	public abstract void Interaction ();
 
 }
