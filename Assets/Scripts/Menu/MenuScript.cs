@@ -8,12 +8,15 @@ public class MenuScript : MonoBehaviour {
     public Canvas mainMenu;
     public Canvas quitMenu;
     public Canvas inputMenu;
+    public Canvas pauseMenu;
+    public Canvas menu;
 
     public Transform controlPanel;
     Event keyEvent;
     KeyCode newKey;
     Text buttonText;
     bool waitingForKey;
+    bool isGameStarted;
 
     // Use this for initialization
     void Start () {
@@ -24,19 +27,22 @@ public class MenuScript : MonoBehaviour {
         mainMenu.enabled = true;
         quitMenu.enabled = false;
         inputMenu.enabled = false;
+        pauseMenu.enabled = false;
 
         //controlPanel = transform.Find("Layout");
         waitingForKey = false;
+        isGameStarted = false;
     }
 
     void Update()
     {
-        //kell még módosítani
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(GameManager.GM.pause) && isGameStarted)
         {
-            mainMenu.enabled = true;
+            menu.enabled = true;
+            mainMenu.enabled = false;
             quitMenu.enabled = false;
             inputMenu.enabled = false;
+            pauseMenu.enabled = true;
         }
     }
 
@@ -101,6 +107,31 @@ public class MenuScript : MonoBehaviour {
                 buttonText.text = GameManager.GM.jump.ToString(); 
                 PlayerPrefs.SetString("Jump_button", GameManager.GM.jump.ToString()); 
                 break;
+            case "sneak":
+                GameManager.GM.sneak= newKey;
+                buttonText.text = GameManager.GM.sneak.ToString();
+                PlayerPrefs.SetString("Sneak_button", GameManager.GM.sneak.ToString());
+                break;
+            case "crounch":
+                GameManager.GM.crounch = newKey;
+                buttonText.text = GameManager.GM.crounch.ToString();
+                PlayerPrefs.SetString("Crounch_button", GameManager.GM.crounch.ToString());
+                break;
+            case "run":
+                GameManager.GM.run = newKey;
+                buttonText.text = GameManager.GM.run.ToString();
+                PlayerPrefs.SetString("Run_button", GameManager.GM.run.ToString());
+                break;
+            case "rightPeek":
+                GameManager.GM.rightPeek = newKey;
+                buttonText.text = GameManager.GM.rightPeek.ToString();
+                PlayerPrefs.SetString("RightPeek_button", GameManager.GM.rightPeek.ToString());
+                break;
+            case "leftPeak":
+                GameManager.GM.leftPeek = newKey;
+                buttonText.text = GameManager.GM.leftPeek.ToString();
+                PlayerPrefs.SetString("leftPeek_button", GameManager.GM.leftPeek.ToString());
+                break;
         }
 
         yield return null;
@@ -111,6 +142,17 @@ public class MenuScript : MonoBehaviour {
         mainMenu.enabled = false;
         quitMenu.enabled = true;
         inputMenu.enabled = false;
+        pauseMenu.enabled = false;
+
+
+    }
+    public void QuitPress()
+    {
+        mainMenu.enabled = true;
+        quitMenu.enabled = false;
+        inputMenu.enabled = false;
+        pauseMenu.enabled = false;
+        isGameStarted = false;
 
     }
     public void NoPress()
@@ -118,6 +160,25 @@ public class MenuScript : MonoBehaviour {
         mainMenu.enabled = true;
         quitMenu.enabled = false;
         inputMenu.enabled = false;
+        pauseMenu.enabled = false;
+    }
+    public void BackPress()
+    {
+        if (isGameStarted)
+        {
+            mainMenu.enabled = false;
+            quitMenu.enabled = false;
+            inputMenu.enabled = false;
+            pauseMenu.enabled = true;
+        }
+        else
+        {
+            mainMenu.enabled = true;
+            quitMenu.enabled = false;
+            inputMenu.enabled = false;
+            pauseMenu.enabled = false;
+        }
+        
     }
 
     public void InputPress()
@@ -125,13 +186,15 @@ public class MenuScript : MonoBehaviour {
         mainMenu.enabled = false;
         quitMenu.enabled = false;
         inputMenu.enabled = true;
+        pauseMenu.enabled = false;
         IterateButtons();
     }
 
     public void StartLevel()
     {
-        SceneManager.LoadScene("TestLevel");
-
+        //SceneManager.LoadScene("TestLevel");
+        menu.enabled = false;
+        isGameStarted = true;
     }
 
     public void ExitGame()
@@ -143,14 +206,16 @@ public class MenuScript : MonoBehaviour {
     {
         for (int i = 0; i < controlPanel.childCount; i++)
         {
-            if (controlPanel.GetChild(i).name == "Forward_button")
-                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.forward.ToString();
-            else if (controlPanel.GetChild(i).name == "Backward_button")
-                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.backward.ToString();
-            else if (controlPanel.GetChild(i).name == "Left_button")
-                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.left.ToString();
-            else if (controlPanel.GetChild(i).name == "Right_button")
-                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.right.ToString();
+            if (controlPanel.GetChild(i).name == "Sneak_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.sneak.ToString();
+            else if (controlPanel.GetChild(i).name == "Crounch_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.crounch.ToString();
+            else if (controlPanel.GetChild(i).name == "Run_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.run.ToString();
+            else if (controlPanel.GetChild(i).name == "RightPeek_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.rightPeek.ToString();
+            else if (controlPanel.GetChild(i).name == "LeftPeek_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.leftPeek.ToString();
             else if (controlPanel.GetChild(i).name == "Jump_button")
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.jump.ToString();
         }

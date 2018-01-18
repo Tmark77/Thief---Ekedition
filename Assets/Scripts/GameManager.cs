@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public KeyCode run { get; set; }
     public KeyCode rightPeek { get; set; }
     public KeyCode leftPeek { get; set; }
+    public KeyCode pause { get; set; }
 
 
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour {
         run = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("runKey", "LeftShift"));
         rightPeek = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightPeekKey", "E"));
         leftPeek = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftPeekKey", "Q"));
+        pause = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("pauseKey", "P"));
 
     }
 
