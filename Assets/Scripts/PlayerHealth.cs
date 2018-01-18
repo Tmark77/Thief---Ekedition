@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
 	void Update ()
 	{
 		if(Input.GetKeyDown(KeyCode.B)){
-			TakeDamage (10);
+			TakeDamage (25);
 		}
 
 		if(damaged)

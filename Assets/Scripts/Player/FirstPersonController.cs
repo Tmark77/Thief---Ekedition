@@ -139,7 +139,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				m_Jumping = false;
 				if(airTime > minSurviveFall)
 				{
-					playerHealth.TakeDamage (damageForSeconds * airTime);
+					playerHealth.TakeDamage (damageForSeconds * airTime * 10);
 				}
 				airTime = 0;
 			}
