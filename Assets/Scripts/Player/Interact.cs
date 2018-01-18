@@ -31,7 +31,7 @@ public class Interact : MonoBehaviour {
 			}
 
 			if (obj is DynamicFieldObject) {
-				(obj as DynamicFieldObject).Interaction ();
+				(obj as DynamicFieldObject).Interaction (true);
 			}
 		}
 	}

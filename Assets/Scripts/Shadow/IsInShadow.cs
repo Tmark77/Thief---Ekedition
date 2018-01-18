@@ -10,9 +10,9 @@ public class IsInShadow : MonoBehaviour {
     public Transform chest;
     public Transform foot;
 
-    bool hH; //head is in shadow
-    bool hC; //chest is in shadow
-    bool hF; //foot is in shadow
+//    bool hH; //head is in shadow
+//    bool hC; //chest is in shadow
+//    bool hF; //foot is in shadow
 
 	int vH; //head visivility
 	int vC; //chest visivility
@@ -23,16 +23,17 @@ public class IsInShadow : MonoBehaviour {
     public int range;
 
 	float distance; //distance of two objects
-	public Text LightGemTemp; //instead of Light Gem
+	//public Text LightGemTemp; //instead of Light Gem
+	public GameObject LightGem;
 
 	public Light[] lights; //array of Lights
     public bool fullHide; //character is in shadow or not
 
 	// Use this for initialization
 	void Start () {
-        hH = false;
-        hC = false;
-        hF = false;
+//        hH = false;
+//        hC = false;
+//        hF = false;
     }
 	
 	// Update is called once per frame
@@ -62,7 +63,8 @@ public class IsInShadow : MonoBehaviour {
 
         }
 
-		LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot: " + vF + "Overall: "+ (vH+vC+vF)/3;
+		//LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot: " + vF + "Overall: "+ (vH+vC+vF)/3;
+
     }
 
 	bool VanRalatas (Transform obj, int index)
