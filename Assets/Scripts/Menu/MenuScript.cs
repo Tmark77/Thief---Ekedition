@@ -18,8 +18,30 @@ public class MenuScript : MonoBehaviour {
     bool waitingForKey;
     bool isGameStarted;
 
+    private AudioListener[] myListeners;
+
     // Use this for initialization
     void Start () {
+        
+        
+        myListeners = FindObjectsOfType(typeof(AudioListener)) as AudioListener[];
+        foreach (AudioListener thisListener in myListeners)
+        {
+            //Debug.Log(thisListener);
+            if (thisListener.name == "Main Camera")
+            {
+                thisListener.enabled = true;
+            }
+            else
+            {
+                thisListener.enabled = false;
+            }
+        }
+
+        
+        Time.timeScale = 0;
+        Cursor.visible = true;
+
         quitMenu = quitMenu.GetComponent<Canvas>();
         quitMenu = quitMenu.GetComponent<Canvas>();
         inputMenu = inputMenu.GetComponent<Canvas>();
@@ -192,9 +214,23 @@ public class MenuScript : MonoBehaviour {
 
     public void StartLevel()
     {
-        //SceneManager.LoadScene("TestLevel");
         menu.enabled = false;
         isGameStarted = true;
+
+        foreach (AudioListener thisListener in myListeners)
+        {
+            if (thisListener.name == "ClimbCam" && !thisListener.enabled)
+            {
+                thisListener.enabled = true;
+            }
+            else
+            {
+                thisListener.enabled = false;
+            }
+            Debug.Log(thisListener+" ||| "+thisListener.enabled);
+        }
+        DontDestroyOnLoad(transform.gameObject);
+        SceneManager.LoadScene("TestLevel");
     }
 
     public void ExitGame()
