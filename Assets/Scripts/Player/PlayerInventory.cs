@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour {
 
 	int collectedGemsValue;
 	int collectedGoldValue;
 	int collectedOtherValue;
+
+	public Text goldValue;
+	public Text gemValue;
+
 	List<int> e = new List<int>();
 	int i;
 
@@ -32,7 +37,10 @@ public class PlayerInventory : MonoBehaviour {
 			PrevItem ();
 			Debug.Log (e [i]);
 		}
-		
+
+		goldValue.text = "Gold: " + collectedGoldValue;
+
+		gemValue.text = "Gem: " + collectedGemsValue;
 	}
 
 	public void NewItem(int item)
