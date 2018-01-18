@@ -12,6 +12,9 @@ public class GetNoise : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// ez csak a testlevelhez kell 
+		if(noiseMeter >=50)
+		GetComponent<Renderer> ().material.color = Color.red;
 	}
 		
 
