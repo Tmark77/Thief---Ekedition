@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	public Text goldValue;
 	public Text gemValue;
+	public Text otherValue;
 
 	List<int> e = new List<int>();
 	int i;
@@ -41,6 +42,8 @@ public class PlayerInventory : MonoBehaviour {
 		goldValue.text = "Gold: " + collectedGoldValue;
 
 		gemValue.text = "Gem: " + collectedGemsValue;
+
+		otherValue.text = "Other Goods: " + collectedOtherValue;
 	}
 
 	public void NewItem(int item)
