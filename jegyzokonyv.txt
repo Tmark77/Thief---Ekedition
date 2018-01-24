@@ -1,0 +1,187 @@
+JANUÁR 16
+
+GubaLord - Peti
+Szkrompa77 - Márk
+Battle.net chat
+-----------------------------------------------
+
+Szkrompa77 - 9:21 AM
+heló béla vagyok
+git gyárban doglozom
+
+GubaLord - 9:21 AM
+az is jó
+és mit mondott a fõnököd?
+
+Szkrompa77 - 9:22 AM
+kilépett ez a trágyadomb battlenet
+giteltem egyet a bal kezemmel :D
+nah, ma hogy érsz rá?
+
+GubaLord - 9:22 AM
+oké :D
+egész nap
+már 1 órája csinálgatom
+kaptál email-t nézd meg
+
+Szkrompa77 - 9:22 AM
+akkor majd pullolj elõtte
+meglesem
+nekem most 10-tõl részt kell vegyek egy skype partiban, szerintem 1 órát vesz igénybe max
+
+GubaLord - 9:23 AM
+igen, mondtad
+legyen kevesebb
+
+Szkrompa77 - 9:23 AM
+utána tudom tolni vagy 2ig aztán elkell takarodjon hálaazégnek, de kb 6-7tõl itthonvagyok és hajnalig nyomom/nyomjuk
+mit csinálsz rajta éppen?
+
+GubaLord - 9:25 AM
+hangokkal játszok
+
+Szkrompa77 - 9:25 AM
+én raktam bele berendezéseket, még nincs mindegyikre ráhúzva a thiefobject
+kicsit világosabbá tettem a játékot
+
+GubaLord - 9:26 AM
+király
+mindjárt betölt :)
+
+Szkrompa77 - 9:26 AM
+a menüt összerakommajd gyorsan skype után, meg az ellophatós dolgokat belerakjuk
+ez meglesz, ez a sok követleményes cucc aggaszt amit kiirt Tajti
+
+GubaLord - 9:26 AM
+email
+
+GubaLord - 9:27 AM
+egy doksit összeraktam
+
+Szkrompa77 - 9:27 AM
+na xd csak közben fõõzök is
+nincs csatolmány lelkek
+
+GubaLord - 9:28 AM
+hogy ne lenne
+marcinak volt
+fú, eléggé akad nekem
+meg hiányzik valami Solar_Flux_Background_Oceanus
+
+Szkrompa77 - 9:31 AM
+de miért hiányzik hát azt is giteltem
+az lenne a skybox
+nekem meg nincs csatolmány sehol. küld át megint pls ide: kistoti007@gmail.com
+
+GubaLord - 9:31 AM
+azt látom
+
+Szkrompa77 - 9:31 AM
+ezt többet használom :D
+
+GubaLord - 9:32 AM
+de a hibát attól még dobja
+
+Szkrompa77 - 9:32 AM
+derossz
+
+GubaLord - 9:32 AM
+átküldtem
+Vannak benne jó dolgok.
+Egészítsétek ki, tegyétek megfelelõ megfogalmazásúvá, ha akarjátok.
+Én így is felgitelem, ebben a formában, ha nem változtattok rajta semmit.
+
+Szkrompa77 - 9:36 AM
+jó amúgy ez, majd átfogalmazom szépre
+na fasza, haladunk
+
+GubaLord - 9:36 AM
+legközelebb azért pakoljad azokat a Thiefobjecteket
+a kertkapun átmegy a karakter akadály nélkül
+ez így kell legyen?
+
+Szkrompa77 - 9:37 AM
+nem még, azokat majd rápakolom én hagyjad
+minden ajtóhoz kell majd az animáció is ahogy kinyilik bezáródik
+találd ki, mit kell ellopjunk a pályáról, mi legyen maga a küldetés, elég csak azt az 1 dolgot ellopni, vagy még lehessen mást is lenyúlni arany értékben
+
+GubaLord - 9:39 AM
+ez még nem olyan fontos
+
+Szkrompa77 - 9:39 AM
+elég fontos azt nézve hogy holnap vizsga :D
+
+GubaLord - 9:41 AM
+ugyan azt a hangot játssza le, minden felületnél, ugyanolyan erõvel; nem nyílnak a kapuk, laggol, nincs fényérzékelõnk, nincs használható felszerelés, nincs implementálva az élet script a testlevelre
+szerintem hogy mit kell ellopni, az másodlagos
+
+Szkrompa77 - 9:42 AM
+a kapuk nyitását megoldom, a lagg azért van mert sok benne a grafikus módositás, azt akkor kiveszem (fpscharacter a Playeren belül, a kamerán van egy Post mégmindignemtommianevecucc, azt szedd le), a fényérzékelõt visszahúzzuk a játékba belerakjuk a fényeket és mûködik
+felszerelés akkor mi legyen?
+marci meg miért nem rakta még be az életscriptet? mit csinált tegnap, annyit küldött hogy semmi se mûködik neki, de neked igen, ezzel nem tudok mit csinálni
+
+GubaLord - 9:43 AM
+tudom
+
+Szkrompa77 - 9:44 AM
+pakoljuk bele amit tudunk, mostmár ne kezdjünk részletesen programozgatni, nincs rá idõ
+
+GubaLord - 9:57 AM
+importáltam egy csomagot
+cuki kis ékkövek vannak benne
+a light scene ben mûködik szépen
+
+Szkrompa77 - 9:57 AM
+király, én is asset storeból szedtem a kanapét stb.
+
+GubaLord - 9:57 AM
+a többiben nem kap textúrát
+ilyen fekete akármi az egész
+az mitõl lehet?
+
+Szkrompa77 - 9:58 AM
+közben mielõtt hivnak skypeon, összerakom mi is kéne hogyiskéne thiefes inventori, jobbalsó sarokban lehessen látni hogy mi van nálunk, legyen alapból egy kardunk meg a bunkónk?
+mármint az ékkõ nem kap textúrát?
+
+GubaLord - 9:58 AM
+aha
+nem kell alapból semmi, egyelõre
+fel lehet venni X db nyilat + X darab víznyilat, oszt kész
+
+Szkrompa77 - 10:00 AM
+okés
+az egyszerûbb is
+
+GubaLord - 10:02 AM
+nem csináltam semmit, oszt most meg nem laggolok
+
+Szkrompa77 - 10:03 AM
+:DDD imádom
+
+GubaLord - 10:06 AM
+és most az ékkõ is mûködik rendesen
+beszarok
+qvantum számítógépem van?
+mert ez nem determinisztikus az tuti
+
+Szkrompa77 - 10:07 AM
+xd
+
+Szkrompa77 - 10:30 AM
+kb 15perc és vagyok
+
+Szkrompa77 - 10:44 AM
+na jelen vagyok, beszéljünk
+-beszélgetés kezdete-
+
+Szkrompa7711:08 AM
+https://forum.unity.com/threads/changing-material-shader-at-runtime-c-scripting.183347/
+https://docs.unity3d.com/ScriptReference/Shader.Find.html?from=Material
+Szkrompa7711:19 AM
+https://answers.unity.com/questions/914923/standard-shader-emission-control-via-script.html
+Szkrompa7711:24 AM
+https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html
+Szkrompa7711:34 AM
+https://answers.unity.com/questions/914923/standard-shader-emission-control-via-script.html
+GubaLord12:23 PM
+((vH+vC+vF)/3)/100)

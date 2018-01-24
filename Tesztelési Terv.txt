@@ -1,0 +1,45 @@
+Tesztterv
+
+---Tesztcsapat---
+ Nagy Márton, Tóth Márk, Guba Péter
+
+---Tesztelés hatóköre---
+Implementált osztályok mûködése, PlayerInventory script, Interact script, játékos megvilágítottsága, zajgenerálás és material típusok.
+
+---Sikeres teszt követelményei---
+Minden kritikus teszt sikerrel végzõdik, valamint a másodlagos teszteknek legalább 80%-a is sikeres.
+
+---A tesztelés eszközei---
+Unit tesztek, valamint emberi próba azon esetekben, ahol a Unit teszt nem alkalmazható.
+
+---Kritikus tesztek---
+PlayerInventory script
+NewItem metódus hívása után az e lista Count-ja bõvüljön 1-el, és az paraméterként átadott felszerelési tárgy kódja kerüljön be a listába.
+UseItem metódus hívásakor az e lista mérete csökkenjen 1-el, úgy, hogy az i index által meghatározott elem törlõdik a listából.
+	IsInShadow script
+A head, chest és foot mezõk nem lehtnek null, különben dobjon hibaüzenetet.
+Ha a lights lista üres, akkor is fusson a script.
+ThiefObject gyerekosztályok
+Fontos, hogy minden objektumnak meg legyen határozva, hogy milyen ThiefObject (static fieldobj, collectible stb…) és a hozzá tartozó material is szerepeljen rajta, különben NullReferenceObject expression lép fel.
+Animációk
+A meganimált objektumok Animator Controllerében a megfelelõ triggerek beállitása, melyeket majd elérünk a kódból és az animációk közti ütközésmentes átmenetek biztositása folytonosan.
+
+
+---Másodlagos tesztek---
+PlayerHealt script
+TakeDamage függvény bemenete 0-100 valid
+Ha a currentHealth mezõ értéke <=0, akkor az isDead mezõ true;
+	PlayerInventory script
+AddGem függvény bemenete >=0 esetén valid
+AddGold függvény bemenete >=0 esetén valid
+AddOtherValuable függvény bemenete >=0 esetén valid
+collectedGemsValue, collectedGoldValue, collectedOtherValue értéke kizárólag pozitív lehet.
+	IsInShadow script
+A mesh.material float értékének 0-2 float értéket ad át a script, bármennyi, és bármilyen fény esetén.
+Amikor minden fény range hatótávján kívül vagyunk, akkor a BrightnessCalculate 
+ metódus értéke 0;
+Egy fénytõl x távolságra állva a BrightnessCalculate értéke y. 0<x<fény.range Újabb fény elhelyezésével, a BrightnessCalculate értéke z lesz. y<=z.
+Egy fénytõl X távolságra állva a BrightnessCalculate értéke Y. Egy másik fénytõl A távolságra állva a BrightnessCalculate értéke B. Az elsõ fénytõl X távolságra állva, és a második fénytõl A tábolságra állva a BrightnessCalculate értéke Q. 0<X,A<fény.range	Y+B > Q.
+NoiseGeneration és GetNoise scriptek
+A játékos minden lépésével zajt kell, hogy generáljon, a kilõtt nyilak vagy eldobott tárgyak egyaránt hangot kell, hogy generáljanak, annak függvényében, hogy milyen felülettel érintkeztek a becsapódás pillanatában. Ezt a NoiseGeneration scriptnek kell végeznie, majd a generált hangot a felület szorzójától függõen átadni a GetNoise scripttel rendelkezõ objektumoknak, melyek a kapott értékre reagálnak.
+

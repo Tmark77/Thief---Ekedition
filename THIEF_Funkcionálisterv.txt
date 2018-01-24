@@ -1,0 +1,59 @@
+Funkcionális terv
+
+---Mozgás---
+A mozgást a Unity beépített FirstPerson kontrollerével valósítjuk meg. A különbözõ mozgási módokat logikai változók alkalmazásával érjük el, míg a fedezékek mögül kihajolás újabb kamerákra váltással valósul meg. Objektumokra felmászást szintén külön kamera bevezetésével érjük el. Az objektumokkal való ütközés esetében ismét a Unity-re bízzuk magunkat, és egy Collider-t használva a beépített fizikai tulajdonságokat használjuk.
+Az input gombok testreszabhatóságát szintén egy beépített Unity megoldással valósítjuk meg.
+
+---Fények---
+A megvilágítottságot egy scripttel fogjuk megoldani. Ennek bemenete egy, az adott pályán fellelhetõ, a megvilágítottság kiszámításában is részt vevõ fényekbõl álló lista lesz. A script sorban megvizsgálja az adott fényekre a megvilágítottság tényét, és mértékét, a játékos 3 különbözõ (fej, törzs, láb) láthatósági pontjára.
+A 3 láthatósági pont megvilágítottságának átlagolásával megkapjuk a teljes megvilágítottságot, mely a játékos kamerájához rögzített fénykõ rendererjének intenzitása lesz (a megfelelõ konvertálás után).
+A fény útját a láthatósági pontokhoz RayCast, valamint RayCastAll függvényekkel végezzük.
+A megvilágítottság a fény és a láthatósági pont távolságának függvénye, figyelembe véve, hogy mekkora a fény maximális hatótávolsága, mely a Range tulajdonsága alapján nem csak könnyen leolvasható, de egyszerûen módosítható is, ami a fények kioltásánál lesz fontos.
+
+---Osztályrendszer és tárgyak---
+Az egész játékhoz készítünk egy osztályrendszert. Ennek legõsibb tagja az ún. ThiefObject lesz. Felhsználva polimorfizmust és az öröklõdést, kidolgozunk minden a játék szempontjából fontos objektumot, és tulajdonságaikat, úgy hogy egy-egy osztály csak a rá legjellemzõbb, legminimálisabb kódot tartalmazza. Ezzel a módszerrel a bõvítés, valamint a módosítás is gyors és egyszerû lesz. Azon objektumok, amik a játék szabályai szempontjából nem relevánsak, nem látjuk el semmilyen ThiefObject-tel, így azok nem bírnak majd jelentõséggel pl. a fények és hangok kiszámításánál.
+Objektum összetétellel a valósítjuk meg, hogy a ThiefObject rendelkezzen egy adott anyaggal, mivel a játékban meghatározó, hogy egy objektum milyen anyagból van.
+Az alapanyag fogja meghatározni a felületre lépéskor keletkezõ hang erejét, azt hogy a felületen keresztülhatol-e a fény és hogy a felületbe beragadnak-e a nyílvesszõk, vagy lepattannak róla.
+A tárgyak felvételéért egy újabb a játékoshoz csatolt script felel, ami a ThiefObject bizonyos alosztályaira fejti csak ki hatását, meghívva a PickUp, és az Interact függvényekt. Ezek a maguk módján gondoskodnak az aktivált objektum sorsáról.
+Egy külön script felel majd a felszerelésmenüért, ami a felvett objektumok megfelelõ tárolásáért felel. Egy összetett lista a használható felszerelési tárgyakhoz, és 3 számláló, a különbözõ formákban (Arany, Ékkõ, Egyéb) összegyûjtött pénzmennyiség jegyzéséhez.
+
+---Hangok---
+A játékos adott megtett távolságonként lép egyet (teszi le a lábát mozgás közben), így hangot csak ezen alkalmakkor, periodikusan generálunk. Mégpedig egy a mozgást leíró változók által meghatározott értékkel meghívjuk a játékos alatt lévõ ThiefObject anyagának megfelelõ függvényét, ami megadja a hangerõsséget. Majd az ezen értékbõl kiszámolt távolságra lévõ hangérzékelésre képes objektumok megfelelõ függvényét hívjuk meg.
+A hangérzékelést egy külön scripttel oldjuk meg.
+
+---AI---
+Minden nem játékos karakter több állapot szerint fog mûködni.
+A nyugodt állapotban az õrök zavartalanul álldogálnak, vagy járõröznek a megszabott útvonalon. Minden hang és látvány az erõsségétõl függõen „gyanú” pontokat generál az azokat érzékelõ õrnél. Ha ez a pont elég magas, akkor az õr átvált keresõ állapotba.
+Minden õrnek meglesz a képessége, hogy bizonyos értéktárgyakat „ismerjen”.
+Keresõ állapotban az õr átkutatja a leggyanúsabb helyeket, a zajok forrását és az ismert tárgyak helyét. Ha a „gyanú” pontjai kellõen lecsökkennek, akkor vissza vált nyugodt állapotba.
+Ha az õr nyugodt vagy keresõ állapotban egyértelmûen meglátja a játékost („gyanú” pontok alapján mûködik) akkor üldözõ állapotba lép. Addig üldözi a játékos karaktert, míg meg nem öli, vagy el nem veszti a nyomát. Nyomelvesztés esetén visszavált keresõ állapotba.
+A nyugodt állapotú õrök a bunkósbottal megütve ájult állapotba jutnak. Ájult õr bizonyos idõ után felébred, gyanakvó állapotba kerül.
+Ha bármely nem játékos karakter életerõ pontjai elfogynak, halott állapotba kerül. Ebbõl nem juthat ki semmilyen módon.
+A halott és ájult állapotban lévõ karaktereket a játékos a vállára veheti és mozgathatja, elviheti s lerakhatja õket.
+Ájult vagy halott karakter észlelése esetén a nem játékos karakterek keresõ állapotba lépnek.
+Alvó állapotban csak a zajok generálnak gyanú pontokat. Ebben az állapotban a karakter nem mozoghat. Minden egyéb tekintetben ez az állapot megegyezik a nyugodt állapottal.
+Fénybomba használatakor, ha egy õr látja a robbanást, akkor vak állapotba kerül. Ilyenkor semmit sem képes tenni, nem lát (de hall). Rövid idõ után átvált keresõ állapotba.
+
+---Fogalmak---
+
+Ismeret: egy õr akkor ismer egy tárgyat, ha annak eltûnése gyanú pontokat generál számára.
+
+Zaj: Különbözõ, fõként a játékos által végrehajtott cselekvések eredményeként indukálódó esemény, mely gyanú pontokat generál azon õröknél, akik hallják. A gyanú pontok mennyisége a zaj erõsségétõl függ. A zajnak nem szabad átjutnia teljesen elkülönített helyiségekbe.
+
+Hallás: Az NJK-k azon képessége hogy érzékeljék a zajokat. Alapvetõen a  közelség függvénye, de több tényezõ is hatással van  rá.
+
+Játékos: Az az objektum, amit a Felhasználó irányít.
+
+Nem játékos karakterek (NJK): Azon mesterséges intelligenciával rendelkezõ objektumok melyeket nem a játékos irányít. Képesek észlelni a játékost, ami viselkedés változást idézhet elõ náluk.
+
+Õrök: Azon nem játékos karakterek, melyek a játékban ellenfélként mûködnek. Képesek életerõ veszteség okozására, mozgásra, és amennyiben észlelik a játékost, megtámadják.
+
+Észlelés: Egy NJK akkor észlel valamit (többnyire a Játékost) ha a gyanú pontjai kellõen magasak. Ez általában akkor lehetséges, ha az NJK látja a Játékost.
+
+Látás: Egy nem játékos karakter akkor lát egy objektumot, ha az objektum a kijelölt látómezejében helyezkedik el, nincs akadály az objektum valamely láthatósági pontja és a karakter látóközéppontja közt (maga a látni kívánt objektum nem számít akadálynak), és a karakter az objektum láthatósági zónáján belül van.
+
+Láthatósági zóna: Az az R sugarú tér, amin belül minden nem játékos karakter láthatja az objektumot. R az objektumra esõ fény intenzitásán múlik. A Játékos esetében az aktuális mozgási mód is számít. (guggolva kevesebb, futva több az R)
+
+Látó középpont: Az a pont egy nem játékos karakternél, ahonnan egyenes vonal húzásával (egy a látómezõben lévõ objektum láthatósági pontja felé) megállapítható a látás ténye.
+
+Láthatósági pont: Azon pontok egy objektumon belül melyekbe az NJK-k látó középpontjából egyenest húzunk a látás vizsgálatakor.
