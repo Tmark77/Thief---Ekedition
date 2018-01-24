@@ -77,16 +77,19 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void AddGem (int value)
 	{
+		if(value>=0)
 		collectedGemsValue += value;
 	}
 
 	public void AddGold (int value)
 	{
+		if(value>=0)
 		collectedGoldValue += value;
 	}
 
 	public void AddOtherValuable (int value)
 	{
+		if(value>=0)
 		collectedOtherValue += value;
 	}
 }
