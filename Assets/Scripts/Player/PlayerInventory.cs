@@ -13,7 +13,8 @@ public class PlayerInventory : MonoBehaviour {
 	public Text gemValue;
 	public Text otherValue;
 
-	List<int> e = new List<int>();
+	//List<int> e = new List<int>();
+	List<Equipment> e = new List<Equipment>();
 	int i;
 
 
@@ -31,12 +32,10 @@ public class PlayerInventory : MonoBehaviour {
 		if (Input.GetButtonDown("NextItem")) 
 		{
 			NextItem();
-			Debug.Log (e [i]);
 		}
 		if (Input.GetButtonDown("PrevItem")) 
 		{
 			PrevItem ();
-			Debug.Log (e [i]);
 		}
 
 		goldValue.text = "Gold: " + collectedGoldValue;
@@ -46,16 +45,17 @@ public class PlayerInventory : MonoBehaviour {
 		otherValue.text = "Other Goods: " + collectedOtherValue;
 	}
 
-	public void NewItem(int item)
+	//public void NewItem(int item)
+	public void NewItem(Equipment item)
 	{
 		e.Add (item);
 		i = e.Count - 1;
-		Debug.Log (item);
+		Debug.Log (e[i]);
 	}
 
 	public void UseItem()
 	{
-		//e [i].Use();
+		e [i].Use();
 		e.RemoveAt (i);
 		NextItem ();
 
@@ -66,6 +66,7 @@ public class PlayerInventory : MonoBehaviour {
 		i++;
 		if (i >= e.Count)
 			i = 0;
+		Debug.Log (e [i]);
 	}
 
 	private void PrevItem()
@@ -73,6 +74,7 @@ public class PlayerInventory : MonoBehaviour {
 		i--;
 		if (i < 0)
 			i = e.Count-1;
+		Debug.Log (e [i]);
 	}
 
 	public void AddGem (int value)

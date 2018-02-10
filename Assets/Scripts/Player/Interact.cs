@@ -34,6 +34,10 @@ public class Interact : MonoBehaviour {
 			if (obj is DynamicFieldObject) {
 				(obj as DynamicFieldObject).Interaction ();
 			}
+
+			if (obj is Creature) {
+				/*Player.carriing = */(obj as Creature).Carry ();
+			}
 		}
 	}
 

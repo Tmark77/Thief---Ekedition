@@ -10,6 +10,8 @@ public abstract class Creature : ThiefObject {
 		get{ return health; }
 		set{ health = value;}
 	}
+		
+	public AbstractCondition condition;
 
 	int suspicion;
 	public int Suspicion
@@ -20,5 +22,30 @@ public abstract class Creature : ThiefObject {
 
 	public List<Collectible> KnownObjects = new List<Collectible> ();
 
-	//Állapottipus
+	public void TakeDamage(int damage)
+	{
+		if(damage > 0)
+			Health = Health - (damage * condition.DamageMultiplier);
+	}
+		
+	//na lehet hogy a váltást nem így kéne mgecsinálni, hanem a konkrét állapotokon belül.
+	public void KnockOut()
+	{
+		if (condition.CanBeKnockedOut) 
+		{
+			// + játszd le az összeeső animációt
+			condition = new KnockedOutCondition ();
+		}
+	}
+
+	public bool Carry()
+	{
+		if (condition.CarryAble) 
+		{
+			// + játszd le a felvevő animációt
+			return true;
+		}
+		return false;
+	}
+
 }
