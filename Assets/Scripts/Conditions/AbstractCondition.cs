@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class AbstractCondition : MonoBehaviour {
 
-	private bool canBeKnockedOut; //leüthető avagy elkábítható-e az adott állapotban a lény.
-	public bool CanBeKnockedOut {
-		get { return canBeKnockedOut;}
-	}
+	//private bool canBeKnockedOut; //leüthető avagy elkábítható-e az adott állapotban a lény.
+	//public bool CanBeKnockedOut {
+	//	get { return canBeKnockedOut;}
+	//}
 
 	private int takeDamageMultiplier; //gyanútlan ellenfél nagyobb sebzést kaphat, alap értéke 1
 	public int DamageMultiplier {
@@ -17,10 +17,46 @@ public abstract class AbstractCondition : MonoBehaviour {
 		}
 	}
 
-	private bool carryAble; //jobb klikkel viheti a játékos a vállán
+	protected bool carryAble; //jobb klikkel viheti a játékos a vállán
 	public bool CarryAble {
 		get { return carryAble;}
 	}
+		
+	public AbstractCondition ChangeToDead(Creature creature)
+	{
+		return creature.condition_dead;
+	}
+
+	//--------------------------------------------------
+	public virtual AbstractCondition ChangeToKnockedOut ()
+	{
+		return this;
+	}
+
+	public virtual AbstractCondition ChangeToBlind ()
+	{
+		return this;
+	}
+	//-----------------------------------------------------
+	public virtual AbstractCondition ChangeToSuspicious ()
+	{
+		return this;
+	}
+
+	public virtual AbstractCondition ChangeToAlerted ()
+	{
+		return this;
+	}
+
+	public virtual AbstractCondition ChangeToCalm ()
+	{
+		return this;
+	}
+		
+	//---------------------------------------------------
+	abstract public void ReactToNoise (Creature creature, int noiseMeter);
+
+	abstract public void ReactToView (Creature creature);
 
 	//nincs kész
 

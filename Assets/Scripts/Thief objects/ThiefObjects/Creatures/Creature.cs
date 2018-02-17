@@ -4,6 +4,14 @@ using UnityEngine;
 
 public abstract class Creature : ThiefObject {
 
+	public AbstractCondition condition_calm;
+	public AbstractCondition condition_suspicious;
+	public AbstractCondition condition_alert;
+	public AbstractCondition condition_dead;
+	public AbstractCondition condition_knockeddown;
+	public AbstractCondition condition_blind;
+	public AbstractCondition condition_sleep;
+
 	int health;
 	public int Health
 	{
@@ -12,6 +20,8 @@ public abstract class Creature : ThiefObject {
 	}
 		
 	public AbstractCondition condition;
+
+	public List<Equipment> e = new List<Equipment>();
 
 	int suspicion;
 	public int Suspicion
@@ -28,14 +38,10 @@ public abstract class Creature : ThiefObject {
 			Health = Health - (damage * condition.DamageMultiplier);
 	}
 		
-	//na lehet hogy a váltást nem így kéne mgecsinálni, hanem a konkrét állapotokon belül.
+	//na lehet hogy a váltást nem így kéne megcsinálni, hanem a konkrét állapotokon belül.
 	public void KnockOut()
 	{
-		if (condition.CanBeKnockedOut) 
-		{
-			// + játszd le az összeeső animációt
-			condition = new KnockedOutCondition ();
-		}
+		condition = condition.ChangeToKnockedOut ();
 	}
 
 	public bool Carry()
@@ -47,5 +53,14 @@ public abstract class Creature : ThiefObject {
 		}
 		return false;
 	}
+
+	public void GetNoise(int noiseMeter)
+	{
+		condition.ReactToNoise (this, noiseMeter);
+	}
+
+	//metódus ami a látott dologokat észleli
+
+
 
 }

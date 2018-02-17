@@ -8,6 +8,11 @@ public abstract class Equipment : Collectible {
 
 	protected int kod;
 
+	public int Kod
+	{
+		get{ return kod; }
+	}
+
 	public override void PickUp(PlayerInventory inv)
 	{
 		//inv.NewItem (kod);
