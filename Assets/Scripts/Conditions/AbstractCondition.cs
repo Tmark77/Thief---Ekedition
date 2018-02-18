@@ -10,6 +10,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 	//}
 
 	private int takeDamageMultiplier; //gyanútlan ellenfél nagyobb sebzést kaphat, alap értéke 1
+
 	public int DamageMultiplier {
 		get
 		{
@@ -28,15 +29,10 @@ public abstract class AbstractCondition : MonoBehaviour {
 	}
 
 	//--------------------------------------------------
-	public virtual AbstractCondition ChangeToKnockedOut ()
-	{
-		return this;
-	}
+	public abstract AbstractCondition ChangeToKnockedOut (Creature creature);
 
-	public virtual AbstractCondition ChangeToBlind ()
-	{
-		return this;
-	}
+	public abstract AbstractCondition ChangeToBlind (Creature creature);
+
 	//-----------------------------------------------------
 	public virtual AbstractCondition ChangeToSuspicious ()
 	{
@@ -58,7 +54,9 @@ public abstract class AbstractCondition : MonoBehaviour {
 
 	abstract public void ReactToView (Creature creature);
 
-	//nincs kész
+	public abstract void SuspicionDecreaseOverTime (Creature creature);
+
+	//kell hogy egy célpont felé hogyan reagál
 
 
 

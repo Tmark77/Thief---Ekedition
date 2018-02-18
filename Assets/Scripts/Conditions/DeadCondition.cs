@@ -6,7 +6,21 @@ namespace AssemblyCSharp
 	{
 		#region implemented abstract members of AbstractCondition
 
-		public DeadCondition ()
+		public override AbstractCondition ChangeToKnockedOut (Creature creature)
+		{
+			return this;
+		}
+
+		public override AbstractCondition ChangeToBlind (Creature creature)
+		{
+			return this;
+		}
+
+		public override void SuspicionDecreaseOverTime (Creature creature)
+		{
+		}
+
+		void Start ()
 		{
 			carryAble = true;
 		}

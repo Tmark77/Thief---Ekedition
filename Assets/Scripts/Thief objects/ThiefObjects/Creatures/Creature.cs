@@ -12,13 +12,33 @@ public abstract class Creature : ThiefObject {
 	public AbstractCondition condition_blind;
 	public AbstractCondition condition_sleep;
 
+	public float NoiseSensitivity;
+
+	public int SuspicionDecrease;
+
+	int maxhealth;
+	public int MaxHealth
+	{
+		get{ return maxhealth; }
+		set{ maxhealth = value; }
+	}
+
 	int health;
 	public int Health
 	{
 		get{ return health; }
-		set{ health = value;}
+		set
+		{
+			if (value > MaxHealth) {
+				health = value;
+			}
+			else
+			{
+				health = MaxHealth;
+			}
+		}
 	}
-		
+
 	public AbstractCondition condition;
 
 	public List<Equipment> e = new List<Equipment>();
@@ -27,7 +47,10 @@ public abstract class Creature : ThiefObject {
 	public int Suspicion
 	{
 		get{ return suspicion; }
-		set{ suspicion = value;}
+		set
+		{ 
+			suspicion = value;
+		}
 	}
 
 	public List<Collectible> KnownObjects = new List<Collectible> ();
@@ -36,12 +59,14 @@ public abstract class Creature : ThiefObject {
 	{
 		if(damage > 0)
 			Health = Health - (damage * condition.DamageMultiplier);
+		if (Health <= 0)
+			condition = condition_dead;
 	}
 		
 	//na lehet hogy a váltást nem így kéne megcsinálni, hanem a konkrét állapotokon belül.
 	public void KnockOut()
 	{
-		condition = condition.ChangeToKnockedOut ();
+		condition = condition.ChangeToKnockedOut (this);
 	}
 
 	public bool Carry()
@@ -60,6 +85,33 @@ public abstract class Creature : ThiefObject {
 	}
 
 	//metódus ami a látott dologokat észleli
+
+	void Update()
+	{
+		
+	}
+
+	void Start()
+	{
+		SuspicionDecrease = 1;
+		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
+	}
+
+	public void DecreaseSuspicion()
+	{
+		if (Suspicion > 0) {
+			Suspicion -= (int)SuspicionDecrease;
+			condition.SuspicionDecreaseOverTime (this);
+		} 
+		else 
+		{
+			Suspicion = 0;
+		}
+	}
+
+	List<Transform> Targets = new List<Transform> ();
+	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
+
 
 
 
