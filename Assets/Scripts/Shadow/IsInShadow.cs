@@ -14,9 +14,9 @@ public class IsInShadow : MonoBehaviour {
 //    bool hC; //chest is in shadow
 //    bool hF; //foot is in shadow
 
-	int vH; //head visivility
-	int vC; //chest visivility
-	int vF; //foot visivility
+	static int vH; //head visivility  NEM STATIC AMÚGY
+	static int vC; //chest visivility NEM STATIC AMÚGY
+	static int vF; //foot visivility  NEM STATIC AMÚGY
 
     int i; //index
     int fullDark; //full shadow
@@ -36,7 +36,20 @@ public class IsInShadow : MonoBehaviour {
 //        hC = false;
 //        hF = false;
     }
-	
+
+	public static int GetVH()
+	{
+		return vH;
+	}
+	public static int GetVC()
+	{
+		return vC;
+	}
+	public static int GetVF()
+	{
+		return vF;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -99,56 +112,7 @@ public class IsInShadow : MonoBehaviour {
 			} while(ind < tf.Count);
 		}
 		return true;
-
-
-	//	ThiefObject thiefObj = hit.collider.gameObject.GetComponent<ThiefObject> ();
-	//	if (hit.transform.name == "Player" || thiefObj.material.SeeTrough ()) //javitás!
-	//		{
-	//			return true;
-	//		} 
-	//		else 
-	//		{
-	//			return false;
-	//		}
 	}
-
-    // bool Hide(int index)
-    // {
-    //     Debug.DrawLine(lights[index].transform.position, head.position, Color.red);
-    //     Debug.DrawLine(lights[index].transform.position, chest.position, Color.blue);
-    //     Debug.DrawLine(lights[index].transform.position, foot.position, Color.green);
-    // 
-    //     RaycastHit hit;
-    //     float distance = Vector3.Distance(lights[i].transform.position, player.position);
-    //     hH = Sensor(head, hH, index);
-    // 	hC = Sensor(chest, hC, index);
-    // 	hF = Sensor(foot, hF, index);
-    // 
-    //     if ((hH && hC || hH && hF || hC && hF) || distance > range)
-    //     {
-    //         return true;
-    //     }
-    //     else return false;
-    // }
-
-    // bool Sensor(Transform obj,bool sensor, int i)
-    // {
-    //     RaycastHit hit;
-    //     if (Physics.Linecast(lights[i].transform.position, obj.position, out hit))
-    //     {
-    //         Debug.Log(hit.transform.name);
-    //         if (hit.transform.name != "Player")
-    //         {
-    //             return true;
-    //         }
-    //         else
-    //         {
-    //             return false;
-    //         }
-    //     }
-    //     else return false;
-    // }
-
 
     /// <summary>
     /// ide kerül a képlet, amivel kiszámoljuk milyen erősséggel világít meg a fény. 

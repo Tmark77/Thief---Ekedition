@@ -52,14 +52,14 @@ public abstract class AbstractCondition : MonoBehaviour {
 	//---------------------------------------------------
 	abstract public void ReactToNoise (Creature creature, int noiseMeter);
 
-	abstract public void ReactToView (Creature creature);
+	abstract public void ReactToView (Creature creature,int H, int C, int F);
 
 	public abstract void SuspicionDecreaseOverTime (Creature creature);
 
 	//kell hogy egy célpont felé hogyan reagál
 
 
-
+	public abstract void PatrolBehaviour (List<Transform> spots,ref int index);
 
 
 }

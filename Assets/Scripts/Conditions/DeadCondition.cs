@@ -6,6 +6,15 @@ namespace AssemblyCSharp
 	{
 		#region implemented abstract members of AbstractCondition
 
+		public override void PatrolBehaviour (System.Collections.Generic.List<UnityEngine.Transform> spots,ref int index)
+		{
+			throw new NotImplementedException ();
+		}
+
+		#endregion
+
+		#region implemented abstract members of AbstractCondition
+
 		public override AbstractCondition ChangeToKnockedOut (Creature creature)
 		{
 			return this;
@@ -29,7 +38,7 @@ namespace AssemblyCSharp
 		{
 		}
 
-		public override void ReactToView (Creature creature)
+		public override void ReactToView (Creature creature,int H, int C, int F)
 		{
 		}
 

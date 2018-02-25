@@ -5,6 +5,15 @@ namespace AssemblyCSharp
 {
 	public class BaseSuspiciousGuard : AbstractCondition
 	{
+		#region implemented abstract members of AbstractCondition
+
+		public override void PatrolBehaviour (System.Collections.Generic.List<Transform> spots, ref int index)
+		{
+			
+		}
+
+		#endregion
+
 		public Material mat;
 		#region implemented abstract members of AbstractCondition
 
@@ -17,14 +26,14 @@ namespace AssemblyCSharp
 			}
 		}
 
-		public override void ReactToView (Creature creature)
+		public override void ReactToView (Creature creature,int H, int C, int F)
 		{
 			throw new NotImplementedException ();
 		}
 
 		public override void SuspicionDecreaseOverTime (Creature creature)
 		{
-			Debug.Log ("csökken a gyanú pont: " + creature.Suspicion);
+			//Debug.Log ("csökken a gyanú pont: " + creature.Suspicion);
 			if(creature.Suspicion<100)
 			{
 				mat.color = Color.yellow;

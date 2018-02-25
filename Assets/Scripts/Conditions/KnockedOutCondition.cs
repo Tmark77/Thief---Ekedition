@@ -5,6 +5,15 @@ using UnityEngine;
 public class KnockedOutCondition : AbstractCondition {
 	#region implemented abstract members of AbstractCondition
 
+	public override void PatrolBehaviour (List<Transform> spots,ref int index)
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	#endregion
+
+	#region implemented abstract members of AbstractCondition
+
 	public override AbstractCondition ChangeToKnockedOut (Creature creature)
 	{
 		return this;
@@ -23,7 +32,7 @@ public class KnockedOutCondition : AbstractCondition {
 	{
 	}
 
-	public override void ReactToView (Creature creature)
+	public override void ReactToView (Creature creature,int H, int C, int F)
 	{
 	}
 

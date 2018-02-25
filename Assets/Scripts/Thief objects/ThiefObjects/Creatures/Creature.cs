@@ -4,6 +4,95 @@ using UnityEngine;
 
 public abstract class Creature : ThiefObject {
 
+	public Transform player;
+	public Transform head;
+	public Transform chest;
+	public Transform foot;
+
+	private int vH;
+	private int vC;
+	private int vF;
+
+	void Start()
+	{
+		SuspicionDecrease = 1;
+		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
+		index = 0;
+	}
+
+	void Update()
+	{
+		condition.PatrolBehaviour (Targets,ref index);
+		//----------------------------------------------------------------------------------------
+		Vector3 direction = player.position - this.transform.position;
+		float angle = Vector3.Angle (direction, this.transform.forward);
+		if (Vector3.Distance(player.position,this.transform.position) < 10 && angle < 30f) 
+		{
+			if (Vanralatas (head)) 
+			{
+				if (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH()) {
+					vH = IsInShadow.GetVH ();
+				}
+			} 
+			else 
+			{
+				vH = 0;
+			}
+
+			if (Vanralatas (chest)) 
+			{
+				if (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVC()) {
+					vC = IsInShadow.GetVC ();
+				}
+			} 
+			else 
+			{
+				vC = 0;
+			}
+
+			if (Vanralatas (foot)) 
+			{
+				if (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVF()) {
+					vF = IsInShadow.GetVF ();
+				}
+			} 
+			else 
+			{
+				vF = 0;
+			}
+
+			condition.ReactToView (this,vH,vC,vF);
+		}
+	}
+
+	bool Vanralatas(Transform obj)
+	{
+		RaycastHit[] hits = Physics.RaycastAll (this.transform.position, obj.position - this.transform.position, Vector3.Distance(this.transform.position, obj.position));
+
+		List<ThiefObject> tf = new List<ThiefObject> ();
+		foreach (RaycastHit hit in hits) 
+		{
+			if (hit.collider.gameObject.GetComponent<ThiefObject> () != null) 
+			{
+				tf.Add (hit.collider.gameObject.GetComponent<ThiefObject> ());
+			}
+		}
+
+		int ind;
+		ind = 0;
+		if (tf.Count != 0) {
+			do {
+				if (!tf[ind].material.SeeTrough())
+				{
+					return false;
+				}
+				ind++;
+			} while(ind < tf.Count);
+		}
+		return true;
+	}
+
+
 	public AbstractCondition condition_calm;
 	public AbstractCondition condition_suspicious;
 	public AbstractCondition condition_alert;
@@ -86,16 +175,7 @@ public abstract class Creature : ThiefObject {
 
 	//metódus ami a látott dologokat észleli
 
-	void Update()
-	{
-		
-	}
 
-	void Start()
-	{
-		SuspicionDecrease = 1;
-		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
-	}
 
 	public void DecreaseSuspicion()
 	{
@@ -109,7 +189,8 @@ public abstract class Creature : ThiefObject {
 		}
 	}
 
-	List<Transform> Targets = new List<Transform> ();
+	public List<Transform> Targets = new List<Transform> ();
+	int index;
 	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
 
 

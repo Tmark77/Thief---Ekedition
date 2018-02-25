@@ -1,14 +1,29 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.AI;
 
 namespace AssemblyCSharp
 {
 	public class BaseCalmGuard : AbstractCondition
 	{
+		NavMeshAgent agent;
+
 		public Material mat;
 
+		void Start ()
+		{
+			carryAble = false;
+			mat.color = Color.yellow;
+			this.agent = GetComponent<NavMeshAgent> ();
+		}
+
+		void Update()
+		{
+			
+		}
+
 		//1 az alap értéke, szorzóként működik
-		#region implemented abstract members of AbstractCondition
 
 		public override void SuspicionDecreaseOverTime (Creature creature)
 		{
@@ -18,26 +33,26 @@ namespace AssemblyCSharp
 		public override void ReactToNoise (Creature creature, int noiseMeter)
 		{
 			creature.Suspicion += (int)(noiseMeter * creature.NoiseSensitivity);
-			Debug.Log ("növekvő gyanú: " + creature.Suspicion);
 			if (creature.Suspicion >= 100) 
 			{
 				mat.color = Color.red;
 				creature.condition = creature.condition_suspicious;
+				agent.SetDestination (creature.gameObject.transform.position);
 			}
 		}
 
-		public override void ReactToView (Creature creature)
+		public override void ReactToView (Creature creature,int H, int C, int F)
 		{
-			throw new NotImplementedException ();
+			if (H > 10 || C > 10 || F > 10) 
+			{
+				Debug.Log ("Látlak");
+				creature.Suspicion = 110;
+				mat.color = Color.red;
+				creature.condition = creature.condition_suspicious;
+				agent.SetDestination (creature.player.position);
+			}
 		}
 
-		#endregion
-
-		void Start ()
-		{
-			carryAble = false;
-			mat.color = Color.yellow;
-		}
 
 		public override AbstractCondition ChangeToKnockedOut (Creature creature)
 		{
@@ -49,7 +64,18 @@ namespace AssemblyCSharp
 			return creature.condition_blind;
 		}
 			
-			
+		public override void PatrolBehaviour (List<Transform> spots, ref int index)
+		{
+			if (Vector3.Distance(agent.transform.position,spots[index].position) < 1 ) 
+			{
+				index++;
+			}
+			else agent.SetDestination (spots [index].position);
+
+			if (index == spots.Count) {
+				index = 0;
+			}
+		}
 	}
 }
 
