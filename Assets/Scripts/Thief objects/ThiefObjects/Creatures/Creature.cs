@@ -26,7 +26,7 @@ public abstract class Creature : ThiefObject {
 		//----------------------------------------------------------------------------------------
 		Vector3 direction = player.position - this.transform.position;
 		float angle = Vector3.Angle (direction, this.transform.forward);
-		if (Vector3.Distance(player.position,this.transform.position) < 10 && angle < 30f) 
+		if (IsInFieldOfView(angle)) 
 		{
 			if (Vanralatas (head)) 
 			{
@@ -91,6 +91,8 @@ public abstract class Creature : ThiefObject {
 		}
 		return true;
 	}
+
+	public abstract bool IsInFieldOfView (float angle);
 
 
 	public AbstractCondition condition_calm;

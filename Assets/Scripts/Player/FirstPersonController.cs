@@ -198,10 +198,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				currentSpeed += m_RunSpeed;
 			if (currentSpeed < minimumSpeed)
 				currentSpeed = minimumSpeed;
-
-
         }
         
+
         private void PlayLandingSound()
         {
 			if (actuallyCrouched)
@@ -331,7 +330,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					if(dist < noise)
 					{
 						g.GetNoise((int)(((noise-dist)*100/noise)*1)); //1 a gyanú pontok szorzója
-						Debug.Log(noise);
+						//Debug.Log(noise);
 					}
 				}
 			}
