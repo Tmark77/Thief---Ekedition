@@ -63,6 +63,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool crouching = false;
 		private bool actuallyCrouched = false;
 
+		[SerializeField] public Transform head;
+
 		public Transform RPcam;
 		public Transform LPcam;
 		public Transform basicCam;
@@ -124,6 +126,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
 		{
 			m_Camera.transform.position = basicCam.position;
+			head.position = basicCam.position;
 
 			RotateView ();
 			// the jump state needs to read here to make sure it is not missed
@@ -172,6 +175,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					if (running == false && m_Jumping == false) {
 						m_Camera.transform.position = RPcam.position;
 						m_Camera.transform.rotation = RPcam.rotation;
+						head.position = RPcam.position;
 					}
 				}
 			}
@@ -181,6 +185,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					if (running == false && m_Jumping == false) {
 						m_Camera.transform.position = LPcam.position;
 						m_Camera.transform.rotation = LPcam.rotation;
+						head.position = LPcam.position;
 					}
 				}
 			}

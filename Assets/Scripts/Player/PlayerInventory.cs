@@ -38,11 +38,11 @@ public class PlayerInventory : MonoBehaviour {
 			PrevItem ();
 		}
 
-		goldValue.text = "Gold: " + collectedGoldValue;
-
-		gemValue.text = "Gem: " + collectedGemsValue;
-
-		otherValue.text = "Other Goods: " + collectedOtherValue;
+		//goldValue.text = "Gold: " + collectedGoldValue;
+		//
+		//gemValue.text = "Gem: " + collectedGemsValue;
+		//
+		//otherValue.text = "Other Goods: " + collectedOtherValue;
 	}
 
 	//public void NewItem(int item)

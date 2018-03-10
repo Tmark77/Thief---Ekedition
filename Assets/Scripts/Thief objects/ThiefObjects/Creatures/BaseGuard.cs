@@ -5,14 +5,15 @@ namespace AssemblyCSharp
 {
 	public class BaseGuard : Creature
 	{
-		
+
 		public BaseGuard ()
 		{
+			RangeOfVision = 20;
 		}
 
 		public override bool IsInFieldOfView (float angle)
 		{
-			return Vector3.Distance (player.position, this.transform.position) < 10 && angle < 30f;
+			return Vector3.Distance (player.position, this.transform.position) < RangeOfVision && angle < 60f;
 		}
 
 		public int damage;

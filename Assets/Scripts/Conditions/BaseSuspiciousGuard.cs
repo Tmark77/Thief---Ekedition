@@ -14,9 +14,9 @@ namespace AssemblyCSharp
 		{
             agent.SetDestination(spots[spots.Count-1]);
 
-            if (Vector3.Distance(agent.transform.position, spots[spots.Count - 1]) < 1f)
+            if (Vector3.Distance(agent.transform.position, spots[spots.Count - 1]) < 2f)
             {
-				Vector3 fasz;
+				Vector3 fasz; //át kell majd írni
 				do
 				{
 					fasz = new Vector3(spots[spots.Count - 1].x+rnd.Next(-3,3)*2, spots[spots.Count - 1].y, spots[spots.Count - 1].z+rnd.Next(-3, 3)*2);
@@ -37,15 +37,22 @@ namespace AssemblyCSharp
             creature.Targets.RemoveAt(creature.Targets.Count - 1);
             creature.Targets.Add(creature.player.position);
 			creature.Suspicion += (int)(noiseMeter * creature.NoiseSensitivity);
-			if (creature.Suspicion >= 200) 
-			{
-				creature.condition = creature.condition_alert;
-			}
+			//if (creature.Suspicion >= 200) 
+			//{
+			//	creature.condition = creature.condition_alert;
+			//}
 		}
 
 		public override void ReactToView (Creature creature,int H, int C, int F)
 		{
-           
+			if ((H > 0 || C > 0 || F > 0)) 
+			{
+				//Debug.Log ("Látlak");
+				//creature.Suspicion = 210;
+				//mat.color = Color.blue;
+				creature.Targets.Add(creature.player.position);
+				creature.condition = creature.condition_alert;
+			}
         }
 
 		public override void SuspicionDecreaseOverTime (Creature creature)

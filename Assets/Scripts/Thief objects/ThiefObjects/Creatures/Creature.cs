@@ -13,57 +13,70 @@ public abstract class Creature : ThiefObject {
 	private int vC;
 	private int vF;
 
+	protected int RangeOfVision;
+	private float ReactTime;
+
 	void Start()
 	{
 		SuspicionDecrease = 1;
 		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
 		index = 0;
+		ReactTime = 1f;
 	}
 
 	void Update()
 	{
+		
 		condition.PatrolBehaviour (Targets,ref index);
 		//----------------------------------------------------------------------------------------
 		Vector3 direction = player.position - this.transform.position;
 		float angle = Vector3.Angle (direction, this.transform.forward);
-		if (IsInFieldOfView(angle)) 
+		if (IsInFieldOfView(angle) && ReactTime < 0f) 
 		{
-			if (Vanralatas (head)) 
+			if (Vanralatas (head) && (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH())) 
 			{
-				if (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH()) {
-					vH = IsInShadow.GetVH ();
-				}
+				vH = IsInShadow.GetVH ();
 			} 
 			else 
 			{
 				vH = 0;
 			}
 
-			if (Vanralatas (chest)) 
+			if (Vanralatas (chest) && (Vector3.Distance(chest.position,this.transform.position) < IsInShadow.GetVC())) 
 			{
-				if (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVC()) {
-					vC = IsInShadow.GetVC ();
-				}
+				vC = IsInShadow.GetVC ();
 			} 
 			else 
 			{
 				vC = 0;
 			}
 
-			if (Vanralatas (foot)) 
+			if (Vanralatas (foot) && (Vector3.Distance(foot.position,this.transform.position) < IsInShadow.GetVF())) 
 			{
-				if (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVF()) {
-					vF = IsInShadow.GetVF ();
-				}
+				vF = IsInShadow.GetVF ();
 			} 
 			else 
 			{
 				vF = 0;
 			}
-
+				
 			condition.ReactToView (this,vH,vC,vF);
+			ReactTime = 1f;
 		}
+		ReactTime -= Time.deltaTime;
 	}
+
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red;
+		Vector3 Direction = transform.TransformDirection (Vector3.forward);
+		Gizmos.DrawRay (this.transform.position, Direction*20);
+		Direction = transform.TransformDirection(new Vector3(17f,0,10));
+		Gizmos.DrawRay (this.transform.position, Direction);
+		Direction = transform.TransformDirection(new Vector3(-17f,0,10));
+		Gizmos.DrawRay (this.transform.position, Direction);
+	}
+
 
 	bool Vanralatas(Transform obj)
 	{

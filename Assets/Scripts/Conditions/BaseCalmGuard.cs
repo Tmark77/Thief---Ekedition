@@ -27,7 +27,7 @@ namespace AssemblyCSharp
 
 		public override void SuspicionDecreaseOverTime (Creature creature)
 		{
-			
+			//Debug.Log (creature.Suspicion.ToString());
 		}
 
 		public override void ReactToNoise (Creature creature, int noiseMeter)
@@ -37,20 +37,23 @@ namespace AssemblyCSharp
 			{
 				mat.color = Color.red;
 				creature.condition = creature.condition_suspicious;
-				creature.Targets.Add(creature.gameObject.transform.position);
+				creature.Targets.Add(creature.player.position);
 			}
 		}
 
 		public override void ReactToView (Creature creature,int H, int C, int F)
 		{
-			if (H > 10 || C > 10 || F > 10) 
+			
+			Debug.Log ("Észrevettem valamit");
+			creature.Suspicion += (int)((H + C + F) / 3);
+			Debug.Log ("Fasz " +(int)((H + C + F) / 3));
+			if (creature.Suspicion >= 100) 
 			{
-				Debug.Log ("Látlak");
-				creature.Suspicion = 110;
-				mat.color = Color.red;
+				mat.color = Color.red;	
 				creature.condition = creature.condition_suspicious;
-                creature.Targets.Add(creature.player.position);
+				creature.Targets.Add (creature.player.position);
 			}
+
 		}
 
 
@@ -66,7 +69,7 @@ namespace AssemblyCSharp
 			
 		public override void PatrolBehaviour (List<Vector3> spots, ref int index)
 		{
-			if (Vector3.Distance(agent.transform.position,spots[index]) < 1 ) 
+			if (Vector3.Distance(agent.transform.position,spots[index]) < 1f ) 
 			{
 				index++;
 			}
