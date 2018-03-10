@@ -5,7 +5,7 @@ using UnityEngine;
 public class KnockedOutCondition : AbstractCondition {
 	#region implemented abstract members of AbstractCondition
 
-	public override void PatrolBehaviour (List<Transform> spots,ref int index)
+	public override void PatrolBehaviour (List<Vector3> spots,ref int index)
 	{
 		throw new System.NotImplementedException ();
 	}

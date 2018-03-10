@@ -191,7 +191,7 @@ public abstract class Creature : ThiefObject {
 		}
 	}
 
-	public List<Transform> Targets = new List<Transform> ();
+	public List<Vector3> Targets = new List<Vector3> ();
 	int index;
 	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
 

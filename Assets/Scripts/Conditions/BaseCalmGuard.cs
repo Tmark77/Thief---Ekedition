@@ -7,7 +7,7 @@ namespace AssemblyCSharp
 {
 	public class BaseCalmGuard : AbstractCondition
 	{
-		NavMeshAgent agent;
+		
 
 		public Material mat;
 
@@ -15,8 +15,8 @@ namespace AssemblyCSharp
 		{
 			carryAble = false;
 			mat.color = Color.yellow;
-			this.agent = GetComponent<NavMeshAgent> ();
-		}
+            this.agent = GetComponent<NavMeshAgent>();
+        }
 
 		void Update()
 		{
@@ -37,7 +37,7 @@ namespace AssemblyCSharp
 			{
 				mat.color = Color.red;
 				creature.condition = creature.condition_suspicious;
-				agent.SetDestination (creature.gameObject.transform.position);
+				creature.Targets.Add(creature.gameObject.transform.position);
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace AssemblyCSharp
 				creature.Suspicion = 110;
 				mat.color = Color.red;
 				creature.condition = creature.condition_suspicious;
-				agent.SetDestination (creature.player.position);
+                creature.Targets.Add(creature.player.position);
 			}
 		}
 
@@ -64,13 +64,13 @@ namespace AssemblyCSharp
 			return creature.condition_blind;
 		}
 			
-		public override void PatrolBehaviour (List<Transform> spots, ref int index)
+		public override void PatrolBehaviour (List<Vector3> spots, ref int index)
 		{
-			if (Vector3.Distance(agent.transform.position,spots[index].position) < 1 ) 
+			if (Vector3.Distance(agent.transform.position,spots[index]) < 1 ) 
 			{
 				index++;
 			}
-			else agent.SetDestination (spots [index].position);
+			else agent.SetDestination (spots [index]);
 
 			if (index == spots.Count) {
 				index = 0;

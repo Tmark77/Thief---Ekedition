@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class AbstractCondition : MonoBehaviour {
 
@@ -11,7 +12,9 @@ public abstract class AbstractCondition : MonoBehaviour {
 
 	private int takeDamageMultiplier; //gyanútlan ellenfél nagyobb sebzést kaphat, alap értéke 1
 
-	public int DamageMultiplier {
+    protected NavMeshAgent agent;
+
+    public int DamageMultiplier {
 		get
 		{
 			return takeDamageMultiplier;
@@ -59,7 +62,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 	//kell hogy egy célpont felé hogyan reagál
 
 
-	public abstract void PatrolBehaviour (List<Transform> spots,ref int index);
+	public abstract void PatrolBehaviour (List<Vector3> spots,ref int index);
 
 
 }
