@@ -16,7 +16,14 @@ namespace AssemblyCSharp
 
             if (Vector3.Distance(agent.transform.position, spots[spots.Count - 1]) < 1f)
             {
-                spots[spots.Count - 1] = new Vector3(spots[spots.Count - 1].x+rnd.Next(-3,3), spots[spots.Count - 1].y, spots[spots.Count - 1].z+rnd.Next(-3, 3)); //SZAR MÉG              
+				Vector3 fasz;
+				do
+				{
+					fasz = new Vector3(spots[spots.Count - 1].x+rnd.Next(-3,3)*2, spots[spots.Count - 1].y, spots[spots.Count - 1].z+rnd.Next(-3, 3)*2);
+					//SZAR MÉG   
+				}while(!agent.CalculatePath(fasz, new NavMeshPath()));
+				spots[spots.Count - 1] = fasz;	
+				Debug.Log (spots [spots.Count - 1].ToString ());
             }
         }
 
@@ -43,7 +50,7 @@ namespace AssemblyCSharp
 
 		public override void SuspicionDecreaseOverTime (Creature creature)
 		{
-			Debug.Log ("csökken a gyanú pont: " + creature.Suspicion);
+			//Debug.Log ("csökken a gyanú pont: " + creature.Suspicion);
 			if(creature.Suspicion<100)
 			{
 				mat.color = Color.yellow;
