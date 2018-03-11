@@ -62,7 +62,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 	//kell hogy egy célpont felé hogyan reagál
 
 
-	public abstract void PatrolBehaviour (List<Vector3> spots,ref int index);
+	public abstract void PatrolBehaviour (Creature creature,ref int index);
 
 
 }

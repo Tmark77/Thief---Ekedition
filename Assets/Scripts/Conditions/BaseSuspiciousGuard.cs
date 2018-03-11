@@ -10,20 +10,20 @@ namespace AssemblyCSharp
 
         #region implemented abstract members of AbstractCondition
 
-        public override void PatrolBehaviour (System.Collections.Generic.List<Vector3> spots, ref int index)
+		public override void PatrolBehaviour (Creature creature, ref int index)
 		{
-            agent.SetDestination(spots[spots.Count-1]);
+			agent.SetDestination(creature.Targets[creature.Targets.Count-1]);
 
-            if (Vector3.Distance(agent.transform.position, spots[spots.Count - 1]) < 2f)
+			if (Vector3.Distance(agent.transform.position, creature.Targets[creature.Targets.Count - 1]) < 2f)
             {
 				Vector3 fasz; //át kell majd írni
 				do
 				{
-					fasz = new Vector3(spots[spots.Count - 1].x+rnd.Next(-3,3)*2, spots[spots.Count - 1].y, spots[spots.Count - 1].z+rnd.Next(-3, 3)*2);
+					fasz = new Vector3(creature.Targets[creature.Targets.Count - 1].x+rnd.Next(-3,3)*2, creature.Targets[creature.Targets.Count - 1].y, creature.Targets[creature.Targets.Count - 1].z+rnd.Next(-3, 3)*2);
 					//SZAR MÉG   
 				}while(!agent.CalculatePath(fasz, new NavMeshPath()));
-				spots[spots.Count - 1] = fasz;	
-				Debug.Log (spots [spots.Count - 1].ToString ());
+				creature.Targets[creature.Targets.Count - 1] = fasz;	
+				//Debug.Log (spots [spots.Count - 1].ToString ());
             }
         }
 
@@ -51,6 +51,7 @@ namespace AssemblyCSharp
 				//creature.Suspicion = 210;
 				//mat.color = Color.blue;
 				creature.Targets.Add(creature.player.position);
+				creature.Suspicion += 30;
 				creature.condition = creature.condition_alert;
 			}
         }

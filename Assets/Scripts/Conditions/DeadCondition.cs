@@ -6,14 +6,10 @@ namespace AssemblyCSharp
 	{
 		#region implemented abstract members of AbstractCondition
 
-		public override void PatrolBehaviour (System.Collections.Generic.List<UnityEngine.Vector3> spots,ref int index)
+		public override void PatrolBehaviour (Creature creature,ref int index)
 		{
-			throw new NotImplementedException ();
+			
 		}
-
-		#endregion
-
-		#region implemented abstract members of AbstractCondition
 
 		public override AbstractCondition ChangeToKnockedOut (Creature creature)
 		{

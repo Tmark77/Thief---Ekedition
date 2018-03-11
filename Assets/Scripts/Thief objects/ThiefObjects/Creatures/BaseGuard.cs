@@ -13,7 +13,7 @@ namespace AssemblyCSharp
 
 		public override bool IsInFieldOfView (float angle)
 		{
-			return Vector3.Distance (player.position, this.transform.position) < RangeOfVision && angle < 60f;
+			return Vector3.Distance (player.position, this.transform.position) < RangeOfVision && angle < 90f;
 		}
 
 		public int damage;

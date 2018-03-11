@@ -27,7 +27,7 @@ public abstract class Creature : ThiefObject {
 	void Update()
 	{
 		
-		condition.PatrolBehaviour (Targets,ref index);
+		condition.PatrolBehaviour (this,ref index);
 		//----------------------------------------------------------------------------------------
 		Vector3 direction = player.position - this.transform.position;
 		float angle = Vector3.Angle (direction, this.transform.forward);
@@ -61,7 +61,7 @@ public abstract class Creature : ThiefObject {
 			}
 				
 			condition.ReactToView (this,vH,vC,vF);
-			ReactTime = 1f;
+			ReactTime = 0.5f;
 		}
 		ReactTime -= Time.deltaTime;
 	}
@@ -71,9 +71,9 @@ public abstract class Creature : ThiefObject {
 		Gizmos.color = Color.red;
 		Vector3 Direction = transform.TransformDirection (Vector3.forward);
 		Gizmos.DrawRay (this.transform.position, Direction*20);
-		Direction = transform.TransformDirection(new Vector3(17f,0,10));
+		Direction = transform.TransformDirection(new Vector3(20f,0,0));
 		Gizmos.DrawRay (this.transform.position, Direction);
-		Direction = transform.TransformDirection(new Vector3(-17f,0,10));
+		Direction = transform.TransformDirection(new Vector3(-20f,0,0));
 		Gizmos.DrawRay (this.transform.position, Direction);
 	}
 
@@ -153,7 +153,13 @@ public abstract class Creature : ThiefObject {
 		get{ return suspicion; }
 		set
 		{ 
-			suspicion = value;
+			if (value <= 200) {
+				suspicion = value;
+			} 
+			else
+			{
+				suspicion = 200;
+			}
 		}
 	}
 
@@ -194,6 +200,7 @@ public abstract class Creature : ThiefObject {
 
 	public void DecreaseSuspicion()
 	{
+		Debug.Log ("Suspicion: " + Suspicion);
 		if (Suspicion > 0) {
 			Suspicion -= (int)SuspicionDecrease;
 			condition.SuspicionDecreaseOverTime (this);
