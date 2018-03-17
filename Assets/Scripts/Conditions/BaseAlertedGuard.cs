@@ -25,14 +25,11 @@ public class BaseAlertedGuard : AbstractCondition {
 		if ((H > 0 || C > 0 || F > 0)) {
 			creature.Targets [creature.Targets.Count - 1] = creature.player.position;
 			//agent.SetDestination (creature.Targets [creature.Targets.Count - 1]);
-			//ez a damage csak unit test
-			//marhára nem ide kell rakni, hanem majd a PatrolBehaviour-be, csak ott még elérés pobléma van
-			//ja és a damage elérés is poblémás még
-			creature.player.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
 		}
 		else
 		{
 			creature.condition = creature.condition_suspicious;
+			Debug.Log("fasz");
 		}
 			
 	}
@@ -42,15 +39,39 @@ public class BaseAlertedGuard : AbstractCondition {
 		creature.Suspicion += 2;
 	}
 
+	private float hitCooldown = 0f;
+
 	public override void PatrolBehaviour (Creature creature, ref int index)
 	{
-		agent.destination = creature.Targets[creature.Targets.Count-1];
+		if (Vector3.Distance (agent.transform.position, creature.player.position) <= 2f) 
+		{
+			agent.SetDestination (this.gameObject.transform.position);
+			Vector3 direction = (creature.player.position - transform.position).normalized;
+			Quaternion lookRotation = Quaternion.LookRotation (direction);
+			transform.rotation = Quaternion.Slerp (transform.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
+			if (hitCooldown < 0f) 
+			{
+				hitCooldown = 2f;
+				creature.player.gameObject.GetComponent<PlayerHealth> ().TakeDamage (20);
+			}
+		} 
+		else
+		{
+			agent.destination = creature.Targets[creature.Targets.Count-1];
+			if (Vector3.Distance (agent.transform.position, creature.Targets [creature.Targets.Count - 1]) <= 2f) 
+			{
+				creature.condition = creature.condition_suspicious;
+			}
+		}
+		hitCooldown -= Time.deltaTime;
+
 	}
 
 
 	// Use this for initialization
 	void Start () {
 		this.agent = GetComponent<NavMeshAgent>();
+
 	}
 	
 	// Update is called once per frame

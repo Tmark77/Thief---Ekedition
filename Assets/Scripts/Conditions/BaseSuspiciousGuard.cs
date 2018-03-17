@@ -14,7 +14,7 @@ namespace AssemblyCSharp
 		{
 			agent.SetDestination(creature.Targets[creature.Targets.Count-1]);
 
-			if (Vector3.Distance(agent.transform.position, creature.Targets[creature.Targets.Count - 1]) < 2f)
+			if (Vector3.Distance(agent.transform.position, creature.Targets[creature.Targets.Count - 1]) < 0.5f)
             {
 				Vector3 fasz; //át kell majd írni
 				do

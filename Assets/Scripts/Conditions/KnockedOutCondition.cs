@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class KnockedOutCondition : AbstractCondition {
 	#region implemented abstract members of AbstractCondition
@@ -8,14 +9,14 @@ public class KnockedOutCondition : AbstractCondition {
 	public override void PatrolBehaviour (Creature creature,ref int index)
 	{
 		
-		if(counter < 0f)
-		{
+		if (counter < 0f) {
 			creature.Suspicion = 130;
 			counter = 10f;
 			creature.condition = creature.condition_suspicious;
-		}
+		} 
+		agent.SetDestination (creature.gameObject.transform.position);
 		counter -= Time.deltaTime;
-		Debug.Log (counter);
+		//Debug.Log (counter);
 	}
 		
 	public override AbstractCondition ChangeToKnockedOut (Creature creature)
@@ -46,6 +47,12 @@ public class KnockedOutCondition : AbstractCondition {
 	void Start()
 	{
 		counter = 10f;
+		this.agent = GetComponent<NavMeshAgent>();
+	}
+
+	public override int DamageMultiplier ()
+	{
+		return 3;
 	}
 
 	//mily meglepő, ez sincs kész

@@ -10,16 +10,12 @@ public abstract class AbstractCondition : MonoBehaviour {
 	//	get { return canBeKnockedOut;}
 	//}
 
-	private int takeDamageMultiplier; //gyanútlan ellenfél nagyobb sebzést kaphat, alap értéke 1
+	public virtual int DamageMultiplier () //gyanútlan ellenfél nagyobb sebzést kaphat, alap értéke 1
+	{
+		return 1; //1 az alap értéke, szorzóként működik
+	}
 
     protected NavMeshAgent agent;
-
-    public int DamageMultiplier {
-		get
-		{
-			return takeDamageMultiplier;
-		}
-	}
 
 	protected bool carryAble; //jobb klikkel viheti a játékos a vállán
 	public bool CarryAble {
@@ -37,22 +33,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 	public abstract AbstractCondition ChangeToBlind (Creature creature);
 
 	//-----------------------------------------------------
-	public virtual AbstractCondition ChangeToSuspicious ()
-	{
-		return this;
-	}
 
-	public virtual AbstractCondition ChangeToAlerted ()
-	{
-		return this;
-	}
-
-	public virtual AbstractCondition ChangeToCalm ()
-	{
-		return this;
-	}
-		
-	//---------------------------------------------------
 	abstract public void ReactToNoise (Creature creature, int noiseMeter);
 
 	abstract public void ReactToView (Creature creature,int H, int C, int F);

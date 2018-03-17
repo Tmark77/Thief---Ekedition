@@ -16,6 +16,7 @@ namespace AssemblyCSharp
 			carryAble = false;
 			mat.color = Color.yellow;
             this.agent = GetComponent<NavMeshAgent>();
+
         }
 
 		void Update()
@@ -23,7 +24,10 @@ namespace AssemblyCSharp
 			
 		}
 
-		//1 az alap értéke, szorzóként működik
+		public override int DamageMultiplier ()
+		{
+			return 3;
+		}
 
 		public override void SuspicionDecreaseOverTime (Creature creature)
 		{
@@ -69,7 +73,7 @@ namespace AssemblyCSharp
 			
 		public override void PatrolBehaviour (Creature creature, ref int index)
 		{
-			if (Vector3.Distance(agent.transform.position,creature.Targets[index]) < 1f ) 
+			if (Vector3.Distance(agent.transform.position,creature.Targets[index]) < 0.5f ) 
 			{
 				index++;
 			}

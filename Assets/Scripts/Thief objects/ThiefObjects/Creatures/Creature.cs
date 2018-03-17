@@ -18,7 +18,6 @@ public abstract class Creature : ThiefObject {
 
 	void Start()
 	{
-		SuspicionDecrease = 1;
 		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
 		index = 0;
 		ReactTime = 1f;
@@ -133,7 +132,7 @@ public abstract class Creature : ThiefObject {
 		get{ return health; }
 		set
 		{
-			if (value > MaxHealth) {
+			if (value < MaxHealth) {
 				health = value;
 			}
 			else
@@ -168,9 +167,13 @@ public abstract class Creature : ThiefObject {
 	public void TakeDamage(int damage)
 	{
 		if(damage > 0)
-			Health = Health - (damage * condition.DamageMultiplier);
-		if (Health <= 0)
+			Health = Health - (damage * condition.DamageMultiplier());
+		if (Health <= 0) 
+		{
 			condition = condition_dead;
+			Debug.Log ("Meghaltam, segítség!");
+		}
+		
 	}
 		
 	//na lehet hogy a váltást nem így kéne megcsinálni, hanem a konkrét állapotokon belül.
@@ -200,7 +203,7 @@ public abstract class Creature : ThiefObject {
 
 	public void DecreaseSuspicion()
 	{
-		Debug.Log ("Suspicion: " + Suspicion);
+		//Debug.Log ("Suspicion: " + Suspicion);
 		if (Suspicion > 0) {
 			Suspicion -= (int)SuspicionDecrease;
 			condition.SuspicionDecreaseOverTime (this);

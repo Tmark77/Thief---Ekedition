@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using cakeslice;
 
 public class Interact : MonoBehaviour {
 
 	[SerializeField] public PlayerInventory inventory;
 	public Camera mainCam;
+	RaycastHit hit;	
 
 	// Use this for initialization
 	void Start () {
@@ -14,16 +16,29 @@ public class Interact : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Physics.Raycast (mainCam.transform.position, mainCam.transform.forward, out hit, 3);
+		if (hit.collider != null) 
+		{
+			try
+			{
+				hit.collider.gameObject.GetComponent<Outline> ().enabled = true;
+			}
+			catch
+			{}
+			//GetComponent<Outline>().enabled = !GetComponent<Outline>().enabled;
+		}
+
 		if (Input.GetMouseButtonDown(1)) {
-			Interacting ();
+			RightClickInteracting ();
+		}
+		if (Input.GetMouseButtonDown(0)) {
+			LeftClickInteracting ();
 		}
 	}
 
-	void Interacting()
+	void RightClickInteracting()
 	{
-		RaycastHit hit;
-
-		if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward,out hit,3)) {
+		if (hit.collider != null) {
 			
 			ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
 
@@ -39,6 +54,21 @@ public class Interact : MonoBehaviour {
 				/*Player.carriing = */(obj as Creature).Carry ();
 			}
 		}
+	}
+
+	void LeftClickInteracting()
+	{
+		if (hit.collider != null) 
+		{
+			ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+
+			if (obj is Creature) 
+			{
+				(obj as Creature).TakeDamage(10);
+				(obj as Creature).KnockOut();
+			}
+		}
+	
 	}
 
 }

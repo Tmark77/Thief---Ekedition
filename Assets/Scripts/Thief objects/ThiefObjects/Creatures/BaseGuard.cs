@@ -9,6 +9,8 @@ namespace AssemblyCSharp
 		public BaseGuard ()
 		{
 			RangeOfVision = 20;
+			MaxHealth = 100;
+			Health = MaxHealth;
 		}
 
 		public override bool IsInFieldOfView (float angle)
