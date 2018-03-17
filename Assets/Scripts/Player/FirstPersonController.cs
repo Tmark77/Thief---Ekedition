@@ -164,7 +164,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				crouching = !crouching;
 				actuallyCrouched = true;
 			}
-			if (Input.GetKey(GameManager.GM.run)) {
+			if (Input.GetKey(GameManager.GM.run)) 
+			{
 				running = true;
 				sneaking = false;
 			} else
