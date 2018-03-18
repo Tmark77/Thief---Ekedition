@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, ISavable
 {
 	public float startingHealth = 100;                            
 	public float currentHealth;                                   
@@ -35,7 +35,17 @@ public class PlayerHealth : MonoBehaviour
 
 	void Update ()
 	{
-		if(Input.GetKeyDown(KeyCode.B)){
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Save();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Load();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B)){
 			TakeDamage (25);
 		}
 
@@ -81,5 +91,19 @@ public class PlayerHealth : MonoBehaviour
 		//playerAudio.Play ();
 
 		//playerMovement.enabled = false;
-	}       
+	}
+
+    public void Save()
+    {
+        SavingLoading.SavePlayer(this);
+    }
+
+    public void Load()
+    {
+        float[] loadedStats = SavingLoading.LoadPlayer();
+
+        currentHealth = loadedStats[0];
+        startingHealth = loadedStats[1];
+        healthSlider.value = currentHealth;
+    }
 }
