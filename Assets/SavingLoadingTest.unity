@@ -1238,6 +1238,16 @@ Prefab:
       propertyPath: damageImage
       value: 
       objectReference: {fileID: 1251091582}
+    - target: {fileID: 114516708973206956, guid: 89bff26951aea9a44af1e8c70d428190,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114991900483064060, guid: 89bff26951aea9a44af1e8c70d428190,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81035768715147826, guid: 89bff26951aea9a44af1e8c70d428190, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 89bff26951aea9a44af1e8c70d428190, type: 2}

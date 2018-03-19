@@ -98,28 +98,32 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			minSurviveFall = 1f;
 			damageForSeconds = 1.5f;
 			airTime = 0f;
-			playerHealth = GetComponent<PlayerHealth> ();
-
-            AudioListener[] myListeners = FindObjectsOfType(typeof(AudioListener)) as AudioListener[];
+			
+            
             isGameStarted = false;
-            foreach (AudioListener thisListener in myListeners)
-            {
-                if (thisListener.name == "Main Camera")
-                {
-                    isGameStarted = true;
-                }
-                
-            }
 
-            Debug.Log("testlevel");
+            //playerHealth.enabled = false;
+            playerHealth.enabled = true;
+            //SceneManager.LoadScene("Menu System" , LoadSceneMode.Additive);
+
+            //DontDestroyOnLoad(this);
+            /*
             if (!isGameStarted)
             {
-                //DontDestroyOnLoad(transform.gameObject);
+                DontDestroyOnLoad(transform.gameObject);
                 //SceneManager.LoadScene("Menu System");
             }
-            
+            */
 
 
+        }
+
+        private void Awake()
+        {
+            playerHealth = GetComponent<PlayerHealth>();
+            playerHealth.enabled = true;
+
+            //Debug.Log("firstperson awake");
         }
 
         // Update is called once per frame
@@ -156,7 +160,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-			if (Input.GetKey(GameManager.GM.sneak))
+            /*
+            if (Input.GetKey(GameManager.GM.pause))
+            {
+                playerHealth.enabled = false;
+                SceneManager.LoadScene("Menu System");
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("Menu System"));
+                //DontDestroyOnLoad(this);
+            }
+            */
+                
+
+            if (Input.GetKey(GameManager.GM.sneak))
 				sneaking = true;
 			else
 				sneaking = false;

@@ -10,6 +10,7 @@ public class MenuScript : MonoBehaviour {
     public Canvas inputMenu;
     public Canvas pauseMenu;
     public Canvas menu;
+    Menus menus = Menus.Instance;
 
     public Transform controlPanel;
     Event keyEvent;
@@ -18,53 +19,49 @@ public class MenuScript : MonoBehaviour {
     bool waitingForKey;
     bool isGameStarted;
 
-    private AudioListener[] myListeners;
-
     // Use this for initialization
     void Start () {
-        
-        
-       myListeners = FindObjectsOfType(typeof(AudioListener)) as AudioListener[];
-       foreach (AudioListener thisListener in myListeners)
-       {
-           //Debug.Log(thisListener);
-           if (thisListener.name == "Main Camera")
-           {
-               thisListener.enabled = true;
-           }
-           else
-           {
-               thisListener.enabled = false;
-           }
-       }
+        Debug.Log("Start");
+        menus.QuitMenu = quitMenu.GetComponent<Canvas>();
+        menus.InputMenu = inputMenu.GetComponent<Canvas>();
+        menus.MainMenu = mainMenu.GetComponent<Canvas>();
+        menus.PauseMenu = pauseMenu.GetComponent<Canvas>();
+        menus.Menu = menu.GetComponent<Canvas>();
 
-        
-        Time.timeScale = 0;
-        Cursor.visible = true;
+        menus.MainMenu.enabled = true;
+        menus.QuitMenu.enabled = false;
+        menus.InputMenu.enabled = false;
+        menus.PauseMenu.enabled = false;
 
-        quitMenu = quitMenu.GetComponent<Canvas>();
-        quitMenu = quitMenu.GetComponent<Canvas>();
-        inputMenu = inputMenu.GetComponent<Canvas>();
-
-        mainMenu.enabled = true;
-        quitMenu.enabled = false;
-        inputMenu.enabled = false;
-        pauseMenu.enabled = false;
 
         //controlPanel = transform.Find("Layout");
         waitingForKey = false;
         isGameStarted = false;
     }
 
+    private void Awake()
+    {
+
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(GameManager.GM.pause) && isGameStarted)
         {
-            menu.enabled = true;
-            mainMenu.enabled = false;
-            quitMenu.enabled = false;
-            inputMenu.enabled = false;
-            pauseMenu.enabled = true;
+            menus.Menu.enabled = true;
+            menus.MainMenu.enabled = false;
+            menus.QuitMenu.enabled = false;
+            menus.InputMenu.enabled = false;
+            menus.PauseMenu.enabled = true;
+        }
+
+        if (Input.GetKeyDown(GameManager.GM.leftPeek))
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("SavingLoadingTest"));
+            Debug.Log(SceneManager.GetActiveScene().name);
+
+            //SceneManager.LoadScene("SavingLoadingTest", LoadSceneMode.Additive);
+            //Debug.Log("leave saving");
         }
     }
 
@@ -130,7 +127,7 @@ public class MenuScript : MonoBehaviour {
                 PlayerPrefs.SetString("Jump_button", GameManager.GM.jump.ToString()); 
                 break;
             case "sneak":
-                GameManager.GM.sneak= newKey;
+                GameManager.GM.sneak = newKey;
                 buttonText.text = GameManager.GM.sneak.ToString();
                 PlayerPrefs.SetString("Sneak_button", GameManager.GM.sneak.ToString());
                 break;
@@ -161,76 +158,64 @@ public class MenuScript : MonoBehaviour {
 
     public void ExitPress()
     {
-        mainMenu.enabled = false;
-        quitMenu.enabled = true;
-        inputMenu.enabled = false;
-        pauseMenu.enabled = false;
+        menus.MainMenu.enabled = false;
+        menus.QuitMenu.enabled = true;
+        menus.InputMenu.enabled = false;
+        menus.PauseMenu.enabled = false;
 
 
     }
     public void QuitPress()
     {
-        mainMenu.enabled = true;
-        quitMenu.enabled = false;
-        inputMenu.enabled = false;
-        pauseMenu.enabled = false;
+        menus.MainMenu.enabled = true;
+        menus.QuitMenu.enabled = false;
+        menus.InputMenu.enabled = false;
+        menus.PauseMenu.enabled = false;
         isGameStarted = false;
 
     }
     public void NoPress()
     {
-        mainMenu.enabled = true;
-        quitMenu.enabled = false;
-        inputMenu.enabled = false;
-        pauseMenu.enabled = false;
+        menus.MainMenu.enabled = true;
+        menus.QuitMenu.enabled = false;
+        menus.InputMenu.enabled = false;
+        menus.PauseMenu.enabled = false;
     }
     public void BackPress()
     {
         if (isGameStarted)
         {
-            mainMenu.enabled = false;
-            quitMenu.enabled = false;
-            inputMenu.enabled = false;
-            pauseMenu.enabled = true;
+            menus.MainMenu.enabled = false;
+            menus.QuitMenu.enabled = false;
+            menus.InputMenu.enabled = false;
+            menus.PauseMenu.enabled = true;
         }
         else
         {
-            mainMenu.enabled = true;
-            quitMenu.enabled = false;
-            inputMenu.enabled = false;
-            pauseMenu.enabled = false;
+            menus.MainMenu.enabled = true;
+            menus.QuitMenu.enabled = false;
+            menus.InputMenu.enabled = false;
+            menus.PauseMenu.enabled = false;
         }
         
     }
 
     public void InputPress()
     {
-        mainMenu.enabled = false;
-        quitMenu.enabled = false;
-        inputMenu.enabled = true;
-        pauseMenu.enabled = false;
+        menus.MainMenu.enabled = false;
+        menus.QuitMenu.enabled = false;
+        menus.InputMenu.enabled = true;
+        menus.PauseMenu.enabled = false;
         IterateButtons();
     }
 
     public void StartLevel()
     {
-        menu.enabled = false;
+        menus.Menu.enabled = false;
         isGameStarted = true;
-
-        foreach (AudioListener thisListener in myListeners)
-        {
-            if (thisListener.name == "ClimbCam" && !thisListener.enabled)
-            {
-                thisListener.enabled = true;
-            }
-            else
-            {
-                thisListener.enabled = false;
-            }
-            Debug.Log(thisListener+" ||| "+thisListener.enabled);
-        }
-        DontDestroyOnLoad(transform.gameObject);
-        SceneManager.LoadScene("TestLevel");
+        
+        //SceneManager.LoadScene("SavingLoadingTest");
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("SavingLoadingTest"));
     }
 
     public void ExitGame()
