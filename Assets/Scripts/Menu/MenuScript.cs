@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MenuScript : MonoBehaviour {
+    public Canvas healthCanvas;
+    
     public Canvas mainMenu;
     public Canvas quitMenu;
     public Canvas inputMenu;
@@ -18,10 +20,14 @@ public class MenuScript : MonoBehaviour {
     Text buttonText;
     bool waitingForKey;
     bool isGameStarted;
+    CursorLockMode cursorMode;
 
     // Use this for initialization
     void Start () {
         Debug.Log("Start");
+
+        healthCanvas.GetComponent<Canvas>();
+
         menus.QuitMenu = quitMenu.GetComponent<Canvas>();
         menus.InputMenu = inputMenu.GetComponent<Canvas>();
         menus.MainMenu = mainMenu.GetComponent<Canvas>();
@@ -32,17 +38,21 @@ public class MenuScript : MonoBehaviour {
         menus.QuitMenu.enabled = false;
         menus.InputMenu.enabled = false;
         menus.PauseMenu.enabled = false;
+        
 
-
-        //controlPanel = transform.Find("Layout");
         waitingForKey = false;
         isGameStarted = false;
+
+        //Screen.lockCursor = false;
+        Cursor.lockState = cursorMode;
+        Cursor.visible = true;
+
+        healthCanvas.gameObject.SetActive(false);
+
+        Time.timeScale = 0;
+
     }
 
-    private void Awake()
-    {
-
-    }
 
     void Update()
     {
@@ -53,16 +63,14 @@ public class MenuScript : MonoBehaviour {
             menus.QuitMenu.enabled = false;
             menus.InputMenu.enabled = false;
             menus.PauseMenu.enabled = true;
-        }
+            healthCanvas.gameObject.SetActive(false);
 
-        if (Input.GetKeyDown(GameManager.GM.leftPeek))
-        {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("SavingLoadingTest"));
-            Debug.Log(SceneManager.GetActiveScene().name);
-
-            //SceneManager.LoadScene("SavingLoadingTest", LoadSceneMode.Additive);
-            //Debug.Log("leave saving");
+            Time.timeScale = 0;
+            Cursor.lockState = cursorMode;
+            Cursor.visible = true;
         }
+        
+
     }
 
     void OnGUI()
@@ -172,7 +180,9 @@ public class MenuScript : MonoBehaviour {
         menus.InputMenu.enabled = false;
         menus.PauseMenu.enabled = false;
         isGameStarted = false;
-
+        // újratölti az aktuális scene-t
+        //DontDestroyOnLoad(gameObject);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void NoPress()
     {
@@ -214,8 +224,8 @@ public class MenuScript : MonoBehaviour {
         menus.Menu.enabled = false;
         isGameStarted = true;
         
-        //SceneManager.LoadScene("SavingLoadingTest");
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("SavingLoadingTest"));
+        healthCanvas.gameObject.SetActive(true);
+        Time.timeScale = 1.0f;
     }
 
     public void ExitGame()

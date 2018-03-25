@@ -74,8 +74,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private float minSurviveFall; //ennyi idő alatt a levegőben nem szerez sérülést a játékos
 		private float damageForSeconds; //sérülés mértéke 1 mp-enként a levegőben
 		private float airTime;
-        private bool isGameStarted;
-        private AudioListener al;
 
 
         private PlayerHealth playerHealth;
@@ -100,21 +98,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			airTime = 0f;
 			
             
-            isGameStarted = false;
-
-            //playerHealth.enabled = false;
+            
             playerHealth.enabled = true;
-            //SceneManager.LoadScene("Menu System" , LoadSceneMode.Additive);
-
-            //DontDestroyOnLoad(this);
-            /*
-            if (!isGameStarted)
-            {
-                DontDestroyOnLoad(transform.gameObject);
-                //SceneManager.LoadScene("Menu System");
-            }
-            */
-
+            
 
         }
 
@@ -159,17 +145,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
-
-            /*
-            if (Input.GetKey(GameManager.GM.pause))
-            {
-                playerHealth.enabled = false;
-                SceneManager.LoadScene("Menu System");
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName("Menu System"));
-                //DontDestroyOnLoad(this);
-            }
-            */
-                
+ 
 
             if (Input.GetKey(GameManager.GM.sneak))
 				sneaking = true;

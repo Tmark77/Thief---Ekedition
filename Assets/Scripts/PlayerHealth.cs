@@ -35,16 +35,6 @@ public class PlayerHealth : MonoBehaviour, ISavable
 
 	void Update ()
 	{
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Save();
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Load();
-        }
-
         if (Input.GetKeyDown(KeyCode.B)){
 			TakeDamage (25);
 		}
