@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class PlayerHealth : MonoBehaviour, ISavable
+public class PlayerHealth : MonoBehaviour//, ISavable
 {
 	public float startingHealth = 100;                            
 	public float currentHealth;                                   
@@ -15,18 +15,17 @@ public class PlayerHealth : MonoBehaviour, ISavable
 
 
 	Animator anim;                                              
-	AudioSource playerAudio;  
-	FirstPersonController firstPersonController;
-	//PlayerMovement playerMovement;                             
+	AudioSource playerAudio;                          
 	bool isDead = false;                                                
 	bool damaged;                                               
+
+    
 
 
 	void Awake ()
 	{
 		anim = GetComponent <Animator> ();
 		playerAudio = GetComponent <AudioSource> ();
-		//playerMovement = GetComponent <PlayerMovement> ();
 
 
 		currentHealth = startingHealth;
@@ -57,9 +56,10 @@ public class PlayerHealth : MonoBehaviour, ISavable
 
 		currentHealth -= amount;
 
-		healthSlider.value = currentHealth;
+        setHealthSlider();
 
-		playerAudio.Play ();
+
+        playerAudio.Play ();
 
 
 		if(currentHealth <= 0 && !isDead)
@@ -67,6 +67,11 @@ public class PlayerHealth : MonoBehaviour, ISavable
 			Death ();
 		}
 	}
+
+    public void setHealthSlider()
+    {
+        healthSlider.value = currentHealth;
+    }
 
 
 	void Death ()
@@ -83,17 +88,5 @@ public class PlayerHealth : MonoBehaviour, ISavable
 		//playerMovement.enabled = false;
 	}
 
-    public void Save()
-    {
-        SavingLoading.SavePlayer(this);
-    }
-
-    public void Load()
-    {
-        float[] loadedStats = SavingLoading.LoadPlayer();
-
-        currentHealth = loadedStats[0];
-        startingHealth = loadedStats[1];
-        healthSlider.value = currentHealth;
-    }
+    
 }

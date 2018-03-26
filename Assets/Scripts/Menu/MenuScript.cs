@@ -22,9 +22,13 @@ public class MenuScript : MonoBehaviour {
     bool isGameStarted;
     CursorLockMode cursorMode;
 
+    SavingLoading save;
+    
+
     // Use this for initialization
     void Start () {
         Debug.Log("Start");
+        save = new SavingLoading();
 
         healthCanvas.GetComponent<Canvas>();
 
@@ -71,7 +75,7 @@ public class MenuScript : MonoBehaviour {
         }
         
 
-    }
+        }
 
     void OnGUI()
     {

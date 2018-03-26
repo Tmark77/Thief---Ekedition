@@ -5,48 +5,63 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public static class SavingLoading {
+public class SavingLoading : MonoBehaviour {
 
-    public static void SavePlayer(PlayerHealth playerHealth)
+    public Transform player;
+    public PlayerHealth playerHealth;
+
+    
+
+    public void SavePlayer()
     {
         Debug.Log("start");
         BinaryFormatter bf = new BinaryFormatter();
         FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Create);
+        
 
-        PlayerData data = new PlayerData(playerHealth);
+        PlayerData data = new PlayerData
+        {
+            x = player.transform.position.x,
+            y = player.transform.position.y,
+            z = player.transform.position.z,
+
+            currentHealth = playerHealth.currentHealth,
+            startingHealth = playerHealth.startingHealth
+        };
 
         bf.Serialize(stream,data);
         stream.Close();
         Debug.Log("end");
     }
+    
 
-    public static float[] LoadPlayer()
+    public void LoadPlayer()
     {
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Open);
-
             PlayerData data = bf.Deserialize(stream) as PlayerData;
+
+            player.transform.position = new Vector3(data.x, data.y, data.z);
+            playerHealth.currentHealth = data.currentHealth;
+            playerHealth.startingHealth = data.startingHealth;
+            playerHealth.setHealthSlider();
+
             stream.Close();
             Debug.Log("loaded");
-            return data.stats;
         }
-        return new float[2];
     }
 
     [Serializable]
-    public class PlayerData
+    class PlayerData
     {
-        public float[] stats;
-
-        public PlayerData(PlayerHealth playerHealth)
-        {
-            stats = new float[2];
-            stats[0] = playerHealth.currentHealth;
-            stats[1] = playerHealth.startingHealth;
-        }
-
+        public float currentHealth;
+        public float startingHealth;
+        public float x;
+        public float y;
+        public float z;
+        
     }
 
 
