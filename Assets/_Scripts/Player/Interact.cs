@@ -16,6 +16,8 @@ public class Interact : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, 3);
+        
 		if (Input.GetMouseButtonDown(1)) {
 			RightClickInteracting ();
 		}
