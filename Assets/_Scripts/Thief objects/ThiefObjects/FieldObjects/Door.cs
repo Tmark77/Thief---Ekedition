@@ -13,7 +13,7 @@ public class Door : DynamicFieldObject {
 		opened = false;
 	}
 	
-	public override void Interaction ()
+	public override void Interaction (bool IsRightClicked)
 	{
 		if (opened == false) {
 			anim.SetTrigger ("open");

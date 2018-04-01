@@ -6,7 +6,7 @@ public class Lever : DynamicFieldObject {
 
 	Animator anim;
 	bool used;
-	public Light[] lights;
+	public GameObject[] dynamicObjects;
 	private float[] ranges;
 	int i;
 
@@ -14,31 +14,27 @@ public class Lever : DynamicFieldObject {
 	void Start () {
 		anim = GetComponent<Animator> ();
 		used = false;
-		ranges = new float[lights.Length];
+		ranges = new float[dynamicObjects.Length];
 	}
 
-	public override void Interaction ()
+	public override void Interaction (bool IsRightClicked)
 	{
 		i = 0;
 		if (used == false) {
 			anim.SetTrigger ("off");
 			used = true;
 			//lights.SetActive (false);
-			foreach (Light l in lights) {
-				ranges [i] = l.range;
-				l.range = 0;
-				i++;
-			}
 		} 
 		else 
 		{
 			anim.SetTrigger ("on");
 			used = false;
 			//lights.SetActive (true);
-			foreach (Light l in lights) {
-				l.range = ranges [i];
-				i++;
-			}
+		}
+
+		foreach (GameObject l in dynamicObjects) {
+			l.GetComponent<DynamicFieldObject> ().Interaction(false);
+			i++;
 		}
 	}
 }
