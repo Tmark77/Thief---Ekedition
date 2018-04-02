@@ -28,9 +28,15 @@ public class MossArrow : Equipment
         if (other.gameObject.GetComponent<ThiefObject>() != null)
         {
             Debug.Log(other.name);
-
-            GameObject moss = Instantiate(plane, this.transform.position,plane.transform.rotation);
-
+            
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    Instantiate(plane, new Vector3(this.transform.position.x + i, this.transform.position.y, this.transform.position.z + j), plane.transform.rotation);
+                }
+            }
+            
             Destroy(this.gameObject);
         }
     }
