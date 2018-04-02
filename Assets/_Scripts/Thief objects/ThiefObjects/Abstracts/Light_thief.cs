@@ -4,18 +4,23 @@ using UnityEngine;
 
 public abstract class Light_thief : DynamicFieldObject {
 
-	float lightrange;
+	protected float lightrange;
 
 	public void Extinguish()
 	{
 		if(GetComponentInParent<Light> ().range != 0)
-			lightrange = GetComponentInParent<Light> ().range;
-		GetComponentInParent<Light> ().range = 0;
+        {
+            lightrange = GetComponentInParent<Light>().range;
+            GetComponentInParent<Light>().range = 0;
+        }
 	}
 
 	public void Ignite()
 	{
-		GetComponentInParent<Light> ().range = lightrange;
+        if (GetComponentInParent<Light>().range == 0)
+        {
+            GetComponentInParent<Light>().range = lightrange;
+        }
 	}
 	/// <summary>
 	/// Determines whether this instance is lit.
@@ -33,6 +38,6 @@ public abstract class Light_thief : DynamicFieldObject {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        
 	}
 }

@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterArrow : Equipment {
+public class FireArrow : Equipment {
 
     Rigidbody Rig;
 
-    // Use this for initialization
-    void Start () {
-		kod = 1;
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-		
     public override void Use(GameObject hand)
     {
         this.gameObject.SetActive(true);
         Shoot(hand);
     }
 
+    // Use this for initialization
+    void Start () {
+        kod = 2;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -44,7 +42,7 @@ public class WaterArrow : Equipment {
                 Light_Open g = nearbyObjects.GetComponent<Light_Open>();
                 if (g != null)
                 {
-                    (g as Light_Open).Extinguish();
+                    (g as Light_Open).Ignite();
                 }
             }
         }
@@ -64,5 +62,4 @@ public class WaterArrow : Equipment {
         this.gameObject.transform.Translate(hand.transform.forward, Space.World);
         this.gameObject.SetActive(true);
     }
-
 }

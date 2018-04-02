@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterArrow : Equipment {
-
+public class MossArrow : Equipment
+{
     Rigidbody Rig;
+    public GameObject plane;
+
+    public override void Use(GameObject hand)
+    {
+        this.gameObject.SetActive(true);
+        Shoot(hand);
+    }
 
     // Use this for initialization
     void Start () {
-		kod = 1;
 		
 	}
 	
@@ -16,13 +22,6 @@ public class WaterArrow : Equipment {
 	void Update () {
 		
 	}
-		
-    public override void Use(GameObject hand)
-    {
-        this.gameObject.SetActive(true);
-        Shoot(hand);
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,23 +29,9 @@ public class WaterArrow : Equipment {
         {
             Debug.Log(other.name);
 
-            ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
-            if ((obj as StaticFieldObject).material.Soft())
-            {
-                Rig = this.gameObject.GetComponent<Rigidbody>();
-                Rig.useGravity = false;
-                Rig.isKinematic = true;
-            }
+            GameObject moss = Instantiate(plane, this.transform.position,plane.transform.rotation);
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
-            foreach (Collider nearbyObjects in colliders)
-            {
-                Light_Open g = nearbyObjects.GetComponent<Light_Open>();
-                if (g != null)
-                {
-                    (g as Light_Open).Extinguish();
-                }
-            }
+            Destroy(this.gameObject);
         }
     }
 
@@ -64,5 +49,4 @@ public class WaterArrow : Equipment {
         this.gameObject.transform.Translate(hand.transform.forward, Space.World);
         this.gameObject.SetActive(true);
     }
-
 }

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour {
 
+    public GameObject hand;
+
 	int collectedGemsValue;
 	int collectedGoldValue;
 	int collectedOtherValue;
@@ -38,6 +40,11 @@ public class PlayerInventory : MonoBehaviour {
 			PrevItem ();
 		}
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            UseItem();
+        }
+
 		//goldValue.text = "Gold: " + collectedGoldValue;
 		//
 		//gemValue.text = "Gem: " + collectedGemsValue;
@@ -55,11 +62,12 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void UseItem()
 	{
-		e [i].Use();
-		e.RemoveAt (i);
-		NextItem ();
-
-	}
+		e[i].Use(hand);
+        //Equipment ep = e[i];
+        e.RemoveAt(i);
+        //Destroy(ep.gameObject);
+        NextItem();
+    }
 
 	private void NextItem()
 	{
