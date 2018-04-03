@@ -15,13 +15,15 @@ public class PlayerInventory : MonoBehaviour {
 	public Text gemValue;
 	public Text otherValue;
 
-	//List<int> e = new List<int>();
-	//List<Equipment> e = new List<Equipment>();
-    Dictionary<Equipment, int> equipment = new Dictionary<Equipment, int>();
-	//int i;
+    //List<int> e = new List<int>();
+    List<Equipment> e = new List<Equipment>();
+    int i;
 
-    Equipment eKey;
-    int eValue;
+    
+    Dictionary<int, int> eq = new Dictionary<int, int>();
+    int eqKey;
+    int eqValue;
+    
 
 
 	// Use this for initialization
@@ -29,10 +31,10 @@ public class PlayerInventory : MonoBehaviour {
 		collectedGemsValue = 0;
 		collectedGoldValue = 0;
 		collectedOtherValue = 0;
-		//i = 0;
+		i = 0;
 
-        eKey = null;
-        eValue = 0;
+        eqKey = 0;
+        eqValue = 0;
 		
 	}
 	
@@ -62,114 +64,102 @@ public class PlayerInventory : MonoBehaviour {
 	//public void NewItem(int item)
 	public void NewItem(Equipment item)
 	{
-        eKey = item;
-        eValue = 1;
-
-
-        if (equipment.ContainsKey(eKey))
+        e.Add(item);
+        i = e.Count - 1;
+        eqKey = e[i].Kod;
+        if (eq.ContainsKey(item.Kod))
         {
-            
-            eValue = equipment[eKey] + 1;
-            Debug.Log(eValue  + " bennevan ");
-            equipment[eKey] = eValue;
+            eq[item.Kod] += 1;
         }
         else
         {
-            equipment.Add(eKey, eValue);
+            eq.Add(item.Kod, 1);
         }
         
-
-        Debug.Log(eKey + " " + eValue);
-
-
-
-        //      e.Add (item);
-        //i = e.Count - 1;
-        //Debug.Log (e[i]);
     }
 
 	public void UseItem()
 	{
-        eKey.Use(hand);
-        if (eValue <= 1)
+        eqKey = e[i].Kod;
+        e[i].Use(hand);
+
+        
+        if (eq[e[i].Kod] <=1)
         {
-            equipment.Remove(eKey);
+            eq.Remove(e[i].Kod);
+            e.RemoveAt(i);
             NextItem();
         }
         else
         {
-            eValue -= 1;
-            equipment[eKey] = eValue;
+            eq[e[i].Kod] -= 1;
+            e.RemoveAt(i);
+            FindNextSameEquipment();
         }
+        
 
 
-		//e[i].Use(hand);
-  //      //Equipment ep = e[i];
-  //      e.RemoveAt(i);
-  //      //Destroy(ep.gameObject);
-  //      NextItem();
+    }
+
+    private void FindNextSameEquipment()
+    {
+        for (int j = 0; j < e.Count; j++)
+        {
+            if (e[j].Kod == eqKey)
+            {
+                i = j;
+                break;
+            }
+        }
+        Debug.Log(e[i] +" " + e[i].Kod + " " + eq[e[i].Kod]);
+        
     }
 
 	private void NextItem()
 	{
-        if (equipment.Count > 1)
+        if (eq.Count>1)
         {
-            Equipment k = eKey;
-            int v = eValue;
+            int temp = eqKey;
             bool found = true;
-            foreach (var e in equipment)
+            foreach (var e in eq)
             {
                 if (found)
                 {
-                    k = e.Key;
-                    v = e.Value;
+                    temp = e.Key;
                     found = false;
                 }
-                if (e.Key == eKey)
+                if (e.Key == eqKey)
                 {
                     found = true;
                 }
-                //Debug.Log("{0}, {1}", pair.Key, pair.Value);
             }
-            eKey = k;
-            eValue = v;
+            eqKey = temp;
+            //Debug.Log(eqKey);
+            FindNextSameEquipment();
         }
-        Debug.Log(eKey + " " + eValue);
-
-        //i++;
-        //if (i >= e.Count)
-        //	i = 0;
-        //Debug.Log (e [i]);
+        
     }
 
 	private void PrevItem()
 	{
-        if (equipment.Count > 1)
+        if (eq.Count > 1)
         {
-            Equipment k = eKey;
-            int v = eValue;
+            int temp = eqKey;
             bool found = false;
-            foreach (var e in equipment)
+            foreach (var e in eq)
             {
-                if (e.Key == eKey && k != eKey)
+                if (e.Key == eqKey && temp != eqKey)
                 {
                     found = true;
                 }
                 if (!found)
                 {
-                    k = e.Key;
-                    v = e.Value;
+                    temp = e.Key;
                 }
-                //Debug.Log("{0}, {1}", pair.Key, pair.Value);
             }
-            eKey = k;
-            eValue = v;
+            eqKey = temp;
+            FindNextSameEquipment();
         }
-        Debug.Log(eKey + " " + eValue);
-        //i--;
-        //if (i < 0)
-        //	i = e.Count-1;
-        //Debug.Log (e [i]);
     }
 
 	public void AddGem (int value)
