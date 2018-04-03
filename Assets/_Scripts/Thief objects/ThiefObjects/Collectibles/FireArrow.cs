@@ -51,6 +51,8 @@ public class FireArrow : Equipment {
                 }
             }
 
+            fire.Play();
+
             Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
             foreach (Collider nearbyObjects in colliders)
             {
@@ -58,9 +60,17 @@ public class FireArrow : Equipment {
                 if (g != null)
                 {
                     (g as Light_Open).Ignite();
-                    fire.Play();
+                    
                 }
             }
+
+            Arrow a = this.gameObject.AddComponent<Arrow>();
+            a.material = this.gameObject.GetComponent<abstract_Material>();
+            a.shot = this.shot;
+            a.hit = this.hit;
+            a.hitWood = this.hitWood;
+            this.gameObject.GetComponent<Renderer>().material = Resources.Load("black", typeof(Material)) as Material;
+            Destroy(this);
         }
     }
 
