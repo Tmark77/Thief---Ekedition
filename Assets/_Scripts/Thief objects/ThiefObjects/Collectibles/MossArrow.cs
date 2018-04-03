@@ -6,6 +6,8 @@ public class MossArrow : Equipment
 {
     Rigidbody Rig;
     public GameObject plane;
+    public AudioSource shot;
+    public AudioSource moss;
 
     public override void Use(GameObject hand)
     {
@@ -15,8 +17,8 @@ public class MossArrow : Equipment
 
     // Use this for initialization
     void Start () {
-		
-	}
+        kod = 3;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,7 +30,8 @@ public class MossArrow : Equipment
         if (other.gameObject.GetComponent<ThiefObject>() != null)
         {
             Debug.Log(other.name);
-            
+            moss.Play();
+
             for (int i = -1; i < 2; i++)
             {
                 for (int j = -1; j < 2; j++)
@@ -45,7 +48,7 @@ public class MossArrow : Equipment
     void Shoot(GameObject hand)
     {
         //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
-
+        shot.Play();
         this.gameObject.transform.position = hand.transform.position;
         this.gameObject.transform.rotation = hand.transform.rotation;
         Rig = this.gameObject.GetComponent<Rigidbody>();

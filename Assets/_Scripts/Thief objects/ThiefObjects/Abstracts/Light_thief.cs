@@ -5,13 +5,15 @@ using UnityEngine;
 public abstract class Light_thief : DynamicFieldObject {
 
 	protected float lightrange;
+    public AudioSource fire;
 
-	public void Extinguish()
+    public void Extinguish()
 	{
 		if(GetComponentInParent<Light> ().range != 0)
         {
             lightrange = GetComponentInParent<Light>().range;
             GetComponentInParent<Light>().range = 0;
+            fire.Stop();
         }
 	}
 
@@ -19,6 +21,7 @@ public abstract class Light_thief : DynamicFieldObject {
 	{
         if (GetComponentInParent<Light>().range == 0)
         {
+            fire.Play();
             GetComponentInParent<Light>().range = lightrange;
         }
 	}
@@ -33,7 +36,6 @@ public abstract class Light_thief : DynamicFieldObject {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame

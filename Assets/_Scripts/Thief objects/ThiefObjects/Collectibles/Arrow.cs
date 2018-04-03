@@ -5,11 +5,15 @@ using UnityEngine;
 public class Arrow : Equipment {
     
     Rigidbody Rig;
+    public AudioSource shot;
+    public AudioSource hitWood;
+    public AudioSource hit;
+    bool played;
 
     // Use this for initialization
     void Start () {
 		kod = 0;
-        
+        played = false;
     }
 	
 	// Update is called once per frame
@@ -37,9 +41,18 @@ public class Arrow : Equipment {
                 Rig = this.gameObject.GetComponent<Rigidbody>();
                 Rig.useGravity = false;
                 Rig.isKinematic = true;
+                hitWood.Play();
                 //GameObject arrowInst = Instantiate(stabilarrow, arrow.transform.position, arrow.transform.rotation);
                 //Destroy(arrowInst, 3600f);
                 //Destroy(arrow);
+            }
+            else
+            {
+                if (!played)
+                {
+                    hit.Play();
+                    played = true;
+                }
             }
         }
     }
@@ -48,7 +61,8 @@ public class Arrow : Equipment {
     void Shoot(GameObject hand)
     {
         //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
-        
+        played = false;
+        shot.Play();
         this.gameObject.transform.position = hand.transform.position;
         this.gameObject.transform.rotation = hand.transform.rotation;
         Rig = this.gameObject.GetComponent<Rigidbody>();
