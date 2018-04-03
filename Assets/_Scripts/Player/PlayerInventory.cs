@@ -63,8 +63,9 @@ public class PlayerInventory : MonoBehaviour {
 	public void NewItem(Equipment item)
 	{
         eKey = item;
-
         eValue = 1;
+
+
         if (equipment.ContainsKey(eKey))
         {
             
@@ -143,15 +144,14 @@ public class PlayerInventory : MonoBehaviour {
 
 	private void PrevItem()
 	{
-        int count = equipment.Count;
-        if (count > 1)
+        if (equipment.Count > 1)
         {
             Equipment k = eKey;
             int v = eValue;
             bool found = false;
             foreach (var e in equipment)
             {
-                if (e.Key == eKey)
+                if (e.Key == eKey && k != eKey)
                 {
                     found = true;
                 }
