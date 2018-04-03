@@ -75,7 +75,6 @@ namespace AssemblyCSharp
 
         void Start()
         {
-            carryAble = false;
             this.agent = GetComponent<NavMeshAgent>();
         }
 

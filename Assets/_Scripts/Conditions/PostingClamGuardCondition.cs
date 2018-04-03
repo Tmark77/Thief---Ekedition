@@ -11,7 +11,6 @@ public class PostingClamGuardCondition : AbstractCondition {
 
 	void Start ()
 	{
-		carryAble = false;
 		mat.color = Color.yellow;
 		this.agent = GetComponent<NavMeshAgent>();
 

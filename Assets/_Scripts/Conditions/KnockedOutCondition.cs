@@ -55,5 +55,10 @@ public class KnockedOutCondition : AbstractCondition {
 		return 3;
 	}
 
-	//mily meglepő, ez sincs kész
+	public override bool CarryAble ()
+	{
+		return true;
+	}
+
+
 }

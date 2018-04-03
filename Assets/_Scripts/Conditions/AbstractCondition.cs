@@ -17,9 +17,9 @@ public abstract class AbstractCondition : MonoBehaviour {
 
     protected NavMeshAgent agent;
 
-	protected bool carryAble; //jobb klikkel viheti a játékos a vállán
-	public bool CarryAble {
-		get { return carryAble;}
+	virtual public bool CarryAble()
+	{
+		return false;
 	}
 		
 	public AbstractCondition ChangeToDead(Creature creature)

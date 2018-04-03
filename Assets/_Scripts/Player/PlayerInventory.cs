@@ -44,15 +44,10 @@ public class PlayerInventory : MonoBehaviour {
 		{
 			NextItem();
 		}
-		if (Input.GetButtonDown("PrevItem")) 
+		if (Input.GetButtonDown ("PrevItem")) 
 		{
 			PrevItem ();
 		}
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            UseItem();
-        }
 
 		//goldValue.text = "Gold: " + collectedGoldValue;
 		//

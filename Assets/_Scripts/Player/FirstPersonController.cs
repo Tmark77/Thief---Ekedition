@@ -62,6 +62,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private bool running = false;
 		private bool crouching = false;
 		private bool actuallyCrouched = false;
+		[HideInInspector] public bool carriing = false;
 
 		[SerializeField] public Transform head;
 
@@ -119,10 +120,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			head.position = basicCam.position;
 
 			RotateView ();
+			////////////////////////////////////////////////
 			// the jump state needs to read here to make sure it is not missed
 			if (!m_Jump) {
 				//m_Jump = CrossPlatformInputManager.GetButtonDown ("Jump");
-                m_Jump = Input.GetKeyDown(GameManager.GM.jump);
+				if (!carriing) 
+				{
+					m_Jump = Input.GetKeyDown (GameManager.GM.jump);
+				}
             }
 
 			if (!m_PreviouslyGrounded && m_CharacterController.isGrounded) {
@@ -142,7 +147,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if (!m_CharacterController.isGrounded && !m_Jump) {
 				airTime += Time.deltaTime;
 			}
-
+			//////////////////////////////////////
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
  
@@ -151,11 +156,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				sneaking = true;
 			else
 				sneaking = false;
-			if (Input.GetKeyDown(GameManager.GM.crounch) && m_CharacterController.isGrounded) {
+			if (Input.GetKeyDown(GameManager.GM.crounch) && m_CharacterController.isGrounded && !carriing) {
 				crouching = !crouching;
 				actuallyCrouched = true;
 			}
-			if (Input.GetKey(GameManager.GM.run)) 
+			if (Input.GetKey(GameManager.GM.run) && !carriing) 
 			{
 				running = true;
 				sneaking = false;

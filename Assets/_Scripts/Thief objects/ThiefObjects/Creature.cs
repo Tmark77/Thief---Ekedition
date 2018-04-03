@@ -184,12 +184,7 @@ public abstract class Creature : ThiefObject {
 
 	public bool Carry()
 	{
-		if (condition.CarryAble) 
-		{
-			// + játszd le a felvevő animációt
-			return true;
-		}
-		return false;
+		return (condition.CarryAble ());
 	}
 
 	public void GetNoise(int noiseMeter, Vector3 location)

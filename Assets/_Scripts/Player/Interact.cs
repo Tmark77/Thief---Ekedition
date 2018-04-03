@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Interact : MonoBehaviour {
 
 	[SerializeField] public PlayerInventory inventory;
 	public Camera mainCam;
-	RaycastHit hit;	
+	RaycastHit hit;
+	ThiefObject PickedUpCreature;
 
 	// Use this for initialization
 	void Start () {
@@ -28,36 +30,58 @@ public class Interact : MonoBehaviour {
 
 	void RightClickInteracting()
 	{
-		if (hit.collider != null) {
+		if (!this.gameObject.GetComponent<FirstPersonController> ().carriing) {
+			if (hit.collider != null) {
 			
-			ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+				ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
 
-			if (obj is Collectible) {
-				(obj as Collectible).PickUp (inventory);
-			}
+				if (obj is Collectible) {
+					(obj as Collectible).PickUp (inventory);
+				}
 
-			if (obj is DynamicFieldObject) {
-				(obj as DynamicFieldObject).Interaction (true);
-			}
+				if (obj is DynamicFieldObject) {
+					(obj as DynamicFieldObject).Interaction (true);
+				}
 
-			if (obj is Creature) {
-				/*Player.carriing = */(obj as Creature).Carry ();
+				if (obj is Creature) 
+				{
+					this.gameObject.GetComponent<FirstPersonController> ().carriing = (obj as Creature).Carry ();
+					if (this.gameObject.GetComponent<FirstPersonController> ().carriing) 
+					{
+						//itt még felvesszük a bácsit
+						PickedUpCreature = obj;
+						PickedUpCreature.gameObject.SetActive (false);
+						//Debug.Log ("Fasz");
+					}
+				}
 			}
+		} 
+		else 
+		{
+			//itt most ledobjuk a bácsit
+			PickedUpCreature.gameObject.transform.position = this.gameObject.transform.position;
+			this.gameObject.GetComponent<FirstPersonController> ().carriing = false;
+			PickedUpCreature.gameObject.SetActive (true);
 		}
 	}
 
 	void LeftClickInteracting()
 	{
-		if (hit.collider != null) 
+		if (!this.gameObject.GetComponent<FirstPersonController> ().carriing) 
 		{
-			ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
-
-			if (obj is Creature) 
-			{
-				(obj as Creature).TakeDamage(10);
-				(obj as Creature).KnockOut();
-			}
+			this.gameObject.GetComponent<PlayerInventory> ().UseItem ();
 		}
+
+		//Ami itt ki van kommentelve, az a Husáng Equipment lesz!!!!!!!!!!!!!!!!!!!!!
+		//if (hit.collider != null) 
+		//{
+		//	ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+			//if (obj is Creature) 
+			//{
+			//	(obj as Creature).TakeDamage(10);
+			//	(obj as Creature).KnockOut();
+			//}
+		//}
 	
 	}
 

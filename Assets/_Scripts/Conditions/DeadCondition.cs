@@ -5,7 +5,6 @@ namespace AssemblyCSharp
 {
 	public class DeadCondition : AbstractCondition
 	{
-		#region implemented abstract members of AbstractCondition
 
 		public override void PatrolBehaviour (Creature creature,ref int index)
 		{
@@ -28,7 +27,7 @@ namespace AssemblyCSharp
 
 		void Start ()
 		{
-			carryAble = true;
+			
 		}
 
 		public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)
@@ -39,8 +38,12 @@ namespace AssemblyCSharp
 		{
 		}
 
-		#endregion
-			
+		public override bool CarryAble ()
+		{
+			return true;
+		}
+
+
 	}
 }
 

@@ -13,7 +13,6 @@ namespace AssemblyCSharp
 
 		void Start ()
 		{
-			carryAble = false;
 			mat.color = Color.yellow;
             this.agent = GetComponent<NavMeshAgent>();
 
