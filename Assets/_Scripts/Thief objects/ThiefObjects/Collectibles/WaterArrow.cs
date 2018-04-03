@@ -5,12 +5,17 @@ using UnityEngine;
 public class WaterArrow : Equipment {
 
     Rigidbody Rig;
+    public AudioSource shot;
+    public AudioSource hitWood;
+    public AudioSource hit;
+    public AudioSource water;
+    bool played;
 
     // Use this for initialization
     void Start () {
 		kod = 1;
-		
-	}
+        played = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,6 +41,15 @@ public class WaterArrow : Equipment {
                 Rig = this.gameObject.GetComponent<Rigidbody>();
                 Rig.useGravity = false;
                 Rig.isKinematic = true;
+                hitWood.Play();
+            }
+            else
+            {
+                if (!played)
+                {
+                    hit.Play();
+                    played = true;
+                }
             }
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
@@ -45,6 +59,7 @@ public class WaterArrow : Equipment {
                 if (g != null)
                 {
                     (g as Light_Open).Extinguish();
+                    water.Play();
                 }
             }
         }
@@ -54,7 +69,8 @@ public class WaterArrow : Equipment {
     void Shoot(GameObject hand)
     {
         //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
-
+        played = false;
+        shot.Play();
         this.gameObject.transform.position = hand.transform.position;
         this.gameObject.transform.rotation = hand.transform.rotation;
         Rig = this.gameObject.GetComponent<Rigidbody>();

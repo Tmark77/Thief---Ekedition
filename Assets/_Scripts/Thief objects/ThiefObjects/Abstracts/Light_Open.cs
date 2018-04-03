@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Light_Open : Light_thief {
 
+
 	// Use this for initialization
 	void Start () {
 		

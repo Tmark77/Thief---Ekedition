@@ -14,14 +14,14 @@ public class Light_OpenFlame_Big : Light_Open {
 			else
 			{
 				Ignite ();
-			}
+            }
 		}
 	}
 
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
