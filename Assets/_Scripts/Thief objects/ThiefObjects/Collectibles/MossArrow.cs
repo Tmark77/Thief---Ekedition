@@ -8,6 +8,7 @@ public class MossArrow : Equipment
     public GameObject plane;
     public AudioSource shot;
     public AudioSource moss;
+	bool IsShooted;
 
     public override void Use(GameObject hand)
     {
@@ -18,6 +19,7 @@ public class MossArrow : Equipment
     // Use this for initialization
     void Start () {
         kod = 3;
+		IsShooted = false;
     }
 	
 	// Update is called once per frame
@@ -27,7 +29,7 @@ public class MossArrow : Equipment
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ThiefObject>() != null)
+		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
             Debug.Log(other.name);
             moss.Play();
@@ -41,6 +43,7 @@ public class MossArrow : Equipment
             }
             
             Destroy(this.gameObject);
+			IsShooted = false;
         }
     }
 
@@ -57,5 +60,6 @@ public class MossArrow : Equipment
         Rig.AddForce(transform.forward * 1500f);
         this.gameObject.transform.Translate(hand.transform.forward, Space.World);
         this.gameObject.SetActive(true);
+		IsShooted = true;
     }
 }

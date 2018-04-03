@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace AssemblyCSharp
 {
@@ -30,7 +31,7 @@ namespace AssemblyCSharp
 			carryAble = true;
 		}
 
-		public override void ReactToNoise (Creature creature, int noiseMeter)
+		public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)
 		{
 		}
 

@@ -326,7 +326,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				{
 					if(dist < noise)
 					{
-						g.GetNoise((int)(((noise-dist)*100/noise)*1)); //1 a gyanú pontok szorzója
+						g.GetNoise((int)(((noise-dist)*100/noise)*1), this.gameObject.transform.position); //1 a gyanú pontok szorzója
 						//Debug.Log(noise);
 					}
 				}

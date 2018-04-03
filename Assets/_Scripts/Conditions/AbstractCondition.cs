@@ -34,7 +34,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 
 	//-----------------------------------------------------
 
-	abstract public void ReactToNoise (Creature creature, int noiseMeter);
+	abstract public void ReactToNoise (Creature creature, int noiseMeter, Vector3 location);
 
 	abstract public void ReactToView (Creature creature,int H, int C, int F);
 

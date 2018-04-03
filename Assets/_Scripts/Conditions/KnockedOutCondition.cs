@@ -33,7 +33,7 @@ public class KnockedOutCondition : AbstractCondition {
 	{
 	}
 
-	public override void ReactToNoise (Creature creature, int noiseMeter)
+	public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)
 	{
 	}
 

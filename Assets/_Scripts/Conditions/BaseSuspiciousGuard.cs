@@ -40,15 +40,11 @@ namespace AssemblyCSharp
         public Material mat;
         #region implemented abstract members of AbstractCondition
 
-        public override void ReactToNoise(Creature creature, int noiseMeter)
+		public override void ReactToNoise(Creature creature, int noiseMeter, Vector3 location)
         {
             creature.Targets.RemoveAt(creature.Targets.Count - 1);
-            creature.Targets.Add(creature.player.position);
-            creature.Suspicion += (int)(noiseMeter * creature.NoiseSensitivity);
-            //if (creature.Suspicion >= 200) 
-            //{
-            //	creature.condition = creature.condition_alert;
-            //}
+			creature.Targets.Add(location);
+			creature.Suspicion += (int)(noiseMeter * creature.NoiseSensitivity);
         }
 
         public override void ReactToView(Creature creature, int H, int C, int F)

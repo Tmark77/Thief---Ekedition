@@ -10,6 +10,7 @@ public class FireArrow : Equipment {
     public AudioSource hit;
     public AudioSource fire;
     bool played;
+	bool IsShooted;
 
     public override void Use(GameObject hand)
     {
@@ -21,6 +22,7 @@ public class FireArrow : Equipment {
     void Start () {
         kod = 2;
         played = false;
+		IsShooted = false;
     }
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class FireArrow : Equipment {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ThiefObject>() != null)
+		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
             Debug.Log(other.name);
 
@@ -70,7 +72,8 @@ public class FireArrow : Equipment {
             a.hit = this.hit;
             a.hitWood = this.hitWood;
             this.gameObject.GetComponent<Renderer>().material = Resources.Load("black", typeof(Material)) as Material;
-            Destroy(this);
+			IsShooted = false;
+			Destroy(this);
         }
     }
 
@@ -88,5 +91,6 @@ public class FireArrow : Equipment {
         Rig.AddForce(transform.forward * 1500f);
         this.gameObject.transform.Translate(hand.transform.forward, Space.World);
         this.gameObject.SetActive(true);
+		IsShooted = true;
     }
 }

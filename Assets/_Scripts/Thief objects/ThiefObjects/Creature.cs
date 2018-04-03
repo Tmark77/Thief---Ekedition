@@ -192,9 +192,9 @@ public abstract class Creature : ThiefObject {
 		return false;
 	}
 
-	public void GetNoise(int noiseMeter)
+	public void GetNoise(int noiseMeter, Vector3 location)
 	{
-		condition.ReactToNoise (this, noiseMeter);
+		condition.ReactToNoise (this, noiseMeter, location);
 	}
 
 	//metódus ami a látott dologokat észleli

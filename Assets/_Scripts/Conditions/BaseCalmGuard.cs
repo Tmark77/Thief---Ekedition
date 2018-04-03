@@ -34,14 +34,14 @@ namespace AssemblyCSharp
 			//Debug.Log (creature.Suspicion.ToString());
 		}
 
-		public override void ReactToNoise (Creature creature, int noiseMeter)
+		public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)
 		{
 			creature.Suspicion += (int)(noiseMeter * creature.NoiseSensitivity);
 			if (creature.Suspicion >= 110) 
 			{
 				mat.color = Color.red;
 				creature.condition = creature.condition_suspicious;
-				creature.Targets.Add(creature.player.position);
+				creature.Targets.Add(location);
 			}
 		}
 

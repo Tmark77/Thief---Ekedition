@@ -13,7 +13,7 @@ public class SleepCondition : AbstractCondition {
 	{
 		throw new System.NotImplementedException ();
 	}
-	public override void ReactToNoise (Creature creature, int noiseMeter)
+	public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)
 	{
 		throw new System.NotImplementedException ();
 	}

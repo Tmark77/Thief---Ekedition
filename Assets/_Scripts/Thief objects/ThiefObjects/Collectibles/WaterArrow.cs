@@ -10,11 +10,13 @@ public class WaterArrow : Equipment {
     public AudioSource hit;
     public AudioSource water;
     bool played;
+	bool IsShooted;
 
     // Use this for initialization
     void Start () {
 		kod = 1;
         played = false;
+		IsShooted = false;
     }
 	
 	// Update is called once per frame
@@ -31,7 +33,7 @@ public class WaterArrow : Equipment {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ThiefObject>() != null)
+		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
             Debug.Log(other.name);
 
@@ -71,7 +73,8 @@ public class WaterArrow : Equipment {
             a.hit = this.hit;
             a.hitWood = this.hitWood;
             this.gameObject.GetComponent<Renderer>().material = Resources.Load("black", typeof(Material)) as Material;
-            Destroy(this);
+			IsShooted = false;
+			Destroy(this);
         }
     }
 
@@ -89,6 +92,7 @@ public class WaterArrow : Equipment {
         Rig.AddForce(transform.forward * 1500f);
         this.gameObject.transform.Translate(hand.transform.forward, Space.World);
         this.gameObject.SetActive(true);
+		IsShooted = true;
     }
 
 }

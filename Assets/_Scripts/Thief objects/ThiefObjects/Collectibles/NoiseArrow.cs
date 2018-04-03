@@ -1,0 +1,110 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NoiseArrow : Equipment {
+	Rigidbody Rig;
+	public AudioSource shot;
+	public AudioSource hitWood;
+	public AudioSource hit;
+	bool played;
+	bool IsShooted;
+	float counter = 0;
+
+	// Use this for initialization
+	void Start () {
+		kod = 0;
+		played = false;
+		IsShooted = false;
+	}
+
+	// Update is called once per frame
+	void Update () {
+
+	}
+
+
+	public override void Use (GameObject hand)
+	{
+		this.gameObject.SetActive(true);
+		Shoot(hand);
+	}
+
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
+		{
+			Debug.Log(other.name);
+
+			ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
+			if ((obj as StaticFieldObject).material.Soft())
+			{
+				Rig = this.gameObject.GetComponent<Rigidbody>();
+				Rig.useGravity = false;
+				Rig.isKinematic = true;
+				hitWood.Play();
+				//GameObject arrowInst = Instantiate(stabilarrow, arrow.transform.position, arrow.transform.rotation);
+				//Destroy(arrowInst, 3600f);
+				//Destroy(arrow);
+			}
+			else
+			{
+				if (!played)
+				{
+					hit.Play();
+					played = true;
+				}
+			}
+			IsShooted = false;
+			counter = 0;
+			InvokeRepeating ("Active", 0f, 1f);
+		}
+	}
+
+	void Active()
+	{
+		counter++;
+		if (counter == 5) 
+		{
+			CancelInvoke ("Active");
+		}
+
+		float noise = 100f;
+		Collider[] colliders = Physics.OverlapSphere(transform.position, noise);
+
+		foreach(Collider nearbyObjects in colliders)
+		{
+			Creature g = nearbyObjects.GetComponent<Creature>();
+			float dist = Vector3.Distance(transform.position, nearbyObjects.transform.position);
+			//Debug.Log (noise);
+			if(g != null)
+			{
+				if(dist < noise)
+				{
+					g.GetNoise((int)(((noise-dist)*100/noise)*1),this.gameObject.transform.position); //1 a gyanú pontok szorzója
+					//Debug.Log(noise);
+				}
+			}
+		}
+		Debug.Log ("fasz");
+
+	}
+
+
+	void Shoot(GameObject hand)
+	{
+		//GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
+		played = false;
+		shot.Play();
+		this.gameObject.transform.position = hand.transform.position;
+		this.gameObject.transform.rotation = hand.transform.rotation;
+		Rig = this.gameObject.GetComponent<Rigidbody>();
+		Rig.useGravity = true;
+		Rig.isKinematic = false;
+		Rig.AddForce(transform.forward * 1500f);
+		this.gameObject.transform.Translate(hand.transform.forward, Space.World);
+		this.gameObject.SetActive(true);
+		IsShooted = true;
+	}
+}

@@ -31,6 +31,5 @@ public class Light_OpenFlame_Small : Light_Open {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(lightrange);
     }
 }

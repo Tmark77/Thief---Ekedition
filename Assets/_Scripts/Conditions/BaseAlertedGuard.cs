@@ -16,7 +16,7 @@ public class BaseAlertedGuard : AbstractCondition
         return creature.condition_blind;
     }
 
-    public override void ReactToNoise(Creature creature, int noiseMeter)
+	public override void ReactToNoise(Creature creature, int noiseMeter, Vector3 location)
     {
 
     }
@@ -33,7 +33,6 @@ public class BaseAlertedGuard : AbstractCondition
             if (Vector3.Distance(agent.transform.position, creature.player.position) > 2f)
             {
                 creature.condition = creature.condition_suspicious;
-                Debug.Log("fasz");
             }
 
         }
