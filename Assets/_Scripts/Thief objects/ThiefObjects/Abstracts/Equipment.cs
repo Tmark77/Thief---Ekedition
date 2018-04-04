@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Equipment : Collectible {
-    
 
 	protected int kod;
 
@@ -19,6 +18,10 @@ public abstract class Equipment : Collectible {
 		gameObject.SetActive (false);
 		//Destroy (gameObject);
 	}
-
-	public abstract void Use (GameObject hand);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="hand"></param>
+    /// <returns> Visszaadja azt, hogy elhasználódott-e az item, a hazsnálat során. </returns>
+	public abstract bool Use (GameObject hand);
 }

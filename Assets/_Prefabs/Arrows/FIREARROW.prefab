@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 114587433958712480}
+  kod: 2
   shot: {fileID: 82144437050285814}
   hitWood: {fileID: 82660460567198832}
   hit: {fileID: 82911490941308298}

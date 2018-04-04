@@ -12,10 +12,11 @@ public class FireArrow : Equipment {
     bool played;
 	bool IsShooted;
 
-    public override void Use(GameObject hand)
+    public override bool Use(GameObject hand)
     {
         this.gameObject.SetActive(true);
         Shoot(hand);
+        return true;
     }
 
     // Use this for initialization
@@ -34,8 +35,6 @@ public class FireArrow : Equipment {
     {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
-            Debug.Log(other.name);
-
             ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
             if ((obj as StaticFieldObject).material.Soft())
             {

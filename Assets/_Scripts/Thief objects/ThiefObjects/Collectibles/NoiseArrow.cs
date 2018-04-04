@@ -13,7 +13,7 @@ public class NoiseArrow : Equipment {
 
 	// Use this for initialization
 	void Start () {
-		kod = 0;
+		kod = 4;
 		played = false;
 		IsShooted = false;
 	}
@@ -24,19 +24,18 @@ public class NoiseArrow : Equipment {
 	}
 
 
-	public override void Use (GameObject hand)
+	public override bool Use (GameObject hand)
 	{
 		this.gameObject.SetActive(true);
 		Shoot(hand);
-	}
+        return true;
+    }
 
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
 		{
-			Debug.Log(other.name);
-
 			ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
 			if ((obj as StaticFieldObject).material.Soft())
 			{

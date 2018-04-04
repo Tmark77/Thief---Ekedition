@@ -62,7 +62,7 @@ public class PlayerInventory : MonoBehaviour {
         e.Add(item);
         i = e.Count - 1;
         eqKey = e[i].Kod;
-        if (eq.ContainsKey(item.Kod))
+        if (eq.ContainsKey(item.Kod) && !(item is Key))
         {
             eq[item.Kod] += 1;
         }
@@ -70,30 +70,27 @@ public class PlayerInventory : MonoBehaviour {
         {
             eq.Add(item.Kod, 1);
         }
-        
     }
 
 	public void UseItem()
 	{
         eqKey = e[i].Kod;
-        e[i].Use(hand);
 
-        
-        if (eq[e[i].Kod] <=1)
+        if(e[i].Use(hand))
         {
-            eq.Remove(e[i].Kod);
-            e.RemoveAt(i);
-            NextItem();
+            if (eq[e[i].Kod] <=1)
+            {
+                eq.Remove(e[i].Kod);
+                e.RemoveAt(i);
+                NextItem();
+            }
+            else
+            {
+                eq[e[i].Kod] -= 1;
+                e.RemoveAt(i);
+                FindNextSameEquipment();
+            }
         }
-        else
-        {
-            eq[e[i].Kod] -= 1;
-            e.RemoveAt(i);
-            FindNextSameEquipment();
-        }
-        
-
-
     }
 
     private void FindNextSameEquipment()

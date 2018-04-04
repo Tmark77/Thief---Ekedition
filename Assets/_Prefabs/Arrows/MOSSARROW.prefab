@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 114715091328554732}
+  kod: 3
   plane: {fileID: 1473209467120240, guid: 1271a580847061443b93ed5f7d53a5f8, type: 2}
   shot: {fileID: 82365073063384936}
   moss: {fileID: 82105712137120156}

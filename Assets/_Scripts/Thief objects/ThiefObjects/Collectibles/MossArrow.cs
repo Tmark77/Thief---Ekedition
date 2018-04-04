@@ -10,10 +10,11 @@ public class MossArrow : Equipment
     public AudioSource moss;
 	bool IsShooted;
 
-    public override void Use(GameObject hand)
+    public override bool Use(GameObject hand)
     {
         this.gameObject.SetActive(true);
         Shoot(hand);
+        return true;
     }
 
     // Use this for initialization
@@ -31,7 +32,6 @@ public class MossArrow : Equipment
     {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
-            Debug.Log(other.name);
             moss.Play();
 
             for (int i = -1; i < 2; i++)
