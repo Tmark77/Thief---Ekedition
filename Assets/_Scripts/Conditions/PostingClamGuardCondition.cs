@@ -75,7 +75,7 @@ public class PostingClamGuardCondition : AbstractCondition {
 			Vector3 direction = (LookAtThis.position - transform.position).normalized;
 			Quaternion lookRotation = Quaternion.LookRotation(direction);
 			transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * agent.angularSpeed/100);
-			index++;
+			//index++;
 		}
 		else agent.SetDestination (creature.Targets[index]);
 

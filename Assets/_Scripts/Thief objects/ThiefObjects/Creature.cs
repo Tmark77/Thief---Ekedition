@@ -16,7 +16,13 @@ public abstract class Creature : ThiefObject {
 	protected int RangeOfVision;
 	private float ReactTime;
 
-	void Start()
+    public List<Collectible> KnownObjects = new List<Collectible>();
+    public AbstractCondition condition;
+
+    public List<Equipment> e = new List<Equipment>();
+
+
+    void Start()
 	{
 		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
 		index = 0;
@@ -142,9 +148,7 @@ public abstract class Creature : ThiefObject {
 		}
 	}
 
-	public AbstractCondition condition;
-
-	public List<Equipment> e = new List<Equipment>();
+	
 
 	int suspicion;
 	public int Suspicion
@@ -162,9 +166,8 @@ public abstract class Creature : ThiefObject {
 		}
 	}
 
-	public List<Collectible> KnownObjects = new List<Collectible> ();
 
-	public void TakeDamage(int damage)
+    public void TakeDamage(int damage)
 	{
 		if(damage > 0)
 			Health = Health - (damage * condition.DamageMultiplier());

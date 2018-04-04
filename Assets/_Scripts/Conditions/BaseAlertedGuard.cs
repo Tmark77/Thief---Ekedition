@@ -48,7 +48,7 @@ public class BaseAlertedGuard : AbstractCondition
 
     public override void PatrolBehaviour(Creature creature, ref int index)
     {
-        if (Vector3.Distance(agent.transform.position, creature.player.position) <= 2f)
+        if (Vector3.Distance(agent.transform.position, creature.player.position) <= 3f)
         {
             agent.SetDestination(this.gameObject.transform.position);
             Vector3 direction = (creature.player.position - transform.position).normalized;

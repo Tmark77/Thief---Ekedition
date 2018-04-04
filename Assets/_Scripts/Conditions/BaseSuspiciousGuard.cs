@@ -12,7 +12,7 @@ namespace AssemblyCSharp
 
         public override void PatrolBehaviour(Creature creature, ref int index)
         {
-            if (Vector3.Distance(agent.transform.position, creature.player.position) <= 2f)
+            if (Vector3.Distance(agent.transform.position, creature.player.position) <= 3f)
             {
                 creature.Targets[creature.Targets.Count - 1] = creature.player.position;
                 creature.condition = creature.condition_alert;

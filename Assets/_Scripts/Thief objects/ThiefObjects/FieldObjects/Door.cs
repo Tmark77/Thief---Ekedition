@@ -6,7 +6,8 @@ public class Door : DynamicFieldObject {
 
 	Animator anim;
 	bool opened;
-    public bool unlocked; //true open, false close
+    public bool locked; //true closed, false opened
+    public bool canBeLockPicked;
     Quaternion newRot;
 
     [Range(10, 20)]
@@ -20,27 +21,45 @@ public class Door : DynamicFieldObject {
 	
 	public override void Interaction (bool IsRightClicked)
 	{
-		if (opened == false && unlocked)
+        if (IsRightClicked)
         {
-			opened = true;
-        } 
-		else 
-		{
-            opened = false;
-		}
+            if (opened == false && !locked)
+            {
+                opened = true;
+            }
+            else
+            {
+                opened = false;
+            }
+        }
+        else
+        {
+            opened = true;
+        }
+		
 	}
 
     private void Update()
     {
         if (opened)
         {
-            newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 200);
+            this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 100);
             transform.rotation = newRot;
+            if (this.gameObject.transform.rotation.y == 90.0f)
+            {
+                this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            }
         }
         else
         {
-            newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 200);
+            this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 100);
             transform.rotation = newRot;
+            if (this.gameObject.transform.rotation.y == 0f)
+            {
+                this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            }
         }
     }
 }

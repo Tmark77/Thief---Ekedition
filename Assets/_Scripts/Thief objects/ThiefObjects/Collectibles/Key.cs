@@ -15,9 +15,9 @@ public class Key : Equipment
             Door obj = hit.collider.GetComponent<Door>();
             if (obj != null)
             {
-                if ((obj as Door).unlocked == false && (obj as Door).keyID == this.keyID)
+                if ((obj as Door).locked == true && (obj as Door).keyID == this.keyID)
                 {
-                    (obj as Door).unlocked = true;
+                    (obj as Door).locked = false;
                 }
             }
         }
