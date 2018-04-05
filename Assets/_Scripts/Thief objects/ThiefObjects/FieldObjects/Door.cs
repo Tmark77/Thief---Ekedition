@@ -9,6 +9,7 @@ public class Door : DynamicFieldObject {
     public bool locked; //true closed, false opened
     public bool canBeLockPicked;
     Quaternion newRot;
+	public GameObject door02;
 
     [Range(10, 20)]
     public int keyID;
@@ -43,22 +44,22 @@ public class Door : DynamicFieldObject {
     {
         if (opened)
         {
-            this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
             newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 100);
             transform.rotation = newRot;
             if (this.gameObject.transform.rotation.y == 90.0f)
             {
-                this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                //this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
             }
         }
         else
         {
-            this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
             newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 100);
             transform.rotation = newRot;
             if (this.gameObject.transform.rotation.y == 0f)
             {
-                this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                //this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
             }
         }
     }

@@ -19,7 +19,7 @@ public abstract class Creature : ThiefObject {
     public List<Collectible> KnownObjects = new List<Collectible>();
     public AbstractCondition condition;
 
-    public List<Equipment> e = new List<Equipment>();
+	public List<Collectible> e = new List<Collectible>();
 
 
     void Start()

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 
 namespace AssemblyCSharp
 {
@@ -22,33 +23,57 @@ namespace AssemblyCSharp
 
         private void OnTriggerEnter(Collider other)
         {
+			
             if (other.gameObject.GetComponent<DynamicFieldObject>())
             {
-                DynamicFieldObject obj = other.gameObject.GetComponent<DynamicFieldObject>();
-                if ((obj as Door).locked && (obj as Door).keyID == this.e[0].Kod)
-                {
-                    (obj as Door).locked = false;
-                    obj.Interaction(true);
-                }
-                else
-                {
-                    obj.Interaction(true);
-                }
+				StartCoroutine (OpenClose(other.gameObject.GetComponent<DynamicFieldObject>()));
             }
+				
+
         }
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.GetComponent<DynamicFieldObject>())
-            {
-                DynamicFieldObject obj = other.gameObject.GetComponent<DynamicFieldObject>();
-                obj.Interaction(true);
-                if ((obj as Door).keyID == this.e[0].Kod)
-                {
-                    (obj as Door).locked = true;
-                }
-            }
-        }
+		private IEnumerator OpenClose(DynamicFieldObject obj)
+		{
+			
+			if ((obj as Door).locked) 
+			{
+				foreach (Collectible item in e) 
+				{
+					if ((item is Key) && (obj as Door).keyID == (item as Equipment).Kod) 
+					{
+						(obj as Door).locked = false;
+					}
+				}
+			}
+			if (!(obj as Door).locked) 
+			{
+				obj.Interaction (true);
+				(obj as Door).door02.GetComponent<Collider> ().isTrigger = true;
+				yield return new WaitForSecondsRealtime (2);
+				obj.Interaction (true);
+				yield return new WaitForSecondsRealtime (1);
+				foreach (Collectible item in e) {
+					if ((item is Key) && (obj as Door).keyID == (item as Equipment).Kod) {
+						(obj as Door).locked = true;
+					}
+				}
+
+				(obj as Door).door02.GetComponent<Collider> ().isTrigger = true;
+			}
+		}
+
+       // private void OnTriggerExit(Collider other)
+       // {
+       //     if (other.gameObject.GetComponent<DynamicFieldObject>())
+       //     {
+       //         DynamicFieldObject obj = other.gameObject.GetComponent<DynamicFieldObject>();
+       //         obj.Interaction(true);
+       //         if ((obj as Door).keyID == this.e[0].Kod)
+       //         {
+       //             (obj as Door).locked = true;
+       //         }
+       //     }
+       // }
     }
 }
 
