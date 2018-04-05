@@ -65,6 +65,11 @@ public class FireArrow : Equipment {
                 }
             }
 
+			if (obj is Creature) 
+			{
+				(obj as Creature).TakeDamage (80);
+			}
+
             Arrow a = this.gameObject.AddComponent<Arrow>();
             a.material = this.gameObject.GetComponent<abstract_Material>();
             a.shot = this.shot;

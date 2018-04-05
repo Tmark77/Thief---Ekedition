@@ -24,6 +24,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 		
 	public AbstractCondition ChangeToDead(Creature creature)
 	{
+		this.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 		return creature.condition_dead;
 	}
 

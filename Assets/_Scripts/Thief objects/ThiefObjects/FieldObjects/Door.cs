@@ -37,6 +37,12 @@ public class Door : DynamicFieldObject {
         {
             opened = true;
         }
+
+		if (opened) {
+			door02.GetComponent<Collider> ().isTrigger = true;
+		} else {
+			door02.GetComponent<Collider> ().isTrigger = false;
+		}
 		
 	}
 

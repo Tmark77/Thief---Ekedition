@@ -173,7 +173,7 @@ public abstract class Creature : ThiefObject {
 			Health = Health - (damage * condition.DamageMultiplier());
 		if (Health <= 0) 
 		{
-			condition = condition_dead;
+			condition = condition.ChangeToDead(this);
 			Debug.Log ("Meghaltam, segítség!");
 		}
 		

@@ -34,7 +34,6 @@ namespace AssemblyCSharp
 
 		private IEnumerator OpenClose(DynamicFieldObject obj)
 		{
-			
 			if ((obj as Door).locked) 
 			{
 				foreach (Collectible item in e) 
@@ -45,10 +44,9 @@ namespace AssemblyCSharp
 					}
 				}
 			}
-			if (!(obj as Door).locked) 
-			{
+			if (!(obj as Door).locked) {
 				obj.Interaction (true);
-				(obj as Door).door02.GetComponent<Collider> ().isTrigger = true;
+				//(obj as Door).door02.GetComponent<Collider> ().isTrigger = true;
 				yield return new WaitForSecondsRealtime (2);
 				obj.Interaction (true);
 				yield return new WaitForSecondsRealtime (1);
@@ -57,23 +55,26 @@ namespace AssemblyCSharp
 						(obj as Door).locked = true;
 					}
 				}
-
-				(obj as Door).door02.GetComponent<Collider> ().isTrigger = true;
+				//(obj as Door).door02.GetComponent<Collider> ().isTrigger = false;
 			}
+			else 
+			{
+				
+				this.gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+				Debug.Log (this.gameObject.GetComponent<Rigidbody> ().isKinematic);
+			}
+
 		}
 
-       // private void OnTriggerExit(Collider other)
-       // {
-       //     if (other.gameObject.GetComponent<DynamicFieldObject>())
-       //     {
-       //         DynamicFieldObject obj = other.gameObject.GetComponent<DynamicFieldObject>();
-       //         obj.Interaction(true);
-       //         if ((obj as Door).keyID == this.e[0].Kod)
-       //         {
-       //             (obj as Door).locked = true;
-       //         }
-       //     }
-       // }
+        private void OnTriggerExit(Collider other)
+        {
+			if (other.gameObject.GetComponentInParent<DynamicFieldObject>()) 
+			{
+				this.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+				Debug.Log (this.gameObject.GetComponent<Rigidbody> ().isKinematic);
+			}
+        }
+			
     }
 }
 

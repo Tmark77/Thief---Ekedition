@@ -51,7 +51,7 @@ public class Interact : MonoBehaviour {
 						//itt még felvesszük a bácsit
 						PickedUpCreature = obj;
 						PickedUpCreature.gameObject.SetActive (false);
-						//Debug.Log ("Fasz");
+						//PickedUpCreature.GetComponent<Rigidbody> ().isKinematic = true;
 					}
 				}
 			}
@@ -71,18 +71,7 @@ public class Interact : MonoBehaviour {
 		{
 			this.gameObject.GetComponent<PlayerInventory> ().UseItem ();
 		}
-
-		//Ami itt ki van kommentelve, az a Husáng Equipment lesz!!!!!!!!!!!!!!!!!!!!!
-		//if (hit.collider != null) 
-		//{
-		//	ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
-			//if (obj is Creature) 
-			//{
-			//	(obj as Creature).TakeDamage(10);
-			//	(obj as Creature).KnockOut();
-			//}
-		//}
-	
+			
 	}
 
 }

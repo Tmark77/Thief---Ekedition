@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace AssemblyCSharp
 {
@@ -8,7 +9,7 @@ namespace AssemblyCSharp
 
 		public override void PatrolBehaviour (Creature creature,ref int index)
 		{
-			
+			agent.SetDestination (this.gameObject.transform.position);
 		}
 
 		public override AbstractCondition ChangeToKnockedOut (Creature creature)
@@ -27,7 +28,7 @@ namespace AssemblyCSharp
 
 		void Start ()
 		{
-			
+			this.agent = GetComponent<NavMeshAgent>();
 		}
 
 		public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)

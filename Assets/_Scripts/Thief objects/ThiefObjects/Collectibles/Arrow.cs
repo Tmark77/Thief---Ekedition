@@ -37,7 +37,7 @@ public class Arrow : Equipment {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
             ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
-            if ((obj as StaticFieldObject).material.Soft())
+			if ((obj as ThiefObject).material.Soft())
             {
                 Rig = this.gameObject.GetComponent<Rigidbody>();
                 Rig.useGravity = false;
@@ -55,6 +55,12 @@ public class Arrow : Equipment {
                     played = true;
                 }
             }
+
+			if (obj is Creature) 
+			{
+				(obj as Creature).TakeDamage (50);
+			}
+
 			IsShooted = false;
         }
     }
