@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Lockpick : Equipment {
 
-
+    public static bool lockPickInProgress;
     RaycastHit hit;
     public GameObject lockpicker;
 
@@ -13,6 +13,7 @@ public class Lockpick : Equipment {
     {
         if (this.gameObject.active == false)
         {
+            lockPickInProgress = true;
             this.gameObject.SetActive(true);
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             this.gameObject.GetComponent<Collider>().enabled = false;
@@ -39,6 +40,7 @@ public class Lockpick : Equipment {
         }
         else
         {
+            lockPickInProgress = false;
             this.gameObject.SetActive(false);
             //this.lockpicker.SetActive(false);
             lockpicker.transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -51,6 +53,7 @@ public class Lockpick : Equipment {
     void Start () {
 		kod = 7;
 		nev = "Lockpicks";
+        lockPickInProgress = false;
 	}
 	
 	// Update is called once per frame
@@ -71,6 +74,7 @@ public class Lockpick : Equipment {
 			successLockPicking = false;
             //lockpicker.SetActive(false);
             lockpicker.transform.localPosition = new Vector3(0f, 0f, 0f);
+            lockPickInProgress = false;
         }
     }
 
