@@ -1514,11 +1514,6 @@ Prefab:
       propertyPath: damageImage
       value: 
       objectReference: {fileID: 212177143}
-    - target: {fileID: 114017531234292214, guid: 89bff26951aea9a44af1e8c70d428190,
-        type: 2}
-      propertyPath: minimumSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89bff26951aea9a44af1e8c70d428190, type: 2}
   m_IsPrefabParent: 0

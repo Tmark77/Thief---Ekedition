@@ -722,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 46709286}
+  fire: {fileID: 0}
 --- !u!114 &46709286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,6 +1207,11 @@ BoxCollider:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 3685710be28c61e43aa769595407c830, type: 3}
   m_PrefabInternal: {fileID: 1726507418}
+--- !u!1 &142928372 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1244941969109228, guid: 89bff26951aea9a44af1e8c70d428190,
+    type: 2}
+  m_PrefabInternal: {fileID: 758696220}
 --- !u!1001 &145260784
 Prefab:
   m_ObjectHideFlags: 0
@@ -1594,6 +1600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 166020672}
+  fire: {fileID: 0}
 --- !u!114 &166020672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,6 +2154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 212951853}
+  locked: 0
+  canBeLockPicked: 0
+  door02: {fileID: 0}
+  keyID: 0
 --- !u!65 &212951859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4661,6 +4672,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 429125523}
+  locked: 0
+  canBeLockPicked: 0
+  door02: {fileID: 0}
+  keyID: 0
 --- !u!1001 &431123880
 Prefab:
   m_ObjectHideFlags: 0
@@ -8314,6 +8329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 811297928}
+  fire: {fileID: 0}
 --- !u!114 &811297928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10127,7 +10143,8 @@ MonoBehaviour:
   chest: {fileID: 1706878604}
   foot: {fileID: 1007582337}
   range: 0
-  LightGemTemp: {fileID: 0}
+  lightGemObject: {fileID: 142928372}
+  hand: {fileID: 1862678769}
   mesh: {fileID: 909221633}
   mat: {fileID: 2100000, guid: fc077f0d30f0a4ccea1d2c28fa3cf93b, type: 2}
   lights:
@@ -13466,6 +13483,9 @@ MonoBehaviour:
   head: {fileID: 1142131919}
   chest: {fileID: 1706878604}
   foot: {fileID: 1007582337}
+  KnownObjects: []
+  condition: {fileID: 1326657587}
+  e: []
   condition_calm: {fileID: 1326657587}
   condition_suspicious: {fileID: 1326657586}
   condition_alert: {fileID: 1326657585}
@@ -13475,9 +13495,6 @@ MonoBehaviour:
   condition_sleep: {fileID: 1326657584}
   NoiseSensitivity: 2
   SuspicionDecrease: 1
-  condition: {fileID: 1326657587}
-  e: []
-  KnownObjects: []
   Targets:
   - {x: -82, y: 0.5, z: -15}
   - {x: -82, y: 0.5, z: 16}
@@ -14232,6 +14249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 1362602727}
+  fire: {fileID: 0}
 --- !u!114 &1362602727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15105,6 +15123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 1447670285}
+  locked: 0
+  canBeLockPicked: 0
+  door02: {fileID: 0}
+  keyID: 0
 --- !u!114 &1447670285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17523,6 +17545,9 @@ MonoBehaviour:
   head: {fileID: 1142131919}
   chest: {fileID: 1706878604}
   foot: {fileID: 1007582337}
+  KnownObjects: []
+  condition: {fileID: 1696199427}
+  e: []
   condition_calm: {fileID: 1696199427}
   condition_suspicious: {fileID: 1696199426}
   condition_alert: {fileID: 1696199425}
@@ -17532,9 +17557,6 @@ MonoBehaviour:
   condition_sleep: {fileID: 1696199424}
   NoiseSensitivity: 2
   SuspicionDecrease: 1
-  condition: {fileID: 1696199427}
-  e: []
-  KnownObjects: []
   Targets:
   - {x: -28, y: 0.5, z: -15}
   - {x: -28, y: 0.5, z: 14}
@@ -18212,6 +18234,9 @@ MonoBehaviour:
   head: {fileID: 1142131919}
   chest: {fileID: 1706878604}
   foot: {fileID: 1007582337}
+  KnownObjects: []
+  condition: {fileID: 1778053196}
+  e: []
   condition_calm: {fileID: 1778053196}
   condition_suspicious: {fileID: 1778053195}
   condition_alert: {fileID: 1778053194}
@@ -18221,9 +18246,6 @@ MonoBehaviour:
   condition_sleep: {fileID: 1778053193}
   NoiseSensitivity: 5
   SuspicionDecrease: 1
-  condition: {fileID: 1778053196}
-  e: []
-  KnownObjects: []
   Targets:
   - {x: -73, y: 0.5, z: 1}
   damage: 20
@@ -19059,6 +19081,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1862264860}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1862678769 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1589145040269018, guid: 89bff26951aea9a44af1e8c70d428190,
+    type: 2}
+  m_PrefabInternal: {fileID: 758696220}
 --- !u!1001 &1872893429
 Prefab:
   m_ObjectHideFlags: 0
@@ -19773,6 +19800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 1971036530}
+  fire: {fileID: 0}
 --- !u!114 &1971036530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20647,6 +20675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2042764743}
+  fire: {fileID: 0}
 --- !u!114 &2042764743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21791,6 +21820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2121123340}
+  fire: {fileID: 0}
 --- !u!114 &2121123340
 MonoBehaviour:
   m_ObjectHideFlags: 0

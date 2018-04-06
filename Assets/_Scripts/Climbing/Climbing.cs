@@ -13,9 +13,12 @@ public class Climbing : MonoBehaviour {
 
 	public static bool alatetVisible;
 
+    public static bool climbingIsInProgress;
+
 	// Use this for initialization
 	void Start () {
-	}
+        climbingIsInProgress = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,7 +26,8 @@ public class Climbing : MonoBehaviour {
 
 		if(canClimb && Input.GetKeyDown(KeyCode.F))
 			{
-			mainCam.depth = 0;
+            climbingIsInProgress = true;
+            mainCam.depth = 0;
 			climbCam.depth = 1;
 			MouseLook.XSensitivity = 0;
 			MouseLook.YSensitivity = 0;
@@ -40,7 +44,8 @@ public class Climbing : MonoBehaviour {
 		MouseLook.YSensitivity = 2;
 		anim.SetTrigger ("NoClimb");
 		playerObject.position = climbCam.transform.position;
-	}
+        climbingIsInProgress = false;
+    }
 
 	void OnTriggerEnter(Collider other)
 	{

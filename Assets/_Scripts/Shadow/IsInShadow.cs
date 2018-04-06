@@ -23,7 +23,9 @@ public class IsInShadow : MonoBehaviour {
     public int range;
 
 	float distance; //distance of two objects
-	public Text LightGemTemp; //instead of Light Gem
+    //public Text LightGemTemp; //instead of Light Gem
+    public GameObject lightGemObject;
+    public GameObject hand;
 	public Renderer mesh;
 	public Material mat;
 
@@ -86,7 +88,18 @@ public class IsInShadow : MonoBehaviour {
 		{
 			mesh.material.SetFloat ("_Emission", 0.02f);
 		}
-		//Debug.Log (mesh.material.GetFloat ("_Emission"));
+        //Debug.Log (mesh.material.GetFloat ("_Emission"));
+
+        if (Climbing.climbingIsInProgress)
+        {
+            lightGemObject.SetActive(false);
+            hand.SetActive(false);
+        }
+        else
+        {
+            lightGemObject.SetActive(true);
+            hand.SetActive(true);
+        }
     }
 
 	bool VanRalatas (Transform obj, int index)
