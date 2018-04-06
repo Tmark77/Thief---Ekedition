@@ -8,6 +8,7 @@ public class Lockpick : Equipment {
     public static bool lockPickInProgress;
     RaycastHit hit;
     public GameObject lockpicker;
+    public AudioSource kattanas;
 
     public override bool Use(GameObject hand)
     {
@@ -92,7 +93,7 @@ public class Lockpick : Equipment {
             if (LockPickingSystem.canBeLockPick && Input.GetKeyDown(KeyCode.H))
             {
                 passes++;
-                Debug.Log(passes);
+                kattanas.Play();
                 yield return new WaitForSecondsRealtime(1);
             }
             yield return null;

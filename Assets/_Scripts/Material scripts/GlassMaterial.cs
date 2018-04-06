@@ -9,6 +9,8 @@ public class GlassMaterial : abstract_Material {
 		return noise *= 2f;
 	}
 
+
+
 	public override bool Soft()
 	{
 		return false;
@@ -18,4 +20,16 @@ public class GlassMaterial : abstract_Material {
 	{
 		return true;
 	}
+
+
+    public GameObject shatteredGlassWall;
+    public GameObject glasswall;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Equipment>())
+        {
+            Instantiate(shatteredGlassWall, this.transform.position, this.transform.rotation);
+            Destroy(glasswall);
+        }
+    }
 }

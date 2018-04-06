@@ -10,6 +10,8 @@ public class Door : DynamicFieldObject {
     public bool canBeLockPicked;
     Quaternion newRot;
 	public GameObject door02;
+    public AudioSource openingAudio;
+    public AudioSource closingingAudio;
 
     [Range(10, 20)]
     public int keyID;
@@ -27,14 +29,17 @@ public class Door : DynamicFieldObject {
             if (opened == false && !locked)
             {
                 opened = true;
+                openingAudio.Play();
             }
             else
             {
+                closingingAudio.Play();
                 opened = false;
             }
         }
         else
         {
+            openingAudio.Play();
             opened = true;
         }
 

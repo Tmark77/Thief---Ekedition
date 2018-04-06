@@ -8,6 +8,7 @@ public class Arrow : Equipment {
     public AudioSource shot;
     public AudioSource hitWood;
     public AudioSource hit;
+    public AudioSource breaking;
     bool played;
 	bool IsShooted;
 
@@ -50,10 +51,19 @@ public class Arrow : Equipment {
             }
             else
             {
+                
                 if (!played)
                 {
-                    hit.Play();
-                    played = true;
+                    if (obj.GetComponent<GlassMaterial>())
+                    {
+                        breaking.Play();
+                        played = true;
+                    }
+                    else
+                    {
+                        hit.Play();
+                        played = true;
+                    }
                 }
             }
 
