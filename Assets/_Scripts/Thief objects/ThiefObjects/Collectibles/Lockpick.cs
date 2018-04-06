@@ -14,7 +14,6 @@ public class Lockpick : Equipment {
     {
         if (this.gameObject.active == false)
         {
-            lockPickInProgress = true;
             this.gameObject.SetActive(true);
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             this.gameObject.GetComponent<Collider>().enabled = false;
@@ -28,6 +27,7 @@ public class Lockpick : Equipment {
                     {
                         if ((obj as Door).canBeLockPicked)
                         {
+							lockPickInProgress = true;
                             StartCoroutine(LockpickRoutine());
                         }
                         else
