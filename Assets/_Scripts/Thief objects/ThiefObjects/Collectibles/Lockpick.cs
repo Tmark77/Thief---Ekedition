@@ -11,28 +11,37 @@ public class Lockpick : Equipment {
 
     public override bool Use(GameObject hand)
     {
-        this.gameObject.SetActive(true);
-        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        this.gameObject.GetComponent<Collider>().enabled = false;
-        
-        if (Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3f))
+        if (this.gameObject.active == false)
         {
-            if (hit.collider != null)
+            this.gameObject.SetActive(true);
+            this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            this.gameObject.GetComponent<Collider>().enabled = false;
+
+            if (Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3f))
             {
-                ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject>();
-				if (obj is Door && (obj as Door).locked)
+                if (hit.collider != null)
                 {
-					if ((obj as Door).canBeLockPicked) 
-					{
-						StartCoroutine (LockpickRoutine ());
-					}
-					else
-					{
-						Debug.Log ("This lock is not conventional. I need to find antoher way to unlock it.");
-					}
-                    
+                    ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject>();
+                    if (obj is Door && (obj as Door).locked)
+                    {
+                        if ((obj as Door).canBeLockPicked)
+                        {
+                            StartCoroutine(LockpickRoutine());
+                        }
+                        else
+                        {
+                            Debug.Log("This lock is not conventional. I need to find antoher way to unlock it.");
+                        }
+
+                    }
                 }
             }
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+            //this.lockpicker.SetActive(false);
+            lockpicker.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
 
         return false;
@@ -59,8 +68,8 @@ public class Lockpick : Equipment {
             	hit.collider.gameObject.GetComponent<Door>().locked = false;
 			passes = 0;
 			successLockPicking = false;
-            lockpicker.SetActive(false);
-
+            //lockpicker.SetActive(false);
+            lockpicker.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
     }
 
@@ -69,7 +78,8 @@ public class Lockpick : Equipment {
 
     public IEnumerator LockpickRoutine()
     {
-        lockpicker.SetActive(true);
+        //this.lockpicker.SetActive(true);
+        lockpicker.transform.localPosition = new Vector3(0f, 0f, 0.25f);
         passes = 0;
 
         while (passes < 3)
@@ -77,6 +87,7 @@ public class Lockpick : Equipment {
             if (LockPickingSystem.canBeLockPick && Input.GetKeyDown(KeyCode.H))
             {
                 passes++;
+                Debug.Log(passes);
                 yield return new WaitForSecondsRealtime(1);
             }
             yield return null;
