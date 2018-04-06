@@ -113,13 +113,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //Debug.Log("firstperson awake");
         }
 
+        public Transform deadCam;
         // Update is called once per frame
         private void Update()
 		{
-			m_Camera.transform.position = basicCam.position;
-			head.position = basicCam.position;
+            if (!PlayerHealth.isDead)
+            {
+                m_Camera.transform.position = basicCam.position;
+                head.position = basicCam.position;
+            }
+            else
+            {
+                m_Camera.transform.position = deadCam.position;
+                m_Camera.transform.rotation = deadCam.rotation;
+            }
 
-			RotateView ();
+        RotateView ();
 			////////////////////////////////////////////////
 			// the jump state needs to read here to make sure it is not missed
 			if (!m_Jump) {
@@ -202,7 +211,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				currentSpeed = minimumSpeed;
 
 
-            if (Lockpick.lockPickInProgress == true)
+            if (Lockpick.lockPickInProgress == true || PlayerHealth.isDead)
             {
                 currentSpeed = 0;
                 MouseLook.XSensitivity = 0;

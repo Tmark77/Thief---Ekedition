@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour//, ISavable
 {
@@ -16,7 +17,7 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 
 	Animator anim;                                              
 	AudioSource playerAudio;                          
-	bool isDead = false;                                                
+	public static bool isDead = false;                                                
 	bool damaged;
 
     
@@ -26,9 +27,10 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 	{
 		anim = GetComponent <Animator> ();
 		playerAudio = GetComponent <AudioSource> ();
-
-
-		currentHealth = startingHealth;
+        restart = false;
+        deadText.SetActive(false);
+        currentHealth = startingHealth;
+        counter = 3f;
 	}
 
 
@@ -47,7 +49,18 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 			damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
 		}
 		damaged = false;
-	}
+
+        if (isDead)
+        {
+            if (counter < 0)
+            {
+                restart = true;
+                isDead = false;
+                currentHealth = startingHealth;
+            }
+            counter -= Time.deltaTime;
+        }
+    }
 
 
 	public void TakeDamage (float amount)
@@ -66,28 +79,25 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 		{
 			Death ();
 		}
+
+        
+
 	}
 
+    float counter;
     public void setHealthSlider()
     {
         healthSlider.value = currentHealth;
     }
 
+    public static bool restart;
+    public GameObject deadText;
+    void Death()
+    {
+        isDead = true;
+        deadText.SetActive(true);
 
-	void Death ()
-	{
-		isDead = true;
-
-		Debug.Log ("Halál");
-
-
-        //anim.SetTrigger ("Die");
-
-        //playerAudio.clip = deathClip;
-        //playerAudio.Play ();
-
-        //playerMovement.enabled = false;
+        Debug.Log("Halál");
     }
 
-    
 }

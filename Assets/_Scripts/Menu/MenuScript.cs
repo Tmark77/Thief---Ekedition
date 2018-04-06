@@ -24,14 +24,17 @@ public class MenuScript : MonoBehaviour {
     CursorLockMode cursorMode;
 
     SavingLoading save;
-    public PlayerHealth playerHealth;
     
 
     // Use this for initialization
     void Start () {
-        Debug.Log("Start");
+
+        RestertRoutine();
+    }
+
+    void RestertRoutine()
+    {
         save = new SavingLoading();
-        playerHealth = playerHealth.GetComponent<PlayerHealth>();
 
         healthCanvas.GetComponent<Canvas>();
         inventoryCanvas.GetComponent<Canvas>();
@@ -46,7 +49,7 @@ public class MenuScript : MonoBehaviour {
         menus.QuitMenu.enabled = false;
         menus.InputMenu.enabled = false;
         menus.PauseMenu.enabled = false;
-        
+
 
         waitingForKey = false;
         isGameStarted = false;
@@ -59,7 +62,6 @@ public class MenuScript : MonoBehaviour {
         inventoryCanvas.gameObject.SetActive(false);
 
         Time.timeScale = 0;
-
     }
 
 
@@ -81,20 +83,22 @@ public class MenuScript : MonoBehaviour {
         }
 
 
-        if (playerHealth != null && playerHealth.currentHealth <= 0)
+        if (PlayerHealth.restart)
         {
             menus.Menu.enabled = true;
-            menus.MainMenu.enabled = true;
-            menus.QuitMenu.enabled = false;
-            menus.InputMenu.enabled = false;
-            menus.PauseMenu.enabled = false;
+            RestertRoutine();
+            //menus.Menu.enabled = true;
+            //menus.MainMenu.enabled = true;
+            //menus.QuitMenu.enabled = false;
+            //menus.InputMenu.enabled = false;
+            //menus.PauseMenu.enabled = false;
             
-            healthCanvas.gameObject.SetActive(false);
-            inventoryCanvas.gameObject.SetActive(false);
+            //healthCanvas.gameObject.SetActive(false);
+            //inventoryCanvas.gameObject.SetActive(false);
 
-            Time.timeScale = 0;
-            Cursor.lockState = cursorMode;
-            Cursor.visible = true;
+            //Time.timeScale = 0;
+            //Cursor.lockState = cursorMode;
+            //Cursor.visible = true;
         }
         
 
@@ -248,6 +252,7 @@ public class MenuScript : MonoBehaviour {
 
     public void StartLevel()
     {
+        Debug.Log("Start");
         menus.Menu.enabled = false;
         isGameStarted = true;
         
