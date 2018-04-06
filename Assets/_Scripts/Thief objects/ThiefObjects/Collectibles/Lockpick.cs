@@ -20,10 +20,16 @@ public class Lockpick : Equipment {
             if (hit.collider != null)
             {
                 ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject>();
-                if (obj is Door && (obj as Door).locked)
+				if (obj is Door && (obj as Door).locked)
                 {
-                    StartCoroutine(LockpickRoutine());
-
+					if ((obj as Door).canBeLockPicked) 
+					{
+						StartCoroutine (LockpickRoutine ());
+					}
+					else
+					{
+						Debug.Log ("This lock is not conventional. I need to find antoher way to unlock it.");
+					}
                     
                 }
             }
@@ -39,23 +45,27 @@ public class Lockpick : Equipment {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(passes);
+        //Debug.Log(passes);
 
         if (passes == 3)
         {
-            succesLockPick = true;
+            successLockPicking = true;
         }
 
-        if (succesLockPick)
+        if (successLockPicking)
         {
             Debug.Log("nyitva");
-            hit.collider.gameObject.GetComponent<Door>().locked = false;
+			if(hit.collider.gameObject.GetComponent<Door>())
+            	hit.collider.gameObject.GetComponent<Door>().locked = false;
+			passes = 0;
+			successLockPicking = false;
             lockpicker.SetActive(false);
+
         }
     }
 
     int passes;
-    bool succesLockPick;
+	bool successLockPicking;
 
     public IEnumerator LockpickRoutine()
     {
