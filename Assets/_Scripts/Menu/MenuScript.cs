@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class MenuScript : MonoBehaviour {
     public Canvas healthCanvas;
-    
+    public Canvas inventoryCanvas;
+
     public Canvas mainMenu;
     public Canvas quitMenu;
     public Canvas inputMenu;
@@ -23,14 +24,17 @@ public class MenuScript : MonoBehaviour {
     CursorLockMode cursorMode;
 
     SavingLoading save;
+    public PlayerHealth playerHealth;
     
 
     // Use this for initialization
     void Start () {
         Debug.Log("Start");
         save = new SavingLoading();
+        playerHealth = playerHealth.GetComponent<PlayerHealth>();
 
         healthCanvas.GetComponent<Canvas>();
+        inventoryCanvas.GetComponent<Canvas>();
 
         menus.QuitMenu = quitMenu.GetComponent<Canvas>();
         menus.InputMenu = inputMenu.GetComponent<Canvas>();
@@ -52,6 +56,7 @@ public class MenuScript : MonoBehaviour {
         Cursor.visible = true;
 
         healthCanvas.gameObject.SetActive(false);
+        inventoryCanvas.gameObject.SetActive(false);
 
         Time.timeScale = 0;
 
@@ -68,6 +73,24 @@ public class MenuScript : MonoBehaviour {
             menus.InputMenu.enabled = false;
             menus.PauseMenu.enabled = true;
             healthCanvas.gameObject.SetActive(false);
+            inventoryCanvas.gameObject.SetActive(false);
+
+            Time.timeScale = 0;
+            Cursor.lockState = cursorMode;
+            Cursor.visible = true;
+        }
+
+
+        if (playerHealth != null && playerHealth.currentHealth <= 0)
+        {
+            menus.Menu.enabled = true;
+            menus.MainMenu.enabled = true;
+            menus.QuitMenu.enabled = false;
+            menus.InputMenu.enabled = false;
+            menus.PauseMenu.enabled = false;
+            
+            healthCanvas.gameObject.SetActive(false);
+            inventoryCanvas.gameObject.SetActive(false);
 
             Time.timeScale = 0;
             Cursor.lockState = cursorMode;
@@ -229,6 +252,7 @@ public class MenuScript : MonoBehaviour {
         isGameStarted = true;
         
         healthCanvas.gameObject.SetActive(true);
+        inventoryCanvas.gameObject.SetActive(true);
         Time.timeScale = 1.0f;
     }
 

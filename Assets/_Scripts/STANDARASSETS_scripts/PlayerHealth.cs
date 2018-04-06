@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 	Animator anim;                                              
 	AudioSource playerAudio;                          
 	bool isDead = false;                                                
-	bool damaged;                                               
+	bool damaged;
 
     
 
@@ -80,13 +80,14 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 
 		Debug.Log ("Halál");
 
-		//anim.SetTrigger ("Die");
 
-		//playerAudio.clip = deathClip;
-		//playerAudio.Play ();
+        //anim.SetTrigger ("Die");
 
-		//playerMovement.enabled = false;
-	}
+        //playerAudio.clip = deathClip;
+        //playerAudio.Play ();
+
+        //playerMovement.enabled = false;
+    }
 
     
 }
