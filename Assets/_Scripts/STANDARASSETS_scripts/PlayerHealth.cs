@@ -52,13 +52,19 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 
         if (isDead)
         {
+            deadText.SetActive(true);
             if (counter < 0)
             {
                 restart = true;
                 isDead = false;
                 currentHealth = startingHealth;
+                setHealthSlider();
             }
             counter -= Time.deltaTime;
+        }
+        else
+        {
+            deadText.SetActive(false);
         }
     }
 
@@ -94,8 +100,8 @@ public class PlayerHealth : MonoBehaviour//, ISavable
     public GameObject deadText;
     void Death()
     {
+        counter = 3f;
         isDead = true;
-        deadText.SetActive(true);
 
         Debug.Log("Halál");
     }

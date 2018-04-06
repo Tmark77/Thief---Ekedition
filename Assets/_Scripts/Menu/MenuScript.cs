@@ -29,11 +29,6 @@ public class MenuScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        RestertRoutine();
-    }
-
-    void RestertRoutine()
-    {
         save = new SavingLoading();
 
         healthCanvas.GetComponent<Canvas>();
@@ -44,13 +39,16 @@ public class MenuScript : MonoBehaviour {
         menus.MainMenu = mainMenu.GetComponent<Canvas>();
         menus.PauseMenu = pauseMenu.GetComponent<Canvas>();
         menus.Menu = menu.GetComponent<Canvas>();
+        RestartRoutine();
+    }
 
+    void RestartRoutine()
+    {
         menus.MainMenu.enabled = true;
         menus.QuitMenu.enabled = false;
         menus.InputMenu.enabled = false;
         menus.PauseMenu.enabled = false;
-
-
+        
         waitingForKey = false;
         isGameStarted = false;
 
@@ -86,7 +84,7 @@ public class MenuScript : MonoBehaviour {
         if (PlayerHealth.restart)
         {
             menus.Menu.enabled = true;
-            RestertRoutine();
+            RestartRoutine();
             //menus.Menu.enabled = true;
             //menus.MainMenu.enabled = true;
             //menus.QuitMenu.enabled = false;
@@ -100,7 +98,11 @@ public class MenuScript : MonoBehaviour {
             //Cursor.lockState = cursorMode;
             //Cursor.visible = true;
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            menus.Menu.enabled = false;
+        }
 
         }
 
@@ -255,6 +257,7 @@ public class MenuScript : MonoBehaviour {
         Debug.Log("Start");
         menus.Menu.enabled = false;
         isGameStarted = true;
+        PlayerHealth.restart = false;
         
         healthCanvas.gameObject.SetActive(true);
         inventoryCanvas.gameObject.SetActive(true);
