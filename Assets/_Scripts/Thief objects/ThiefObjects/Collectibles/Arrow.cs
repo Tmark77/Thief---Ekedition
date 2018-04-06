@@ -16,6 +16,7 @@ public class Arrow : Equipment {
 		kod = 0;
         played = false;
 		IsShooted = false;
+		nev = "Arrow";
     }
 	
 	// Update is called once per frame

@@ -36,7 +36,9 @@ public class Sword : Equipment {
 	// Use this for initialization
 	void Start () 
 	{
+		kod = 9;
 		counter = 2f;
+		nev = "Sword";
 	}
 
 	// Update is called once per frame

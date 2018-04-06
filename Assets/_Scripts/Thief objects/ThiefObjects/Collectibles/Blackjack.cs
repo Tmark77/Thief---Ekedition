@@ -31,6 +31,8 @@ public class Blackjack : Equipment {
 	// Use this for initialization
 	void Start () {
 		counter = 2f;
+		kod = 8;
+		nev = "Blackjack";
 	}
 	
 	// Update is called once per frame

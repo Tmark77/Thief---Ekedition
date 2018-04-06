@@ -24,6 +24,7 @@ public class FireArrow : Equipment {
         kod = 2;
         played = false;
 		IsShooted = false;
+		nev = "Fire Arrow";
     }
 	
 	// Update is called once per frame

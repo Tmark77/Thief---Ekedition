@@ -16,6 +16,7 @@ public class NoiseArrow : Equipment {
 		kod = 4;
 		played = false;
 		IsShooted = false;
+		nev = "Noise Arrow";
 	}
 
 	// Update is called once per frame
@@ -86,7 +87,6 @@ public class NoiseArrow : Equipment {
 				}
 			}
 		}
-		Debug.Log ("fasz");
 
 	}
 

@@ -21,6 +21,7 @@ public class MossArrow : Equipment
     void Start () {
         kod = 3;
 		IsShooted = false;
+		nev = "Moss Arrow";
     }
 	
 	// Update is called once per frame

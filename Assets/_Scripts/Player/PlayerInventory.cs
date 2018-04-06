@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour {
 	public Text goldValue;
 	public Text gemValue;
 	public Text otherValue;
+	public Text equipped_item;
 
     //List<int> e = new List<int>();
     List<Equipment> e = new List<Equipment>();
@@ -48,12 +49,22 @@ public class PlayerInventory : MonoBehaviour {
 		{
 			PrevItem ();
 		}
+	
+		ManageTexts ();
+	}
 
-		//goldValue.text = "Gold: " + collectedGoldValue;
-		//
-		//gemValue.text = "Gem: " + collectedGemsValue;
-		//
-		//otherValue.text = "Other Goods: " + collectedOtherValue;
+	public void ManageTexts()
+	{
+		if (e.Count != 0)
+			equipped_item.text = e [i].Nev + ": " + eq [e [i].Kod];
+		else
+			equipped_item.text = string.Empty;
+
+		goldValue.text = "Gold: " + collectedGoldValue;
+
+		gemValue.text = "Gem: " + collectedGemsValue;
+
+		otherValue.text = "Other Goods: " + collectedOtherValue;
 	}
 
 	//public void NewItem(int item)
@@ -78,15 +89,17 @@ public class PlayerInventory : MonoBehaviour {
 
         if(e[i].Use(hand))
         {
-            if (eq[e[i].Kod] <=1)
-            {
-                eq.Remove(e[i].Kod);
-                e.RemoveAt(i);
-                NextItem();
+			if (eq [eqKey] == 1) {
+				eq.Remove (eqKey);
+				e.RemoveAt (i);
+				if (i == e.Count) 
+				{
+					NextItem ();
+				}
             }
             else
-            {
-                eq[e[i].Kod] -= 1;
+     			       {
+				eq[eqKey] --;
                 e.RemoveAt(i);
                 FindNextSameEquipment();
             }

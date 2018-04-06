@@ -9,6 +9,8 @@ public class Interact : MonoBehaviour {
 	public Camera mainCam;
 	RaycastHit hit;
 	ThiefObject PickedUpCreature;
+	[SerializeField]
+	public GameObject hand;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +20,7 @@ public class Interact : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, 3);
+		Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3);
         
 		if (Input.GetMouseButtonDown(1)) {
 			RightClickInteracting ();

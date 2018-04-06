@@ -17,6 +17,7 @@ public class WaterArrow : Equipment {
 		kod = 1;
         played = false;
 		IsShooted = false;
+		nev = "Water Arrow";
     }
 	
 	// Update is called once per frame

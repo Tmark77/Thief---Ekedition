@@ -11,6 +11,14 @@ public abstract class Equipment : Collectible {
 		get{ return kod; }
 	}
 
+	protected string nev;
+
+	public string Nev
+	{
+		get { return nev; }
+	}
+
+
 	public override void PickUp(PlayerInventory inv)
 	{
         //inv.NewItem (kod);

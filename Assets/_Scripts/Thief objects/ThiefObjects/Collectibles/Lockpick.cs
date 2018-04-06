@@ -49,7 +49,8 @@ public class Lockpick : Equipment {
 
     // Use this for initialization
     void Start () {
-		
+		kod = 7;
+		nev = "Lockpicks";
 	}
 	
 	// Update is called once per frame
