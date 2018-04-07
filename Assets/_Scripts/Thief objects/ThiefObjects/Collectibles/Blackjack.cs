@@ -14,12 +14,17 @@ public class Blackjack : Equipment {
 		if (counter < 0f) {
 			counter = 1f;
 			if (Physics.Raycast (hand.transform.position, hand.transform.forward, out hit, 3f)) {
-				if (hit.collider != null) {
+				if (hit.collider != null) 
+				{
 					ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
 					if (obj is Creature) {
 						Debug.Log ("Tarkón basztam");
 						(obj as Creature).TakeDamage (5);
 						(obj as Creature).KnockOut ();
+					}
+					if (obj.GetComponent<Breakable> ())
+					{
+						obj.GetComponent<Breakable> ().Break ();
 					}
 				}
 			}

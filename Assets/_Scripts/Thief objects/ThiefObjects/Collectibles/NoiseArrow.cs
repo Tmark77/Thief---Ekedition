@@ -44,9 +44,7 @@ public class NoiseArrow : Equipment {
 				Rig.useGravity = false;
 				Rig.isKinematic = true;
 				hitWood.Play();
-				//GameObject arrowInst = Instantiate(stabilarrow, arrow.transform.position, arrow.transform.rotation);
-				//Destroy(arrowInst, 3600f);
-				//Destroy(arrow);
+
 			}
 			else
 			{
@@ -55,6 +53,10 @@ public class NoiseArrow : Equipment {
 					hit.Play();
 					played = true;
 				}
+			}
+			if (obj.GetComponent<Breakable> ())
+			{
+				obj.GetComponent<Breakable> ().Break ();
 			}
 			IsShooted = false;
 			counter = 0;
@@ -77,13 +79,13 @@ public class NoiseArrow : Equipment {
 		{
 			Creature g = nearbyObjects.GetComponent<Creature>();
 			float dist = Vector3.Distance(transform.position, nearbyObjects.transform.position);
-			//Debug.Log (noise);
+
 			if(g != null)
 			{
 				if(dist < noise)
 				{
 					g.GetNoise((int)(((noise-dist)*100/noise)*1),this.gameObject.transform.position); //1 a gyanú pontok szorzója
-					//Debug.Log(noise);
+
 				}
 			}
 		}
@@ -93,7 +95,6 @@ public class NoiseArrow : Equipment {
 
 	void Shoot(GameObject hand)
 	{
-		//GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
 		played = false;
 		shot.Play();
 		this.gameObject.transform.position = hand.transform.position;

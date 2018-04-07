@@ -45,21 +45,12 @@ public class Arrow : Equipment {
                 Rig.useGravity = false;
                 Rig.isKinematic = true;
                 hitWood.Play();
-                //GameObject arrowInst = Instantiate(stabilarrow, arrow.transform.position, arrow.transform.rotation);
-                //Destroy(arrowInst, 3600f);
-                //Destroy(arrow);
             }
             else
             {
                 
                 if (!played)
                 {
-                    if (obj.GetComponent<GlassMaterial>())
-                    {
-                        breaking.Play();
-                        played = true;
-                    }
-                    else
                     {
                         hit.Play();
                         played = true;
@@ -72,6 +63,11 @@ public class Arrow : Equipment {
 				(obj as Creature).TakeDamage (50);
 			}
 
+			if (obj.GetComponent<Breakable> ()) 
+			{
+				obj.GetComponent<Breakable> ().Break ();
+			}
+
 			IsShooted = false;
         }
     }
@@ -79,7 +75,6 @@ public class Arrow : Equipment {
 
     void Shoot(GameObject hand)
     {
-        //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
         played = false;
         shot.Play();
         this.gameObject.transform.position = hand.transform.position;

@@ -70,6 +70,10 @@ public class FireArrow : Equipment {
 			{
 				(obj as Creature).TakeDamage (80);
 			}
+			if (obj.GetComponent<Breakable> ())
+			{
+				obj.GetComponent<Breakable> ().Break ();
+			}
 
             Arrow a = this.gameObject.AddComponent<Arrow>();
             a.material = this.gameObject.GetComponent<abstract_Material>();

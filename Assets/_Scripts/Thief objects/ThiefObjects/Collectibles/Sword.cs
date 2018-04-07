@@ -24,6 +24,10 @@ public class Sword : Equipment {
 						Debug.Log ("Belevertem");
 						(obj as Creature).TakeDamage (35);
 					}
+					if (obj.GetComponent<Breakable> ())
+					{
+						obj.GetComponent<Breakable> ().Break ();
+					}
 				}
 			}
 		}

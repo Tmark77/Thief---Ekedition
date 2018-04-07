@@ -67,6 +67,11 @@ public class WaterArrow : Equipment {
                 }
             }
 
+			if (obj.GetComponent<Breakable> ())
+			{
+				obj.GetComponent<Breakable> ().Break ();
+			}
+
             Arrow a = this.gameObject.AddComponent<Arrow>();
             a.material = this.gameObject.GetComponent<abstract_Material>();
             a.shot = this.shot;
