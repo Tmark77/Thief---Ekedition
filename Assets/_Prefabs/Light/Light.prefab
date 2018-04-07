@@ -82,6 +82,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -97,6 +98,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -159,11 +161,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27378a97bd8214f4ab99210605acd2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   head: {fileID: 0}
   chest: {fileID: 0}
   foot: {fileID: 0}
   range: 20
-  isHiding: 0
+  mesh: {fileID: 0}
+  mat: {fileID: 0}
+  lights: []
+  fullHide: 0
 --- !u!135 &135167142606159548
 SphereCollider:
   m_ObjectHideFlags: 1
