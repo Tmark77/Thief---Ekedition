@@ -185,6 +185,11 @@ public abstract class Creature : ThiefObject {
 		condition = condition.ChangeToKnockedOut (this);
 	}
 
+	public void Blinding()
+	{
+		condition = condition.ChangeToBlind (this);
+	}
+
 	public bool Carry()
 	{
 		return (condition.CarryAble ());

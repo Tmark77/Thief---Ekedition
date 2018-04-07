@@ -10,6 +10,8 @@ public class Climbing : MonoBehaviour {
 	public Camera climbCam;
 	public Camera mainCam;
 	public Transform playerObject;
+	public GameObject lightGemObject;
+	public GameObject hand;
 
 	public static bool alatetVisible;
 
@@ -23,7 +25,16 @@ public class Climbing : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+		if (Climbing.climbingIsInProgress)
+		{
+			lightGemObject.SetActive(false);
+			hand.SetActive(false);
+		}
+		else
+		{
+			lightGemObject.SetActive(true);
+			hand.SetActive(true);
+		}
 		if(canClimb && Input.GetKeyDown(KeyCode.F))
 			{
             climbingIsInProgress = true;

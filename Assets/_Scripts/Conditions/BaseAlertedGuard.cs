@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using AssemblyCSharp;
 
 public class BaseAlertedGuard : AbstractCondition
 {
@@ -13,6 +14,7 @@ public class BaseAlertedGuard : AbstractCondition
 
     public override AbstractCondition ChangeToBlind(Creature creature)
     {
+		creature.Targets.RemoveAt(creature.Targets.Count - 1);
         return creature.condition_blind;
     }
 
@@ -57,7 +59,8 @@ public class BaseAlertedGuard : AbstractCondition
             if (hitCooldown < 0f)
             {
                 hitCooldown = 2f;
-                creature.player.gameObject.GetComponent<PlayerHealth>().TakeDamage(20);
+				Debug.Log ("fasz");
+				creature.player.gameObject.GetComponent<PlayerHealth>().TakeDamage((creature as BaseGuard).damage);
             }
         }
         else

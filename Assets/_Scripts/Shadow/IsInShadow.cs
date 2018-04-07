@@ -10,10 +10,6 @@ public class IsInShadow : MonoBehaviour {
     public Transform chest;
     public Transform foot;
 
-//    bool hH; //head is in shadow
-//    bool hC; //chest is in shadow
-//    bool hF; //foot is in shadow
-
 	static int vH; //head visivility  NEM STATIC AMÚGY
 	static int vC; //chest visivility NEM STATIC AMÚGY
 	static int vF; //foot visivility  NEM STATIC AMÚGY
@@ -23,9 +19,6 @@ public class IsInShadow : MonoBehaviour {
     public int range;
 
 	float distance; //distance of two objects
-    //public Text LightGemTemp; //instead of Light Gem
-    public GameObject lightGemObject;
-    public GameObject hand;
 	public Renderer mesh;
 	public Material mat;
 
@@ -34,9 +27,6 @@ public class IsInShadow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//        hH = false;
-//        hC = false;
-//        hF = false;
     }
 
 	public static int GetVH()
@@ -89,17 +79,7 @@ public class IsInShadow : MonoBehaviour {
 			mesh.material.SetFloat ("_Emission", 0.02f);
 		}
         //Debug.Log (mesh.material.GetFloat ("_Emission"));
-
-        if (Climbing.climbingIsInProgress)
-        {
-            lightGemObject.SetActive(false);
-            hand.SetActive(false);
-        }
-        else
-        {
-            lightGemObject.SetActive(true);
-            hand.SetActive(true);
-        }
+	
     }
 
 	bool VanRalatas (Transform obj, int index)

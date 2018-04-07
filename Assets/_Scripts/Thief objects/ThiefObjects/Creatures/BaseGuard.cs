@@ -71,7 +71,7 @@ namespace AssemblyCSharp
 			if (other.gameObject.GetComponentInParent<DynamicFieldObject>()) 
 			{
 				this.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
-				Debug.Log (this.gameObject.GetComponent<Rigidbody> ().isKinematic);
+				//Debug.Log (this.gameObject.GetComponent<Rigidbody> ().isKinematic);
 			}
         }
 			

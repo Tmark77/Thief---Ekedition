@@ -80,6 +80,7 @@ namespace AssemblyCSharp
 
         public override AbstractCondition ChangeToBlind(Creature creature)
         {
+			creature.Targets.RemoveAt(creature.Targets.Count - 1);
             return creature.condition_blind;
         }
 

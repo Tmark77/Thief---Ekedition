@@ -8,7 +8,6 @@ public class Arrow : Equipment {
     public AudioSource shot;
     public AudioSource hitWood;
     public AudioSource hit;
-    public AudioSource breaking;
     bool played;
 	bool IsShooted;
 
