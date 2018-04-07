@@ -78,8 +78,8 @@ public class MenuScript : MonoBehaviour {
             Time.timeScale = 0;
             Cursor.lockState = cursorMode;
             Cursor.visible = true;
-        }
 
+        }
 
         if (PlayerHealth.restart)
         {

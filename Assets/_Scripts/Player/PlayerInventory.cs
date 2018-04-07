@@ -11,7 +11,10 @@ public class PlayerInventory : MonoBehaviour {
 	int collectedGoldValue;
 	int collectedOtherValue;
 
-	public Text goldValue;
+    public static int GEMS;
+    public static int GOLDS;
+
+    public Text goldValue;
 	public Text gemValue;
 	public Text otherValue;
 	public Text equipped_item;
@@ -36,7 +39,8 @@ public class PlayerInventory : MonoBehaviour {
 
         eqKey = 0;
         eqValue = 0;
-		
+
+        
 	}
 	
 	// Update is called once per frame
@@ -51,7 +55,10 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	
 		ManageTexts ();
-	}
+
+        GEMS = collectedGemsValue;
+        GOLDS = collectedGoldValue;
+    }
 
 	public void ManageTexts()
 	{
