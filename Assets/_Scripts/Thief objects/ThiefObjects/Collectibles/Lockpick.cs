@@ -90,7 +90,7 @@ public class Lockpick : Equipment {
 
         while (passes < 3)
         {
-            if (LockPickingSystem.canBeLockPick && Input.GetKeyDown(KeyCode.H))
+            if (LockPickingSystem.canBeLockPick && Input.GetMouseButtonDown(1))
             {
                 passes++;
                 kattanas.Play();

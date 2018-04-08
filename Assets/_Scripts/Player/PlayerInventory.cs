@@ -44,20 +44,21 @@ public class PlayerInventory : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetButtonDown("NextItem") || Input.GetAxis("ChangeItem") > 0) 
-		{
-			NextItem();
-		}
-		if (Input.GetButtonDown ("PrevItem") || Input.GetAxis("ChangeItem") < 0) 
-		{
-			PrevItem ();
-		}
-	
-		ManageTexts ();
+	void Update ()
+    {
+            if (Input.GetButtonDown("NextItem") || Input.GetAxis("ChangeItem") > 0)
+            {
+                NextItem();
+            }
+            if (Input.GetButtonDown("PrevItem") || Input.GetAxis("ChangeItem") < 0)
+            {
+                PrevItem();
+            }
 
-        GEMS = collectedGemsValue;
-        GOLDS = collectedGoldValue;
+            ManageTexts();
+
+            GEMS = collectedGemsValue;
+            GOLDS = collectedGoldValue;
     }
 
 	public void ManageTexts()

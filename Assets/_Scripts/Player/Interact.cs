@@ -20,14 +20,19 @@ public class Interact : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3);
-        
-		if (Input.GetMouseButtonDown(1)) {
-			RightClickInteracting ();
-		}
-		if (Input.GetMouseButtonDown(0)) {
-			LeftClickInteracting ();
-		}
+        if (MenuScript.isGameStarted)
+        {
+            Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3);
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                RightClickInteracting();
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                LeftClickInteracting();
+            }
+        }
 	}
 
 	void RightClickInteracting()

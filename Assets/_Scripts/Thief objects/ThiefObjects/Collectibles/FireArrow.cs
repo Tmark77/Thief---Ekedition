@@ -43,12 +43,14 @@ public class FireArrow : Equipment {
                 Rig.useGravity = false;
                 Rig.isKinematic = true;
                 hitWood.Play();
+                (obj as ThiefObject).material.NoiseGeneration(1f);
             }
             else
             {
                 if (!played)
                 {
                     hit.Play();
+                    (obj as ThiefObject).material.NoiseGeneration(1f);
                     played = true;
                 }
             }

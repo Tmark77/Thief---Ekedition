@@ -19,7 +19,7 @@ public class Board : DynamicFieldObject
 
     // Use this for initialization
     void Start () {
-        counter = 3f;
+        counter = 10f;
 	}
 	
 	// Update is called once per frame

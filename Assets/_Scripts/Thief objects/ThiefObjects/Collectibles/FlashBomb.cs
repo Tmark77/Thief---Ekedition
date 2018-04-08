@@ -36,7 +36,8 @@ public class FlashBomb : Equipment {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
 		{
 			ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
-			ExplosionSound.Play();
+            (obj as ThiefObject).material.NoiseGeneration(1f);
+            ExplosionSound.Play();
 
 			if (obj.GetComponent<Breakable> ()) 
 			{

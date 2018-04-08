@@ -72,7 +72,7 @@ public class NoiseArrow : Equipment {
 			CancelInvoke ("Active");
 		}
 
-		float noise = 100f;
+		float noise = 30f;
 		Collider[] colliders = Physics.OverlapSphere(transform.position, noise);
 
 		foreach(Collider nearbyObjects in colliders)

@@ -21,6 +21,8 @@ public abstract class Creature : ThiefObject {
 
 	public List<Collectible> e = new List<Collectible>();
 
+    public AudioSource deadSound;
+
 
     void Start()
 	{
@@ -174,7 +176,8 @@ public abstract class Creature : ThiefObject {
 		if (Health <= 0) 
 		{
 			condition = condition.ChangeToDead(this);
-			Debug.Log ("Meghaltam, segítség!");
+            deadSound.Play();
+			//Debug.Log ("Meghaltam, segítség!");
 		}
 		
 	}

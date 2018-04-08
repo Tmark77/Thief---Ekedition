@@ -36,7 +36,7 @@ public class Helper : MonoBehaviour {
         }
         else
         {
-            information.text = "Collect at least 200 gold, steal the big Gem, and you can kill only one Guard. Good Luck!";
+            information.text = string.Empty;
         }       
     }
 

@@ -20,7 +20,7 @@ public class MenuScript : MonoBehaviour {
     KeyCode newKey;
     Text buttonText;
     bool waitingForKey;
-    bool isGameStarted;
+    public static bool isGameStarted;
     CursorLockMode cursorMode;
 
     SavingLoading save;
@@ -78,6 +78,8 @@ public class MenuScript : MonoBehaviour {
             Time.timeScale = 0;
             Cursor.lockState = cursorMode;
             Cursor.visible = true;
+
+            isGameStarted = false;
 
         }
 
