@@ -45,11 +45,11 @@ public class PlayerInventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("NextItem")) 
+		if (Input.GetButtonDown("NextItem") || Input.GetAxis("ChangeItem") > 0) 
 		{
 			NextItem();
 		}
-		if (Input.GetButtonDown ("PrevItem")) 
+		if (Input.GetButtonDown ("PrevItem") || Input.GetAxis("ChangeItem") < 0) 
 		{
 			PrevItem ();
 		}
