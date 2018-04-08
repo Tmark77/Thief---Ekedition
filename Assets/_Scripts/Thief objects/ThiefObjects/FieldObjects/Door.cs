@@ -40,7 +40,7 @@ public class Door : DynamicFieldObject {
         else
         {
             openingAudio.Play();
-            opened = true;
+            opened = !opened;
         }
 
 		if (opened) {

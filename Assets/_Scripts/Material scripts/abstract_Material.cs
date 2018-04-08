@@ -10,4 +10,9 @@ public abstract class abstract_Material : MonoBehaviour {
 	public abstract float NoiseGeneration (float noise);
 	public abstract bool Soft();
 	public abstract bool SeeTrough();
+
+    public AudioClip MaterialSound()
+    {
+        return sound;
+    }
 }

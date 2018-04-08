@@ -19,6 +19,7 @@ public class Key : Equipment
                 if ((obj as Door).locked == true && (obj as Door).keyID == this.keyID)
                 {
                     (obj as Door).locked = false;
+                    (obj as Door).Interaction(true);
                 }
             }
         }

@@ -6,7 +6,7 @@ public class MetalMaterial : abstract_Material {
 
 	public override float NoiseGeneration (float noise)
 	{
-		return noise *= 3f;
+		return noise *= 4f;
 	}
 
 	public override bool Soft()

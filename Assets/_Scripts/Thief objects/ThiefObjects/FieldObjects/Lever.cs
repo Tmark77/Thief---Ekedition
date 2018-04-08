@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lever : DynamicFieldObject {
-
-	Animator anim;
+    
 	bool used;
 	public GameObject[] dynamicObjects;
 	private float[] ranges;
@@ -12,7 +11,6 @@ public class Lever : DynamicFieldObject {
 
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animator> ();
 		used = false;
 		ranges = new float[dynamicObjects.Length];
 	}
@@ -21,13 +19,11 @@ public class Lever : DynamicFieldObject {
 	{
 		i = 0;
 		if (used == false) {
-			anim.SetTrigger ("off");
 			used = true;
 			//lights.SetActive (false);
 		} 
 		else 
 		{
-			anim.SetTrigger ("on");
 			used = false;
 			//lights.SetActive (true);
 		}

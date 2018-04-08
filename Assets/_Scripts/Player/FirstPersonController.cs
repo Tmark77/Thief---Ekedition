@@ -25,7 +25,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
         [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] private float m_StepInterval;
-        [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
+        [SerializeField] private AudioClip m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
@@ -325,14 +325,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
-            int n = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[n];
+            //int n = Random.Range(1, m_FootstepSounds.Length);
+            m_AudioSource.clip = m_FootstepSounds;
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
 			// hang kiadás !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			HangAmiAkkorJonLetreHaRalepunkVagyUgrunkValamire(CurrentSpeed);
             // move picked sound to index 0 so it's not picked next time
-            m_FootstepSounds[n] = m_FootstepSounds[0];
-            m_FootstepSounds[0] = m_AudioSource.clip;
+            //m_FootstepSounds[n] = m_FootstepSounds[0];
+            //m_FootstepSounds[0] = m_AudioSource.clip;
         }
 
 		private void HangAmiAkkorJonLetreHaRalepunkVagyUgrunkValamire(float vehemencia)
@@ -343,12 +343,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			float noise = thiefObj.material.NoiseGeneration (vehemencia);//a vehemecia az az érték, hogy milyen erősen léptünk a felületre
 
 			Collider[] colliders = Physics.OverlapSphere(transform.position, noise);
-
-			foreach(Collider nearbyObjects in colliders)
+            Debug.Log(noise);
+            foreach (Collider nearbyObjects in colliders)
 			{
 				Creature g = nearbyObjects.GetComponent<Creature>();
 				float dist = Vector3.Distance(transform.position, nearbyObjects.transform.position);
-				//Debug.Log (noise);
+				
 				if(g != null)
 				{
 					if(dist < noise)
@@ -358,6 +358,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					}
 				}
 			}
+
+            m_JumpSound = thiefObj.material.MaterialSound();
+            m_FootstepSounds = thiefObj.material.MaterialSound();
+            //Még balancolandó, 0.035f egy noiseegység mekkora volumenak felel meg, 0.2f alaphangerő
+            m_AudioSource.volume = noise * 0.035f + 0.2f;
 		}
 
         private void UpdateCameraPosition(float speed)
