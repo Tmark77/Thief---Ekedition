@@ -32,7 +32,7 @@ public class QuestManagerScript : MonoBehaviour {
 
     void Obj1()
     {
-        if (PlayerInventory.GEMS >= 10000)
+        if (PlayerInventory.GEMS >= 1000)
         {
             obj1.text = "Completed!";
             completed1 = true;
@@ -41,7 +41,7 @@ public class QuestManagerScript : MonoBehaviour {
 
     void Obj2()
     {
-        if (PlayerInventory.GOLDS >= 200)
+        if (PlayerInventory.GOLDS >= 200 && PlayerInventory.Others >= 200)
         {
             obj2.text = "Completed!";
             completed2 = true;
@@ -60,7 +60,7 @@ public class QuestManagerScript : MonoBehaviour {
             }
         }
 
-        if (sumDeadGuards > 1)
+        if (sumDeadGuards > 2)
         {
             obj3.text = "Failed!";
             completed3 = false;

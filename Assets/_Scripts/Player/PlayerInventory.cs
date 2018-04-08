@@ -13,6 +13,7 @@ public class PlayerInventory : MonoBehaviour {
 
     public static int GEMS;
     public static int GOLDS;
+    public static int Others;
 
     public Text goldValue;
 	public Text gemValue;
@@ -59,6 +60,7 @@ public class PlayerInventory : MonoBehaviour {
 
             GEMS = collectedGemsValue;
             GOLDS = collectedGoldValue;
+            Others = collectedOtherValue;
     }
 
 	public void ManageTexts()

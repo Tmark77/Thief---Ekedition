@@ -26,6 +26,7 @@ public class Helper : MonoBehaviour {
             if (counter < 0)
             {
                 PlayerHealth.restart = true;
+                MenuScript.isGameStarted = false;
             }
             information.text = "LEVEL COMPLETED!";
 

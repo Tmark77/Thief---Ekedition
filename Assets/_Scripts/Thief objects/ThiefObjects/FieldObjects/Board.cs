@@ -12,7 +12,7 @@ public class Board : DynamicFieldObject
 
     public override void Interaction(bool IsRightClicked)
     {
-        counter = 3f;
+        counter = 10f;
         show = true;
         informationText.text = information;
     }
