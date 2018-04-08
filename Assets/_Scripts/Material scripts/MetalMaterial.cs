@@ -18,4 +18,9 @@ public class MetalMaterial : abstract_Material {
 	{
 		return false;
 	}
+
+	public void Start()
+	{
+		sound = (AudioClip)Resources.Load("_Sounds/arrow/Arrow Hit", typeof(AudioClip));
+	}
 }

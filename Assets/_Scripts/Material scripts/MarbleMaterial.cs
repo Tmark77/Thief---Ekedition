@@ -18,4 +18,9 @@ public class MarbleMaterial : abstract_Material {
 	{
 		return false;
 	}
+
+	public void Start()
+	{
+		sound = (AudioClip)Resources.Load("_Sounds/steps/Footsteps Hard Surface", typeof(AudioClip));
+	}
 }

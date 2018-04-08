@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class abstract_Material : MonoBehaviour {
 
 	protected AudioClip sound;
-	protected AudioSource soundSource;
+	//protected AudioSource soundSource;
 	//Methods
 	public abstract float NoiseGeneration (float noise);
 	public abstract bool Soft();

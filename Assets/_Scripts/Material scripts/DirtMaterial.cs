@@ -18,4 +18,9 @@ public class DirtMaterial : abstract_Material {
 	{
 		return false;
 	}
+
+	public void Start()
+	{
+		sound = (AudioClip)Resources.Load("_Sounds/steps/Footsteps Gravel", typeof(AudioClip));
+	}
 }

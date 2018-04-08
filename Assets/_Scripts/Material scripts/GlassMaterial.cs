@@ -20,5 +20,10 @@ public class GlassMaterial : abstract_Material {
 	{
 		return true;
 	}
+
+	public void Start()
+	{
+		sound = (AudioClip)Resources.Load("_Sounds/glass/Window Shatter 04", typeof(AudioClip));
+	}
 		
 }

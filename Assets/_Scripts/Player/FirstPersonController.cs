@@ -359,7 +359,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				}
 			}
 
-            m_JumpSound = thiefObj.material.MaterialSound();
+			m_LandSound = thiefObj.material.MaterialSound();
             m_FootstepSounds = thiefObj.material.MaterialSound();
             //Még balancolandó, 0.035f egy noiseegység mekkora volumenak felel meg, 0.2f alaphangerő
             m_AudioSource.volume = noise * 0.035f + 0.2f;

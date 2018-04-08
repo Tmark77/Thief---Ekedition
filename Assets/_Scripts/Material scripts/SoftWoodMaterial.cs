@@ -18,4 +18,9 @@ public class SoftWoodMaterial : abstract_Material {
 	{
 		return false;
 	}
+
+	public void Start()
+	{
+		sound = (AudioClip)Resources.Load("_Sounds/steps/Footsteps Linoleum Slow 02", typeof(AudioClip));
+	}
 }
