@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class MenuScript : MonoBehaviour {
     public Canvas healthCanvas;
@@ -24,11 +25,13 @@ public class MenuScript : MonoBehaviour {
     CursorLockMode cursorMode;
 
     SavingLoading save;
+    private FirstPersonController player;
     
 
     // Use this for initialization
     void Start () {
 
+        player = GameObject.Find("Player").GetComponent<FirstPersonController>();
         save = new SavingLoading();
 
         healthCanvas.GetComponent<Canvas>();
@@ -52,8 +55,15 @@ public class MenuScript : MonoBehaviour {
         waitingForKey = false;
         isGameStarted = false;
 
-        //Screen.lockCursor = false;
-        Cursor.lockState = cursorMode;
+        ////Screen.lockCursor = false;
+        //Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = cursorMode;
+        //Cursor.visible = true;
+        
+        player.enabled = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
 
         healthCanvas.gameObject.SetActive(false);
@@ -75,11 +85,19 @@ public class MenuScript : MonoBehaviour {
             healthCanvas.gameObject.SetActive(false);
             inventoryCanvas.gameObject.SetActive(false);
 
-            Time.timeScale = 0;
-            Cursor.lockState = cursorMode;
-            Cursor.visible = true;
+            //Time.timeScale = 0;
+            //Cursor.lockState = cursorMode;
+            //Cursor.visible = true;
 
             isGameStarted = false;
+            player.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+
+
+            Cursor.visible = true;
+            Debug.Log("PAUSE");
 
         }
 
@@ -100,11 +118,7 @@ public class MenuScript : MonoBehaviour {
             //Cursor.lockState = cursorMode;
             //Cursor.visible = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            menus.Menu.enabled = false;
-        }
+        
 
         }
 
@@ -264,6 +278,11 @@ public class MenuScript : MonoBehaviour {
         healthCanvas.gameObject.SetActive(true);
         inventoryCanvas.gameObject.SetActive(true);
         Time.timeScale = 1.0f;
+        player.enabled = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void ExitGame()
