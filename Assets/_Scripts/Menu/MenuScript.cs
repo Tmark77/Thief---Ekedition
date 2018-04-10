@@ -54,11 +54,7 @@ public class MenuScript : MonoBehaviour {
         
         waitingForKey = false;
         isGameStarted = false;
-
-        ////Screen.lockCursor = false;
-        //Cursor.lockState = CursorLockMode.Confined;
-        //Cursor.lockState = cursorMode;
-        //Cursor.visible = true;
+        
         
         player.enabled = false;
 
@@ -84,10 +80,7 @@ public class MenuScript : MonoBehaviour {
             menus.PauseMenu.enabled = true;
             healthCanvas.gameObject.SetActive(false);
             inventoryCanvas.gameObject.SetActive(false);
-
-            //Time.timeScale = 0;
-            //Cursor.lockState = cursorMode;
-            //Cursor.visible = true;
+            
 
             isGameStarted = false;
             player.enabled = false;
@@ -154,61 +147,75 @@ public class MenuScript : MonoBehaviour {
         waitingForKey = true;
 
         yield return WaitForKey();
-        
 
-        switch (keyName)
+        CheckButtonIsUsable(newKey.ToString());
+        if (CheckButtonIsUsable(newKey.ToString()))
         {
-            case "forward":
-                GameManager.GM.forward = newKey; 
-                buttonText.text = GameManager.GM.forward.ToString(); 
-                PlayerPrefs.SetString("Forward_button", GameManager.GM.forward.ToString());
-                break;
-            case "backward":
-                GameManager.GM.backward = newKey;
-                buttonText.text = GameManager.GM.backward.ToString();
-                PlayerPrefs.SetString("Backward_button", GameManager.GM.backward.ToString());
-                break;
-            case "left":
-                GameManager.GM.left = newKey; 
-                buttonText.text = GameManager.GM.left.ToString(); 
-                PlayerPrefs.SetString("Left_button", GameManager.GM.left.ToString()); 
-                break;
-            case "right":
-                GameManager.GM.right = newKey; 
-                buttonText.text = GameManager.GM.right.ToString(); 
-                PlayerPrefs.SetString("Right_button", GameManager.GM.right.ToString()); 
-                break;
-            case "jump":
-                GameManager.GM.jump = newKey; 
-                buttonText.text = GameManager.GM.jump.ToString(); 
-                PlayerPrefs.SetString("Jump_button", GameManager.GM.jump.ToString()); 
-                break;
-            case "sneak":
-                GameManager.GM.sneak = newKey;
-                buttonText.text = GameManager.GM.sneak.ToString();
-                PlayerPrefs.SetString("Sneak_button", GameManager.GM.sneak.ToString());
-                break;
-            case "crounch":
-                GameManager.GM.crounch = newKey;
-                buttonText.text = GameManager.GM.crounch.ToString();
-                PlayerPrefs.SetString("Crounch_button", GameManager.GM.crounch.ToString());
-                break;
-            case "run":
-                GameManager.GM.run = newKey;
-                buttonText.text = GameManager.GM.run.ToString();
-                PlayerPrefs.SetString("Run_button", GameManager.GM.run.ToString());
-                break;
-            case "rightPeek":
-                GameManager.GM.rightPeek = newKey;
-                buttonText.text = GameManager.GM.rightPeek.ToString();
-                PlayerPrefs.SetString("RightPeek_button", GameManager.GM.rightPeek.ToString());
-                break;
-            case "leftPeak":
-                GameManager.GM.leftPeek = newKey;
-                buttonText.text = GameManager.GM.leftPeek.ToString();
-                PlayerPrefs.SetString("leftPeek_button", GameManager.GM.leftPeek.ToString());
-                break;
+            Debug.Log("Használható");
+
+            switch (keyName)
+            {
+                case "forward":
+                    GameManager.GM.forward = newKey;
+                    buttonText.text = GameManager.GM.forward.ToString();
+                    PlayerPrefs.SetString("Forward_button", GameManager.GM.forward.ToString());
+                    break;
+                case "backward":
+                    GameManager.GM.backward = newKey;
+                    buttonText.text = GameManager.GM.backward.ToString();
+                    PlayerPrefs.SetString("Backward_button", GameManager.GM.backward.ToString());
+                    break;
+                case "left":
+                    GameManager.GM.left = newKey;
+                    buttonText.text = GameManager.GM.left.ToString();
+                    PlayerPrefs.SetString("Left_button", GameManager.GM.left.ToString());
+                    break;
+                case "right":
+                    GameManager.GM.right = newKey;
+                    buttonText.text = GameManager.GM.right.ToString();
+                    PlayerPrefs.SetString("Right_button", GameManager.GM.right.ToString());
+                    break;
+                case "jump":
+                    GameManager.GM.jump = newKey;
+                    buttonText.text = GameManager.GM.jump.ToString();
+                    PlayerPrefs.SetString("Jump_button", GameManager.GM.jump.ToString());
+                    break;
+                case "sneak":
+                    GameManager.GM.sneak = newKey;
+                    buttonText.text = GameManager.GM.sneak.ToString();
+                    PlayerPrefs.SetString("Sneak_button", GameManager.GM.sneak.ToString());
+                    break;
+                case "crouch":
+                    GameManager.GM.crouch = newKey;
+                    buttonText.text = GameManager.GM.crouch.ToString();
+                    PlayerPrefs.SetString("Crouch_button", GameManager.GM.crouch.ToString());
+                    break;
+                case "run":
+                    GameManager.GM.run = newKey;
+                    buttonText.text = GameManager.GM.run.ToString();
+                    PlayerPrefs.SetString("Run_button", GameManager.GM.run.ToString());
+                    break;
+                case "rightPeek":
+                    GameManager.GM.rightPeek = newKey;
+                    buttonText.text = GameManager.GM.rightPeek.ToString();
+                    PlayerPrefs.SetString("RightPeek_button", GameManager.GM.rightPeek.ToString());
+                    break;
+                case "leftPeek":
+                    GameManager.GM.leftPeek = newKey;
+                    buttonText.text = GameManager.GM.leftPeek.ToString();
+                    PlayerPrefs.SetString("LeftPeek_button", GameManager.GM.leftPeek.ToString());
+                    break;
+
+                default: break;
+            }
         }
+        else
+        {
+            Debug.Log("Nem használható");
+        }
+
+
+
 
         yield return null;
     }
@@ -265,7 +272,7 @@ public class MenuScript : MonoBehaviour {
         menus.QuitMenu.enabled = false;
         menus.InputMenu.enabled = true;
         menus.PauseMenu.enabled = false;
-        IterateButtons();
+        GetButtonsKeyName();
     }
 
     public void StartLevel()
@@ -290,14 +297,14 @@ public class MenuScript : MonoBehaviour {
         Application.Quit(); 
     }
 
-    public void IterateButtons()
+    public void GetButtonsKeyName()
     {
         for (int i = 0; i < controlPanel.childCount; i++)
         {
             if (controlPanel.GetChild(i).name == "Sneak_button")
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.sneak.ToString();
-            else if (controlPanel.GetChild(i).name == "Crounch_button")
-                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.crounch.ToString();
+            else if (controlPanel.GetChild(i).name == "Crouch_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.crouch.ToString();
             else if (controlPanel.GetChild(i).name == "Run_button")
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.run.ToString();
             else if (controlPanel.GetChild(i).name == "RightPeek_button")
@@ -308,4 +315,21 @@ public class MenuScript : MonoBehaviour {
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.jump.ToString();
         }
     }
+
+    public bool CheckButtonIsUsable(string keyName)
+    {
+        Button[] buttons = controlPanel.GetComponentsInChildren<Button>();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            //Debug.Log(buttons[i].GetComponentInChildren<Text>().text);
+            if (buttons[i].GetComponentInChildren<Text>().text == keyName)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 }

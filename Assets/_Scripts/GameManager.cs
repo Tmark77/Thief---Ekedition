@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
     public KeyCode left { get; set; }
     public KeyCode right { get; set; }
     public KeyCode sneak { get; set; }
-    public KeyCode crounch { get; set; }
+    public KeyCode crouch { get; set; }
     public KeyCode run { get; set; }
     public KeyCode rightPeek { get; set; }
     public KeyCode leftPeek { get; set; }
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
 		
         jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "Space"));
         sneak = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("sneakKey", "LeftControl"));
-        crounch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("crounchKey", "X"));
+        crouch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("crouchKey", "X"));
         run = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("runKey", "LeftShift"));
         rightPeek = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightPeekKey", "E"));
         leftPeek = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftPeekKey", "Q"));

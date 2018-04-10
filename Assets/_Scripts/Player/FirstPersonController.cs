@@ -165,7 +165,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				sneaking = true;
 			else
 				sneaking = false;
-			if (Input.GetKeyDown(GameManager.GM.crounch) && m_CharacterController.isGrounded && !carriing) {
+			if (Input.GetKeyDown(GameManager.GM.crouch) && m_CharacterController.isGrounded && !carriing) {
 				crouching = !crouching;
 				actuallyCrouched = true;
 			}
