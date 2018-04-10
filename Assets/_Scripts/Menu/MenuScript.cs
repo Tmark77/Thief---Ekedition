@@ -23,8 +23,7 @@ public class MenuScript : MonoBehaviour {
     bool waitingForKey;
     public static bool isGameStarted;
     CursorLockMode cursorMode;
-
-    SavingLoading save;
+    
     private FirstPersonController player;
     
 
@@ -32,7 +31,6 @@ public class MenuScript : MonoBehaviour {
     void Start () {
 
         player = GameObject.Find("Player").GetComponent<FirstPersonController>();
-        save = new SavingLoading();
 
         healthCanvas.GetComponent<Canvas>();
         inventoryCanvas.GetComponent<Canvas>();
@@ -98,18 +96,6 @@ public class MenuScript : MonoBehaviour {
         {
             menus.Menu.enabled = true;
             RestartRoutine();
-            //menus.Menu.enabled = true;
-            //menus.MainMenu.enabled = true;
-            //menus.QuitMenu.enabled = false;
-            //menus.InputMenu.enabled = false;
-            //menus.PauseMenu.enabled = false;
-            
-            //healthCanvas.gameObject.SetActive(false);
-            //inventoryCanvas.gameObject.SetActive(false);
-
-            //Time.timeScale = 0;
-            //Cursor.lockState = cursorMode;
-            //Cursor.visible = true;
         }
         
 
@@ -236,10 +222,8 @@ public class MenuScript : MonoBehaviour {
         menus.InputMenu.enabled = false;
         menus.PauseMenu.enabled = false;
         isGameStarted = false;
-        // újratölti az aktuális scene-t
-        //DontDestroyOnLoad(gameObject);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void NoPress()
     {
         menus.MainMenu.enabled = true;
@@ -247,6 +231,7 @@ public class MenuScript : MonoBehaviour {
         menus.InputMenu.enabled = false;
         menus.PauseMenu.enabled = false;
     }
+
     public void BackPress()
     {
         if (isGameStarted)
