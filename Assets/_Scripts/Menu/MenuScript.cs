@@ -4,8 +4,11 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using TMPro;
 
 public class MenuScript : MonoBehaviour {
+    public static bool isGameStarted;
+    public Transform controlPanel;
     public Canvas healthCanvas;
     public Canvas inventoryCanvas;
 
@@ -15,13 +18,14 @@ public class MenuScript : MonoBehaviour {
     public Canvas pauseMenu;
     public Canvas menu;
     Menus menus = Menus.Instance;
-
-    public Transform controlPanel;
+    
+    private Text infoText;
     Event keyEvent;
     KeyCode newKey;
     Text buttonText;
     bool waitingForKey;
-    public static bool isGameStarted;
+    float counter;
+
     CursorLockMode cursorMode;
     
     private FirstPersonController player;
@@ -29,6 +33,8 @@ public class MenuScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        infoText = controlPanel.Find("Info").GetComponentInChildren<Text>();
+        counter = -0.1f;
 
         player = GameObject.Find("Player").GetComponent<FirstPersonController>();
 
@@ -97,7 +103,17 @@ public class MenuScript : MonoBehaviour {
             menus.Menu.enabled = true;
             RestartRoutine();
         }
-        
+
+        if (counter >= 0)
+        {
+            infoText.enabled = true;
+            counter -= 0.025f;
+        }
+        else
+        {
+            infoText.enabled = false;
+            
+        }
 
         }
 
@@ -137,7 +153,8 @@ public class MenuScript : MonoBehaviour {
         CheckButtonIsUsable(newKey.ToString());
         if (CheckButtonIsUsable(newKey.ToString()))
         {
-            Debug.Log("Használható");
+            infoText.text = "successfully configured";
+            //infoText.text = "Használható";
 
             switch (keyName)
             {
@@ -197,8 +214,10 @@ public class MenuScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Nem használható");
+            infoText.text = "can not be used because it is configured for another operation";
+            //infoText.text = "Nem használható";
         }
+        counter = 2.0f;
 
 
 
@@ -270,8 +289,8 @@ public class MenuScript : MonoBehaviour {
         healthCanvas.gameObject.SetActive(true);
         inventoryCanvas.gameObject.SetActive(true);
         Time.timeScale = 1.0f;
-        player.enabled = true;
 
+        player.enabled = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -284,6 +303,8 @@ public class MenuScript : MonoBehaviour {
 
     public void GetButtonsKeyName()
     {
+        
+
         for (int i = 0; i < controlPanel.childCount; i++)
         {
             if (controlPanel.GetChild(i).name == "Sneak_button")
@@ -298,6 +319,7 @@ public class MenuScript : MonoBehaviour {
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.leftPeek.ToString();
             else if (controlPanel.GetChild(i).name == "Jump_button")
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.jump.ToString();
+            
         }
     }
 
