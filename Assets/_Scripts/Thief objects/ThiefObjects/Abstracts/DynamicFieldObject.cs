@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DynamicFieldObject : FieldObject {
+public abstract class DynamicFieldObject : ThiefObject {
 
-	public abstract void Interaction (bool IsRightClicked);
+	public abstract void Interaction (bool IsManualyOperated);
 
 }
