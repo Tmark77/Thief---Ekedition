@@ -22,9 +22,9 @@ public class Door : DynamicFieldObject {
 		opened = false;
 	}
 	
-	public override void Interaction (bool IsRightClicked)
+	public override void Interaction (bool IsManualyOperated)
 	{
-        if (IsRightClicked)
+		if (IsManualyOperated)
         {
             if (opened == false && !locked)
             {

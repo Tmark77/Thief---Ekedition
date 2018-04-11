@@ -10,7 +10,7 @@ public class Board : DynamicFieldObject
     float counter;
     bool show;
 
-    public override void Interaction(bool IsRightClicked)
+	public override void Interaction(bool IsManualyOperated)
     {
         counter = 10f;
         show = true;

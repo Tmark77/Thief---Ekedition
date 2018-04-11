@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Light_ProtectedFlame : Light_thief {
 	
-	public override void Interaction (bool IsRightClicked)
+	public override void Interaction (bool IsManualyOperated)
 	{
-		if (!IsRightClicked) 
+		if (!IsManualyOperated) 
 		{
 			if (IsLit ())
 			{

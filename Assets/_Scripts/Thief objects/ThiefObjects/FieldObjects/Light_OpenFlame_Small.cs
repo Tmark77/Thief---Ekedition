@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Light_OpenFlame_Small : Light_Open {
 	
-	public override void Interaction (bool IsRightClicked)
+	public override void Interaction (bool IsManualyOperated)
 	{
-		if (!IsRightClicked)
+		if (!IsManualyOperated)
         {
             if (IsLit())
             {

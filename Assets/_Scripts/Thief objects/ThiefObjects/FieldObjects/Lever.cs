@@ -5,17 +5,15 @@ using UnityEngine;
 public class Lever : DynamicFieldObject {
     
 	bool used;
-	public GameObject[] dynamicObjects;
-	private float[] ranges;
+	public DynamicFieldObject[] dynamicObjects;
 	int i;
 
 	// Use this for initialization
 	void Start () {
 		used = false;
-		ranges = new float[dynamicObjects.Length];
 	}
 
-	public override void Interaction (bool IsRightClicked)
+	public override void Interaction (bool IsManualyOperated)
 	{
 		i = 0;
 		if (used == false) {
@@ -28,8 +26,8 @@ public class Lever : DynamicFieldObject {
 			//lights.SetActive (true);
 		}
 
-		foreach (GameObject l in dynamicObjects) {
-			l.GetComponent<DynamicFieldObject> ().Interaction(false);
+		foreach (DynamicFieldObject l in dynamicObjects) {
+			l.Interaction(false);
 			i++;
 		}
 	}
