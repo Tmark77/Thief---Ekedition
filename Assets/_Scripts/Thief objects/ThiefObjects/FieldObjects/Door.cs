@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Door : DynamicFieldObject {
 
-	Animator anim;
 	bool opened;
     public bool locked; //true closed, false opened
     public bool canBeLockPicked;
@@ -18,7 +17,6 @@ public class Door : DynamicFieldObject {
 
     // Use this for initialization
     void Start () {
-		anim = GetComponent<Animator> ();
 		opened = false;
 	}
 	
@@ -39,8 +37,12 @@ public class Door : DynamicFieldObject {
         }
         else
         {
-            openingAudio.Play();
-            opened = !opened;
+			opened = !opened;
+			if(opened)
+            	openingAudio.Play();
+			else
+				closingingAudio.Play();
+            
         }
 
 		if (opened) {
@@ -58,20 +60,14 @@ public class Door : DynamicFieldObject {
             //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
             newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 100);
             transform.rotation = newRot;
-            if (this.gameObject.transform.rotation.y == 90.0f)
-            {
-                //this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-            }
+            
         }
         else
         {
             //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
             newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 100);
             transform.rotation = newRot;
-            if (this.gameObject.transform.rotation.y == 0f)
-            {
-                //this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-            }
+           
         }
     }
 }

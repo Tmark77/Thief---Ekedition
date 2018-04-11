@@ -21,10 +21,8 @@ public abstract class Equipment : Collectible {
 
 	public override void PickUp(PlayerInventory inv)
 	{
-        //inv.NewItem (kod);
 		inv.NewItem(this);
 		gameObject.SetActive (false);
-		//Destroy (gameObject);
 	}
     /// <summary>
     /// 

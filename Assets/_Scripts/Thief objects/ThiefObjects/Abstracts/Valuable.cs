@@ -6,5 +6,6 @@ public abstract class Valuable : Collectible {
 
 	public abstract void Collide ();
 
+	[SerializeField]
 	public int value;
 }
