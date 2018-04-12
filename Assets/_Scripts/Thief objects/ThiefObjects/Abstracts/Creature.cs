@@ -8,6 +8,9 @@ public abstract class Creature : ThiefObject {
 	public Transform head;
 	public Transform chest;
 	public Transform foot;
+	public AudioSource deadSound;
+	public float NoiseSensitivity;
+	public int SuspicionDecrease;
 
 	private int vH;
 	private int vC;
@@ -17,12 +20,19 @@ public abstract class Creature : ThiefObject {
 	private float ReactTime;
 
     public List<Collectible> KnownObjects = new List<Collectible>();
-    public AbstractCondition condition;
-
 	public List<Collectible> e = new List<Collectible>();
+	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
+	public List<Vector3> Targets = new List<Vector3> ();
+	int index;
 
-    public AudioSource deadSound;
-
+    public AbstractCondition condition;
+	public AbstractCondition condition_calm;
+	public AbstractCondition condition_suspicious;
+	public AbstractCondition condition_alert;
+	public AbstractCondition condition_dead;
+	public AbstractCondition condition_knockeddown;
+	public AbstractCondition condition_blind;
+	public AbstractCondition condition_sleep;
 
     void Start()
 	{
@@ -40,7 +50,7 @@ public abstract class Creature : ThiefObject {
 		float angle = Vector3.Angle (direction, this.transform.forward);
 		if (IsInFieldOfView(angle) && ReactTime < 0f) 
 		{
-			if (Vanralatas (head) && (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH())) 
+			if (ItIsInLineOfSight (head) && (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH())) 
 			{
 				vH = IsInShadow.GetVH ();
 			} 
@@ -49,7 +59,7 @@ public abstract class Creature : ThiefObject {
 				vH = 0;
 			}
 
-			if (Vanralatas (chest) && (Vector3.Distance(chest.position,this.transform.position) < IsInShadow.GetVC())) 
+			if (ItIsInLineOfSight (chest) && (Vector3.Distance(chest.position,this.transform.position) < IsInShadow.GetVC())) 
 			{
 				vC = IsInShadow.GetVC ();
 			} 
@@ -58,7 +68,7 @@ public abstract class Creature : ThiefObject {
 				vC = 0;
 			}
 
-			if (Vanralatas (foot) && (Vector3.Distance(foot.position,this.transform.position) < IsInShadow.GetVF())) 
+			if (ItIsInLineOfSight (foot) && (Vector3.Distance(foot.position,this.transform.position) < IsInShadow.GetVF())) 
 			{
 				vF = IsInShadow.GetVF ();
 			} 
@@ -83,9 +93,8 @@ public abstract class Creature : ThiefObject {
 		Direction = transform.TransformDirection(new Vector3(-20f,0,0));
 		Gizmos.DrawRay (this.transform.position, Direction);
 	}
-
-
-	bool Vanralatas(Transform obj)
+		
+	bool ItIsInLineOfSight(Transform obj)
 	{
 		RaycastHit[] hits = Physics.RaycastAll (this.transform.position, obj.position - this.transform.position, Vector3.Distance(this.transform.position, obj.position));
 
@@ -114,19 +123,6 @@ public abstract class Creature : ThiefObject {
 
 	public abstract bool IsInFieldOfView (float angle);
 
-
-	public AbstractCondition condition_calm;
-	public AbstractCondition condition_suspicious;
-	public AbstractCondition condition_alert;
-	public AbstractCondition condition_dead;
-	public AbstractCondition condition_knockeddown;
-	public AbstractCondition condition_blind;
-	public AbstractCondition condition_sleep;
-
-	public float NoiseSensitivity;
-
-	public int SuspicionDecrease;
-
 	int maxhealth;
 	public int MaxHealth
 	{
@@ -150,8 +146,6 @@ public abstract class Creature : ThiefObject {
 		}
 	}
 
-	
-
 	int suspicion;
 	public int Suspicion
 	{
@@ -167,22 +161,22 @@ public abstract class Creature : ThiefObject {
 			}
 		}
 	}
-
-
+		
     public void TakeDamage(int damage)
 	{
 		if(damage > 0)
 			Health = Health - (damage * condition.DamageMultiplier());
 		if (Health <= 0) 
 		{
+			if(condition!=condition_dead)
+				deadSound.Play();
 			condition = condition.ChangeToDead(this);
-            deadSound.Play();
+            
 			//Debug.Log ("Meghaltam, segítség!");
 		}
 		
 	}
 		
-	//na lehet hogy a váltást nem így kéne megcsinálni, hanem a konkrét állapotokon belül.
 	public void KnockOut()
 	{
 		condition = condition.ChangeToKnockedOut (this);
@@ -203,10 +197,6 @@ public abstract class Creature : ThiefObject {
 		condition.ReactToNoise (this, noiseMeter, location);
 	}
 
-	//metódus ami a látott dologokat észleli
-
-
-
 	public void DecreaseSuspicion()
 	{
 		//Debug.Log ("Suspicion: " + Suspicion);
@@ -219,10 +209,8 @@ public abstract class Creature : ThiefObject {
 			Suspicion = 0;
 		}
 	}
+		
 
-	public List<Vector3> Targets = new List<Vector3> ();
-	int index;
-	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
 
 
 

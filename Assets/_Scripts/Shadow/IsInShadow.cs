@@ -55,15 +55,15 @@ public class IsInShadow : MonoBehaviour {
         {
 			distance = Vector3.Distance(lights[i].transform.position, player.position);
 			if (lights[i].range >= distance) {
-				if(VanRalatas(head, i)){
+				if(IsInLineOfSight(head, i)){
 					distance = Vector3.Distance(lights[i].transform.position, head.position);
 					vH = BrightnessCalculate(lights[i].range, distance, vH);
 				}
-				if(VanRalatas(chest, i)){
+				if(IsInLineOfSight(chest, i)){
 					distance = Vector3.Distance(lights[i].transform.position, chest.position);
 					vC = BrightnessCalculate(lights[i].range, distance, vC);
 				}
-				if(VanRalatas(foot, i)){
+				if(IsInLineOfSight(foot, i)){
 					distance = Vector3.Distance(lights[i].transform.position, foot.position);
 					vF = BrightnessCalculate(lights[i].range, distance, vF);
 				}
@@ -82,7 +82,7 @@ public class IsInShadow : MonoBehaviour {
 	
     }
 
-	bool VanRalatas (Transform obj, int index)
+	bool IsInLineOfSight (Transform obj, int index)
 	{
 		//RaycastHit hit;
 		//Physics.Linecast (lights [index].transform.position, obj.position, out hit);

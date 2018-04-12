@@ -6,7 +6,6 @@ namespace AssemblyCSharp
 {
 	public class BaseGuard : Creature
 	{
-
 		public BaseGuard ()
 		{
 			RangeOfVision = 20;
