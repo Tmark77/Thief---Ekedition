@@ -46,39 +46,42 @@ public abstract class Creature : ThiefObject {
 		
 		condition.PatrolBehaviour (this,ref index);
 		//----------------------------------------------------------------------------------------
-		Vector3 direction = player.position - this.transform.position;
-		float angle = Vector3.Angle (direction, this.transform.forward);
-		if (IsInFieldOfView(angle) && ReactTime < 0f) 
+		if(ReactTime < 0f)
 		{
-			if (ItIsInLineOfSight (head) && (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH())) 
-			{
-				vH = IsInShadow.GetVH ();
-			} 
-			else 
-			{
-				vH = 0;
-			}
-
-			if (ItIsInLineOfSight (chest) && (Vector3.Distance(chest.position,this.transform.position) < IsInShadow.GetVC())) 
-			{
-				vC = IsInShadow.GetVC ();
-			} 
-			else 
-			{
-				vC = 0;
-			}
-
-			if (ItIsInLineOfSight (foot) && (Vector3.Distance(foot.position,this.transform.position) < IsInShadow.GetVF())) 
-			{
-				vF = IsInShadow.GetVF ();
-			} 
-			else 
-			{
-				vF = 0;
-			}
-				
-			condition.ReactToView (this,vH,vC,vF);
 			ReactTime = 0.5f;
+			Vector3 direction = player.position - this.transform.position;
+			float angle = Vector3.Angle (direction, this.transform.forward);
+			if (IsInFieldOfView(angle)) 
+			{
+				if (IsInLineOfSight (head) && (Vector3.Distance(head.position,this.transform.position) < IsInShadow.GetVH())) 
+				{
+					vH = IsInShadow.GetVH ();
+				} 
+				else 
+				{
+					vH = 0;
+				}
+			
+				if (IsInLineOfSight (chest) && (Vector3.Distance(chest.position,this.transform.position) < IsInShadow.GetVC())) 
+				{
+					vC = IsInShadow.GetVC ();
+				} 
+				else 
+				{
+					vC = 0;
+				}
+			
+				if (IsInLineOfSight (foot) && (Vector3.Distance(foot.position,this.transform.position) < IsInShadow.GetVF())) 
+				{
+					vF = IsInShadow.GetVF ();
+				} 
+				else 
+				{
+					vF = 0;
+				}
+					
+				condition.ReactToView (this,vH,vC,vF);
+			}
 		}
 		ReactTime -= Time.deltaTime;
 	}
@@ -94,7 +97,7 @@ public abstract class Creature : ThiefObject {
 		Gizmos.DrawRay (this.transform.position, Direction);
 	}
 		
-	bool ItIsInLineOfSight(Transform obj)
+	bool IsInLineOfSight(Transform obj)
 	{
 		RaycastHit[] hits = Physics.RaycastAll (this.transform.position, obj.position - this.transform.position, Vector3.Distance(this.transform.position, obj.position));
 
