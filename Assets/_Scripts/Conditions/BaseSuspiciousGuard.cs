@@ -48,7 +48,7 @@ namespace AssemblyCSharp
                 //Debug.Log ("Látlak");
                 //creature.Suspicion = 210;
                 //mat.color = Color.blue;
-                creature.Targets.Add(creature.player.position);
+				creature.Targets[creature.Targets.Count - 1] = creature.player.position;
                 creature.Suspicion += 30;
                 creature.condition = creature.condition_alert;
             }
