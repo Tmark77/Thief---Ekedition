@@ -35,7 +35,7 @@ public class Climbing : MonoBehaviour {
 			lightGemObject.SetActive(true);
 			hand.SetActive(true);
 		}
-		if(canClimb && Input.GetKeyDown(KeyCode.F))
+		if(canClimb && Input.GetKey(GameManager.GM.climb))
 			{
             climbingIsInProgress = true;
             mainCam.depth = 0;

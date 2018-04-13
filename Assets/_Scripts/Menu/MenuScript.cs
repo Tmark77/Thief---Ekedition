@@ -86,7 +86,7 @@ public class MenuScript : MonoBehaviour {
             inventoryCanvas.gameObject.SetActive(false);
             
 
-            isGameStarted = false;
+            isGameStarted = true;
             player.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.lockState = CursorLockMode.Confined;
@@ -208,6 +208,11 @@ public class MenuScript : MonoBehaviour {
                     buttonText.text = GameManager.GM.leftPeek.ToString();
                     PlayerPrefs.SetString("LeftPeek_button", GameManager.GM.leftPeek.ToString());
                     break;
+                case "climb":
+                    GameManager.GM.climb = newKey;
+                    buttonText.text = GameManager.GM.climb.ToString();
+                    PlayerPrefs.SetString("Climb_button", GameManager.GM.climb.ToString());
+                    break;
 
                 default: break;
             }
@@ -319,7 +324,9 @@ public class MenuScript : MonoBehaviour {
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.leftPeek.ToString();
             else if (controlPanel.GetChild(i).name == "Jump_button")
                 controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.jump.ToString();
-            
+            else if (controlPanel.GetChild(i).name == "Climb_button")
+                controlPanel.GetChild(i).GetComponentInChildren<Text>().text = GameManager.GM.climb.ToString();
+
         }
     }
 
