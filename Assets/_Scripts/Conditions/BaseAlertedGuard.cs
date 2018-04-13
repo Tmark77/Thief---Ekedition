@@ -43,7 +43,7 @@ public class BaseAlertedGuard : AbstractCondition
 
     public override void SuspicionDecreaseOverTime(Creature creature)
     {
-        creature.Suspicion += 2;
+		creature.Suspicion += 2 * creature.SuspicionDecrease;
     }
 
     private float hitCooldown = 0f;
@@ -59,14 +59,12 @@ public class BaseAlertedGuard : AbstractCondition
             if (hitCooldown < 0f)
             {
                 hitCooldown = 2f;
-				Debug.Log ("fasz");
 				creature.player.gameObject.GetComponent<PlayerHealth>().TakeDamage((creature as BaseGuard).damage);
             }
         }
         else
         {
             agent.destination = creature.Targets[creature.Targets.Count - 1];
-            creature.condition = creature.condition_suspicious;
         }
         hitCooldown -= Time.deltaTime;
 

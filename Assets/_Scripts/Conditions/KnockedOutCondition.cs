@@ -8,14 +8,15 @@ public class KnockedOutCondition : AbstractCondition {
 
 	public override void PatrolBehaviour (Creature creature,ref int index)
 	{
-		if (counter == 10f) 
+		if (counter == 60f) 
 		{
 			this.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 		}
 		
 		if (counter < 0f) {
 			creature.Suspicion = 130;
-			counter = 10f;
+			counter = 60f;
+			creature.Targets.Add (this.gameObject.transform.position);
 			creature.condition = creature.condition_suspicious;
 		} 
 		agent.SetDestination (creature.gameObject.transform.position);
