@@ -75,12 +75,13 @@ namespace AssemblyCSharp
 			if (Vector3.Distance(agent.transform.position,creature.Targets[index]) < 0.5f ) 
 			{
 				index++;
+				if (index == creature.Targets.Count) {
+					index = 0;
+				}
 			}
 			else agent.SetDestination (creature.Targets [index]);
 
-			if (index == creature.Targets.Count) {
-				index = 0;
-			}
+
 		}
 	}
 }

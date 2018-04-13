@@ -8,7 +8,7 @@ namespace AssemblyCSharp
     {
         System.Random rnd = new System.Random();
 
-        #region implemented abstract members of AbstractCondition
+		public Material mat;
 
         public override void PatrolBehaviour(Creature creature, ref int index)
         {
@@ -23,22 +23,16 @@ namespace AssemblyCSharp
 
                 if (Vector3.Distance(agent.transform.position, creature.Targets[creature.Targets.Count - 1]) < 0.5f)
                 {
-                    Vector3 fasz; //át kell majd írni
+                    Vector3 newRandomTarget;
                     do
                     {
-                        fasz = new Vector3(creature.Targets[creature.Targets.Count - 1].x + rnd.Next(-3, 3) * 2, creature.Targets[creature.Targets.Count - 1].y, creature.Targets[creature.Targets.Count - 1].z + rnd.Next(-3, 3) * 2);
-                        //SZAR MÉG   
-                    } while (!agent.CalculatePath(fasz, new NavMeshPath()));
-                    creature.Targets[creature.Targets.Count - 1] = fasz;
+                        newRandomTarget = new Vector3(creature.Targets[creature.Targets.Count - 1].x + rnd.Next(-3, 3) * 2, creature.Targets[creature.Targets.Count - 1].y, creature.Targets[creature.Targets.Count - 1].z + rnd.Next(-3, 3) * 2);  
+                    } while (!agent.CalculatePath(newRandomTarget, new NavMeshPath()));
+                    creature.Targets[creature.Targets.Count - 1] = newRandomTarget;
                     //Debug.Log (spots [spots.Count - 1].ToString ());
                 }
             }
         }
-
-        #endregion
-
-        public Material mat;
-        #region implemented abstract members of AbstractCondition
 
 		public override void ReactToNoise(Creature creature, int noiseMeter, Vector3 location)
         {
@@ -70,8 +64,6 @@ namespace AssemblyCSharp
                 creature.Targets.RemoveAt(creature.Targets.Count - 1);
             }
         }
-
-        #endregion
 
         void Start()
         {
