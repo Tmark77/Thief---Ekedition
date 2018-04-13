@@ -4,7 +4,7 @@ using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 using TMPro;
 
-public class PlayerHealth : MonoBehaviour//, ISavable
+public class PlayerHealth : MonoBehaviour
 {
 	public float startingHealth = 100;                            
 	public float currentHealth;                                   
@@ -14,9 +14,7 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 	public float flashSpeed = 5f;                               
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     
 
-
-	Animator anim;                                              
-	AudioSource playerAudio;                          
+                        
 	public static bool isDead = false;                                                
 	bool damaged;
 
@@ -25,8 +23,6 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 
 	void Awake ()
 	{
-		anim = GetComponent <Animator> ();
-		playerAudio = GetComponent <AudioSource> ();
         restart = false;
         deadText.SetActive(false);
         currentHealth = startingHealth;
@@ -36,9 +32,9 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 
 	void Update ()
 	{
-        if (Input.GetKeyDown(KeyCode.B)){
-			TakeDamage (25);
-		}
+  //      if (Input.GetKeyDown(KeyCode.B)){
+		//	TakeDamage (25);
+		//}
 
 		if(damaged)
 		{
@@ -76,9 +72,7 @@ public class PlayerHealth : MonoBehaviour//, ISavable
 		currentHealth -= amount;
 
         setHealthSlider();
-
-
-        playerAudio.Play ();
+        
 
 
 		if(currentHealth <= 0 && !isDead)
