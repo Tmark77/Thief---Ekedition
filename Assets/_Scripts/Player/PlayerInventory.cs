@@ -19,19 +19,16 @@ public class PlayerInventory : MonoBehaviour {
 	public Text gemValue;
 	public Text otherValue;
 	public Text equipped_item;
-
-    //List<int> e = new List<int>();
+    
     List<Equipment> e = new List<Equipment>();
     int i;
 
     
     Dictionary<int, int> eq = new Dictionary<int, int>();
     int eqKey;
-    int eqValue;
     
 
-
-	// Use this for initialization
+    
 	void Start () {
 		collectedGemsValue = 0;
 		collectedGoldValue = 0;
@@ -39,12 +36,10 @@ public class PlayerInventory : MonoBehaviour {
 		i = 0;
 
         eqKey = 0;
-        eqValue = 0;
 
         
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
             if (Input.GetButtonDown("NextItem") || Input.GetAxis("ChangeItem") > 0)
@@ -77,7 +72,7 @@ public class PlayerInventory : MonoBehaviour {
 		otherValue.text = "Other Goods: " + collectedOtherValue;
 	}
 
-	//public void NewItem(int item)
+	
 	public void NewItem(Equipment item)
 	{
         e.Add(item);
@@ -149,7 +144,6 @@ public class PlayerInventory : MonoBehaviour {
                 }
             }
             eqKey = temp;
-            //Debug.Log(eqKey);
             FindNextSameEquipment();
         }
         
