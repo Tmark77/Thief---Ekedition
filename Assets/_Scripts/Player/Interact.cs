@@ -20,8 +20,8 @@ public class Interact : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (MenuScript.isGameStarted)
-        {
+        //if (MenuScript.isGameStarted)
+        //{
             Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3);
 
             if (Input.GetMouseButtonDown(1))
@@ -32,7 +32,7 @@ public class Interact : MonoBehaviour {
             {
                 LeftClickInteracting();
             }
-        }
+        //}
 	}
 
 	void RightClickInteracting()
@@ -66,7 +66,7 @@ public class Interact : MonoBehaviour {
 		else 
 		{
 			//itt most ledobjuk a bácsit
-			PickedUpCreature.gameObject.transform.position = this.gameObject.transform.position;
+			PickedUpCreature.gameObject.transform.position = this.gameObject.transform.position+this.gameObject.transform.forward*2;
 			this.gameObject.GetComponent<FirstPersonController> ().carriing = false;
 			PickedUpCreature.gameObject.SetActive (true);
 		}

@@ -112,16 +112,26 @@ public abstract class Creature : ThiefObject {
 
 		int ind;
 		ind = 0;
-		if (tf.Count != 0) {
-			do {
-				if (!tf[ind].material.SeeTrough())
-				{
-					return false;
-				}
-				ind++;
-			} while(ind < tf.Count);
+
+		while (ind < tf.Count) 
+		{
+			if (!tf [ind].material.SeeTrough ()) {
+				return false;
+			}
+			ind++;
 		}
+		
 		return true;
+		//if (tf.Count != 0) {
+		//	do {
+		//		if (!tf[ind].material.SeeTrough())
+		//		{
+		//			return false;
+		//		}
+		//		ind++;
+		//	} while(ind < tf.Count);
+		//}
+		//return true;
 	}
 
 	public abstract bool IsInFieldOfView (float angle);
