@@ -20,7 +20,7 @@ public abstract class Creature : ThiefObject {
 	private float ReactTime;
 
     public List<Collectible> KnownObjects = new List<Collectible>();
-	public List<Collectible> e = new List<Collectible>();
+	[System.NonSerialized] public List<Collectible> e = new List<Collectible>();
 	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
 	public List<Vector3> Targets = new List<Vector3> ();
 	int index;
@@ -39,6 +39,7 @@ public abstract class Creature : ThiefObject {
 		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
 		index = 0;
 		ReactTime = 1f;
+        e.AddRange(this.gameObject.GetComponentsInChildren<Collectible>());
 	}
 
 	void Update()
@@ -224,7 +225,18 @@ public abstract class Creature : ThiefObject {
 	}
 		
 
-
+    public void DetachEquipment(Equipment item)
+    {
+        
+        for (int i = 0; i < e.Count; i++)
+        {
+            if ((e[i] as Equipment).Kod == item.Kod) //goldot nem tudunk levenni, mert az "e" az Collectibles tipusú
+            {
+                e.Remove(item);
+            }
+        }
+        item.transform.parent = null;
+    }
 
 
 

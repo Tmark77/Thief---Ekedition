@@ -62,6 +62,7 @@ public class Arrow : Equipment {
 			if (obj is Creature) 
 			{
 				(obj as Creature).TakeDamage (50);
+                this.transform.parent = obj.transform;
 			}
 
 			if (obj.GetComponent<Breakable> ()) 

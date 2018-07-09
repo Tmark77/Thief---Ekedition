@@ -42,7 +42,10 @@ public abstract class AbstractCondition : MonoBehaviour {
 
 	public abstract void ReactToView (Creature creature,int H, int C, int F);
 
-
+    public virtual bool CanUseThings()
+    {
+        return true;
+    }
 	//-----------------------------------------------------
 
 

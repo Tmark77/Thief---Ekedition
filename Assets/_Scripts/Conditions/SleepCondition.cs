@@ -45,4 +45,9 @@ public class SleepCondition : AbstractCondition {
 	{
 		return 3;
 	}
+
+    public override bool CanUseThings()
+    {
+        return false;
+    }
 }

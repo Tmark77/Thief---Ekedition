@@ -44,7 +44,10 @@ namespace AssemblyCSharp
 			return true;
 		}
 
-
-	}
+        public override bool CanUseThings()
+        {
+            return false;
+        }
+    }
 }
 

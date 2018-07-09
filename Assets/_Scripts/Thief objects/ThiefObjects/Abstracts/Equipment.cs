@@ -21,9 +21,15 @@ public abstract class Equipment : Collectible {
 
 	public override void PickUp(PlayerInventory inv)
 	{
-		inv.NewItem(this);
-		gameObject.SetActive (false);
-	}
+        Creature parent = this.gameObject.GetComponentInParent<Creature>();
+
+        if (parent != null)
+        {
+            parent.DetachEquipment(this);
+        }
+        inv.NewItem(this);
+        gameObject.SetActive(false);
+    }
     /// <summary>
     /// 
     /// </summary>

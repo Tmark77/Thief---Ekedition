@@ -127,7 +127,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	private void NextItem()
 	{
-        if (eq.Count>1)
+        if (eq.Count>0)
         {
             int temp = eqKey;
             bool found = true;
@@ -151,7 +151,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	private void PrevItem()
 	{
-        if (eq.Count > 1)
+        if (eq.Count > 0)
         {
             int temp = eqKey;
             bool found = false;

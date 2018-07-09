@@ -68,4 +68,9 @@ public class BlindGuardCondition : AbstractCondition {
 	void Update () {
 		
 	}
+
+    public override bool CanUseThings()
+    {
+        return false;
+    }
 }
