@@ -121,7 +121,7 @@ public class PlayerInventory : MonoBehaviour {
                 break;
             }
         }
-        Debug.Log(e[i] +" " + e[i].Kod + " " + eq[e[i].Kod]);
+        //Debug.Log(e[i] +" " + e[i].Kod + " " + eq[e[i].Kod]);
         
     }
 

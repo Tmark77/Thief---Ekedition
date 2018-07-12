@@ -2,7 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Creature : ThiefObject {
+public abstract class Creature : ThiefObject, I_Highlightable {
+	#region I_Highlightable implementation
+	public void Highlight()
+	{
+		if(condition.CarryAble())
+		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color(0.3f,0.3f,0.3f));
+	}
+
+	public void DeHighlight()
+	{
+		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", Color.black);
+	}
+	#endregion
 
 	public Transform player;
 	public Transform head;

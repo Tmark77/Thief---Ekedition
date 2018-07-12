@@ -11,6 +11,7 @@ public class Interact : MonoBehaviour {
 	ThiefObject PickedUpCreature;
 	[SerializeField]
 	public GameObject hand;
+	ThiefObject LastLookedCollectible; //ez a név szar
 
 	// Use this for initialization
 	void Start () {
@@ -18,12 +19,33 @@ public class Interact : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         //if (MenuScript.isGameStarted)
         //{
             Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, 3);
-
+		if (hit.collider != null && hit.collider.gameObject.GetComponent<ThiefObject> () is I_Highlightable) 
+		{
+			ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+			if (obj != LastLookedCollectible) 
+			{
+				if (LastLookedCollectible != null) 
+				{
+					(LastLookedCollectible as I_Highlightable).DeHighlight ();
+					LastLookedCollectible = null;
+				}
+				LastLookedCollectible = obj;
+				(obj as I_Highlightable).Highlight ();
+			}
+		}
+		else 
+		{
+			if (LastLookedCollectible != null) 
+			{
+				(LastLookedCollectible as I_Highlightable).DeHighlight ();
+				LastLookedCollectible = null;
+			}
+		}
             if (Input.GetMouseButtonDown(1))
             {
                 RightClickInteracting();

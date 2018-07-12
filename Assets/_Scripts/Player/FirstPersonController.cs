@@ -343,7 +343,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			float noise = thiefObj.material.NoiseGeneration (vehemencia);//a vehemecia az az érték, hogy milyen erősen léptünk a felületre
 
 			Collider[] colliders = Physics.OverlapSphere(transform.position, noise);
-            Debug.Log(noise);
+            //Debug.Log(noise);
             foreach (Collider nearbyObjects in colliders)
 			{
 				Creature g = nearbyObjects.GetComponent<Creature>();
