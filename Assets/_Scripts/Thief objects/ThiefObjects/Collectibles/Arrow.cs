@@ -32,6 +32,13 @@ public class Arrow : Equipment {
         return true;
 	}
 
+	//public static void SetParents(this Transform child, Transform parent)
+	//{
+	//	child.parent = parent;
+	//	child.localPosition = Vector3.zero;
+	//	child.localRotation = Quaternion.identity;
+	//	child.localScale = Vector3.one;
+	//}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -45,6 +52,11 @@ public class Arrow : Equipment {
                 Rig.isKinematic = true;
                 hitWood.Play();
                 (obj as ThiefObject).material.NoiseGeneration(1f);
+
+
+				this.transform.parent = obj.transform.parent.transform;
+
+
             }
             else
             {
@@ -62,14 +74,12 @@ public class Arrow : Equipment {
 			if (obj is Creature) 
 			{
 				(obj as Creature).TakeDamage (50);
-                this.transform.parent = obj.transform;
 			}
 
 			if (obj.GetComponent<Breakable> ()) 
 			{
 				obj.GetComponent<Breakable> ().Break ();
 			}
-
 			IsShooted = false;
         }
     }

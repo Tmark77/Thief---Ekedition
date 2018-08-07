@@ -3,19 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Creature : ThiefObject, I_Highlightable {
-	#region I_Highlightable implementation
-	public void Highlight()
-	{
-		if(condition.CarryAble())
-		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color(0.3f,0.3f,0.3f));
-	}
-
-	public void DeHighlight()
-	{
-		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", Color.black);
-	}
-	#endregion
-
+	
 	public Transform player;
 	public Transform head;
 	public Transform chest;
@@ -98,6 +86,19 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 		}
 		ReactTime -= Time.deltaTime;
 	}
+
+	#region I_Highlightable implementation
+	public void Highlight()
+	{
+		if(condition.CarryAble())
+			this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color(0.3f,0.3f,0.3f));
+	}
+
+	public void DeHighlight()
+	{
+		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", Color.black);
+	}
+	#endregion
 
 	void OnDrawGizmosSelected()
 	{
@@ -239,16 +240,37 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 
     public void DetachEquipment(Equipment item)
     {
+		int i = -1;
+		do
+		{
+			i++;
+		}
+		while((i > e.Count) || ((e[i] is Equipment) && (e[i] as Equipment).Kod == item.Kod));
+		Debug.Log (i);
+		if (i <= e.Count)
+			e.RemoveAt (i);
         
-        for (int i = 0; i < e.Count; i++)
-        {
-            if ((e[i] as Equipment).Kod == item.Kod) //goldot nem tudunk levenni, mert az "e" az Collectibles tipusú
-            {
-                e.Remove(item);
-            }
-        }
-        item.transform.parent = null;
+        //for (int i = 0; i < e.Count; i++)
+        //{
+		//	if ((e[i] is Equipment) && (e[i] as Equipment).Kod == item.Kod)
+        //    {
+        //        e.Remove(item);
+        //    }
+        //}
     }
+
+	public void DetachEquipment(Valuable item)
+	{
+		int i = -1;
+		do
+		{
+			i++;
+		}
+		while((i > e.Count) || ((e[i] is Valuable) && (e[i] as Valuable).value == item.value));
+
+		if (i <= e.Count)
+			e.RemoveAt (i);
+	}
 
 
 

@@ -11,6 +11,7 @@ public class Door : DynamicFieldObject {
 	public GameObject door02;
     public AudioSource openingAudio;
     public AudioSource closingingAudio;
+	private float baseRotation;
 
     [Range(10, 20)]
     public int keyID;
@@ -18,6 +19,7 @@ public class Door : DynamicFieldObject {
     // Use this for initialization
     void Start () {
 		opened = false;
+		baseRotation = this.transform.parent.eulerAngles.y;
 	}
 	
 	public override void Interaction (bool IsManualyOperated)
@@ -58,15 +60,15 @@ public class Door : DynamicFieldObject {
         if (opened)
         {
             //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
-            newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 100);
-            transform.rotation = newRot;
+			newRot = Quaternion.RotateTowards(transform.parent.rotation, Quaternion.Euler(0.0f, baseRotation + 90.0f, 0.0f), Time.deltaTime * 100);
+			transform.parent.rotation = newRot;
             
         }
         else
         {
             //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;
-            newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 100);
-            transform.rotation = newRot;
+			newRot = Quaternion.RotateTowards(transform.parent.rotation, Quaternion.Euler(0.0f, baseRotation, 0.0f), Time.deltaTime * 100);
+			transform.parent.rotation = newRot;
            
         }
     }

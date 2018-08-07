@@ -21,12 +21,13 @@ public abstract class Equipment : Collectible {
 
 	public override void PickUp(PlayerInventory inv)
 	{
-        Creature parent = this.gameObject.GetComponentInParent<Creature>();
+		Creature parent = this.transform.GetComponentInParent<Creature>();
 
         if (parent != null)
         {
             parent.DetachEquipment(this);
         }
+		this.transform.parent = null;
         inv.NewItem(this);
         gameObject.SetActive(false);
     }

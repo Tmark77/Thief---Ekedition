@@ -10,6 +10,11 @@ public abstract class AbstractCondition : MonoBehaviour {
 	//	get { return canBeKnockedOut;}
 	//}
 
+	public void Start()
+	{
+		this.agent = GetComponentInParent<NavMeshAgent>();
+	}
+
 	protected NavMeshAgent agent;
 
 	public virtual int DamageMultiplier () //gyanútlan ellenfél nagyobb sebzést kaphat, alap értéke 1

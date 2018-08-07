@@ -52,7 +52,7 @@ public class KnockedOutCondition : AbstractCondition {
 	void Start()
 	{
 		counter = 60f;
-		this.agent = GetComponent<NavMeshAgent>();
+		base.Start ();
 	}
 
 	public override int DamageMultiplier ()

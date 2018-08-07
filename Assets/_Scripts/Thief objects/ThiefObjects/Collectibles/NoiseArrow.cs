@@ -38,15 +38,15 @@ public class NoiseArrow : Equipment {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
 		{
 			ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
-			if ((obj as ThiefObject).material.Soft())
-			{
-				Rig = this.gameObject.GetComponent<Rigidbody>();
-				Rig.useGravity = false;
-				Rig.isKinematic = true;
-				hitWood.Play();
-
-			}
-			else
+			//if ((obj as ThiefObject).material.Soft())
+			//{
+			//	Rig = this.gameObject.GetComponent<Rigidbody>();
+			//	Rig.useGravity = false;
+			//	Rig.isKinematic = true;
+			//	hitWood.Play();
+			//
+			//}
+			//else
 			{
 				if (!played)
 				{

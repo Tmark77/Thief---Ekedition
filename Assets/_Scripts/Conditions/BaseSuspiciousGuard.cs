@@ -67,7 +67,7 @@ namespace AssemblyCSharp
 
         void Start()
         {
-            this.agent = GetComponent<NavMeshAgent>();
+			base.Start ();
         }
 
         public override AbstractCondition ChangeToBlind(Creature creature)

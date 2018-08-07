@@ -61,7 +61,7 @@ public class BlindGuardCondition : AbstractCondition {
 	// Use this for initialization
 	void Start () {
 		counter = 10f;
-		this.agent = GetComponent<NavMeshAgent>();
+		base.Start ();
 	}
 	
 	// Update is called once per frame

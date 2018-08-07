@@ -13,8 +13,8 @@ namespace AssemblyCSharp
 
 		void Start ()
 		{
+			base.Start ();
 			mat.color = Color.yellow;
-            this.agent = GetComponent<NavMeshAgent>();
 
         }
 

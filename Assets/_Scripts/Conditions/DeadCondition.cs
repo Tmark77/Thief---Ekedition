@@ -28,7 +28,7 @@ namespace AssemblyCSharp
 
 		void Start ()
 		{
-			this.agent = GetComponent<NavMeshAgent>();
+			base.Start ();
 		}
 
 		public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)

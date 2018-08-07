@@ -53,9 +53,9 @@ public class BaseAlertedGuard : AbstractCondition
         if (Vector3.Distance(agent.transform.position, creature.player.position) <= 3f)
         {
             agent.SetDestination(this.gameObject.transform.position);
-            Vector3 direction = (creature.player.position - transform.position).normalized;
+			Vector3 direction = (creature.player.position - transform.parent.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
+			transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
             if (hitCooldown < 0f)
             {
                 hitCooldown = 2f;
@@ -74,8 +74,7 @@ public class BaseAlertedGuard : AbstractCondition
     // Use this for initialization
     void Start()
     {
-        this.agent = GetComponent<NavMeshAgent>();
-
+		base.Start ();
     }
 
     // Update is called once per frame

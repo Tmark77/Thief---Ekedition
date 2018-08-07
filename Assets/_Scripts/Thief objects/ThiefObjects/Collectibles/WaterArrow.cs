@@ -38,6 +38,8 @@ public class WaterArrow : Equipment {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
             ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
+			Arrow a = this.gameObject.AddComponent<Arrow>();
+
 			if ((obj as ThiefObject).material.Soft())
             {
                 Rig = this.gameObject.GetComponent<Rigidbody>();
@@ -45,7 +47,10 @@ public class WaterArrow : Equipment {
                 Rig.isKinematic = true;
                 hitWood.Play();
                 (obj as ThiefObject).material.NoiseGeneration(1f);
-
+				//új sorok!!!!!!!!!!!!!!!!!!!!!!!!!
+				if (obj is Creature) {
+					a.transform.parent = obj.transform;
+				}
             }
             else
             {
@@ -73,8 +78,7 @@ public class WaterArrow : Equipment {
 			{
 				obj.GetComponent<Breakable> ().Break ();
 			}
-
-            Arrow a = this.gameObject.AddComponent<Arrow>();
+				
             a.material = this.gameObject.GetComponent<abstract_Material>();
             a.shot = this.shot;
             a.hit = this.hit;
