@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class Creature : ThiefObject, I_Highlightable {
 	
-	public Transform player;
-	public Transform head;
-	public Transform chest;
-	public Transform foot;
+	[System.NonSerialized] public Transform player;
+	[System.NonSerialized] public Transform head;
+	[System.NonSerialized] public Transform chest;
+	[System.NonSerialized] public Transform foot;
 	public AudioSource deadSound;
 	public float NoiseSensitivity;
 	public int SuspicionDecrease;
@@ -36,10 +36,15 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 
     void Start()
 	{
+		player = GameObject.FindGameObjectWithTag ("Player").transform;
+		head = player.Find ("Head").transform;
+		chest = player.Find ("Chest").transform;
+		foot = player.Find ("Foot").transform;
 		InvokeRepeating ("DecreaseSuspicion", 0f, 1f);
 		index = 0;
 		ReactTime = 1f;
         e.AddRange(this.gameObject.GetComponentsInChildren<Collectible>());
+
 	}
 
 	void Update()
