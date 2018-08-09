@@ -28,7 +28,8 @@ public class Arrow : Equipment {
 	public override bool Use (GameObject hand)
 	{
         this.gameObject.SetActive(true);
-        Shoot(hand);
+		StartCoroutine (Pull(hand));
+        //Shoot(hand);
         return true;
 	}
 
@@ -53,14 +54,15 @@ public class Arrow : Equipment {
                 hitWood.Play();
                 (obj as ThiefObject).material.NoiseGeneration(1f);
 
-
-				this.transform.parent = obj.transform.parent.transform;
-
+				try
+				{
+					this.transform.parent = obj.transform.parent.transform;
+				}
+				catch{}
 
             }
             else
-            {
-                
+            {  
                 if (!played)
                 {
                     {
@@ -84,8 +86,24 @@ public class Arrow : Equipment {
         }
     }
     
+	IEnumerator Pull(GameObject hand)
+	{
+		int shootforce = 100;
+		float t = Time.time;
+		yield return new WaitWhile (() => Input.GetMouseButton(0));
 
-    void Shoot(GameObject hand)
+		t = Time.time - t;
+		shootforce += (int)(750 * t);
+		if (shootforce > 1500) 
+		{
+			shootforce = 1500;
+		}
+			
+		Shoot (hand, shootforce);
+		yield return null;
+	}
+
+	void Shoot(GameObject hand, int shootforce)
     {
         played = false;
         shot.Play();
@@ -94,7 +112,8 @@ public class Arrow : Equipment {
         Rig = this.gameObject.GetComponent<Rigidbody>();
         Rig.useGravity = true;
         Rig.isKinematic = false;
-        Rig.AddForce(transform.forward * 1500f);
+		Rig.AddForce(transform.forward * shootforce);
+        //Rig.AddForce(transform.forward * 1500f);
         this.gameObject.transform.Translate(hand.transform.forward, Space.World);
         this.gameObject.SetActive(true);
 		IsShooted = true;
