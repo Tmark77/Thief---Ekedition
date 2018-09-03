@@ -6,7 +6,8 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public float startingHealth = 100;                            
+	public float startingHealth = 100;
+	int maximumHealth = 100;
 	public float currentHealth;                                   
 	public Slider healthSlider;                                 
 	public Image damageImage;                                   
@@ -21,12 +22,14 @@ public class PlayerHealth : MonoBehaviour
     
 
 
-	void Awake ()
+	void Start ()
 	{
         restart = false;
         deadText.SetActive(false);
         currentHealth = startingHealth;
-        counter = 3f;
+        counter = 3f; // ez majd később a nehézség függvénye lesz
+		Debug.Log(maximumHealth.ToString());
+		setHealthSlider ();
 	}
 
 
@@ -82,6 +85,18 @@ public class PlayerHealth : MonoBehaviour
 
         
 
+	}
+
+	public void GetHeal (int amount)
+	{
+
+		currentHealth += amount;
+		if (currentHealth > maximumHealth) 
+		{
+			currentHealth = maximumHealth;
+		}
+
+		setHealthSlider();
 	}
 
     float counter;

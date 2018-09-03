@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310700264817968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0.5, z: -11}
+  m_LocalPosition: {x: 7.8, y: 1, z: -0.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4871935197626950}
@@ -642,8 +642,8 @@ MonoBehaviour:
   SuspicionDecrease: 10
   KnownObjects: []
   Targets:
-  - {x: -10, y: 0.5, z: -11}
-  - {x: 0, y: 0.5, z: 0}
+  - {x: 8, y: 1, z: 0}
+  - {x: -9, y: 1, z: 0}
   condition: {fileID: 114008298556098658}
   condition_calm: {fileID: 114008298556098658}
   condition_suspicious: {fileID: 114405486179819288}
@@ -740,5 +740,5 @@ NavMeshAgent:
   m_AutoRepath: 0
   m_Height: 1
   m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4

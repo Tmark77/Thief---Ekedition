@@ -5,13 +5,29 @@ using UnityEngine;
 public class Door : DynamicFieldObject {
 
 	bool opened;
-    public bool locked; //true closed, false opened
+	[SerializeField]
+    private bool locked; //true closed, false opened
+
+	public bool Locked
+	{
+		get
+		{ 
+			return locked;
+		}
+		set
+		{
+			locked = value;
+			door_guard_comp_manager.DoorLockedStatusChanged (this.keyID, Locked);
+		}
+	}
     public bool canBeLockPicked;
     Quaternion newRot;
 	public GameObject door02;
     public AudioSource openingAudio;
     public AudioSource closingingAudio;
 	private float baseRotation;
+	public GameObject doorway;
+	private Door_Guard_CompatibilityManager door_guard_comp_manager;
 
     [Range(10, 20)]
     public int keyID;
@@ -20,6 +36,7 @@ public class Door : DynamicFieldObject {
     void Start () {
 		opened = false;
 		baseRotation = this.transform.parent.eulerAngles.y;
+		door_guard_comp_manager = GameObject.FindObjectOfType<Door_Guard_CompatibilityManager> ();
 	}
 	
 	public override void Interaction (bool IsManualyOperated)
@@ -57,6 +74,8 @@ public class Door : DynamicFieldObject {
 
     private void Update()
     {
+		if (!locked)
+			doorway.isStatic = false;
         if (opened)
         {
             //this.gameObject.GetComponent<BoxCollider>().isTrigger = false;

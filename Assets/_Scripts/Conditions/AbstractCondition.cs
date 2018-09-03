@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public abstract class AbstractCondition : MonoBehaviour {
 
@@ -51,6 +52,32 @@ public abstract class AbstractCondition : MonoBehaviour {
     {
         return true;
     }
+
+
+	public void DoorAvaible (int doorID)
+	{
+		this.Start ();
+		if ((agent.areaMask & (int)Math.Pow (2, doorID)) != (int)Math.Pow(2, doorID))
+		{
+			agent.areaMask = agent.areaMask + (int)Math.Pow (2, doorID);
+			Debug.Log ("avaible: "+ doorID);
+		}
+
+	}
+
+	//az útvonaltervből kiveszi az ajtót, theát nem mehet át az adott ajtón az őr
+	public void DoorDisable (int doorID)
+	{
+		if ((agent.areaMask & (int)Math.Pow (2, doorID)) == (int)Math.Pow(2, doorID))
+		{
+			agent.areaMask = agent.areaMask - (int)Math.Pow(2, doorID);
+			Debug.Log ("denied: "+ doorID);
+		}
+
+	}
+
+
+
 	//-----------------------------------------------------
 
 

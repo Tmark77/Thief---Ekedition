@@ -8,6 +8,7 @@ TagManager:
   - Ledge
   - Wall
   - Mesh
+  - Door
   layers:
   - Default
   - TransparentFX

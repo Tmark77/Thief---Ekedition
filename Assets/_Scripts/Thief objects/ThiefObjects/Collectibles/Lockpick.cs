@@ -23,7 +23,7 @@ public class Lockpick : Equipment {
                 if (hit.collider != null)
                 {
                     ThiefObject obj = hit.collider.gameObject.GetComponent<ThiefObject>();
-                    if (obj is Door && (obj as Door).locked)
+                    if (obj is Door && (obj as Door).Locked)
                     {
                         if ((obj as Door).canBeLockPicked)
                         {
@@ -70,7 +70,7 @@ public class Lockpick : Equipment {
         {
             Debug.Log("nyitva");
 			if(hit.collider.gameObject.GetComponent<Door>())
-            	hit.collider.gameObject.GetComponent<Door>().locked = false;
+            	hit.collider.gameObject.GetComponent<Door>().Locked = false;
 			passes = 0;
 			successLockPicking = false;
             //lockpicker.SetActive(false);

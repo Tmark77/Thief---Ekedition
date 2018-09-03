@@ -33,19 +33,21 @@ namespace AssemblyCSharp
 
 		private IEnumerator OpenClose(DynamicFieldObject obj)
 		{
+			Debug.Log ("works");
             if (this.condition.CanUseThings())
             {
-                if ((obj as Door).locked)
+                if ((obj as Door).Locked)
                 {
                     foreach (Collectible item in e)
                     {
+						//Debug.Log ((item as Equipment).Kod);
                         if ((item is Key) && (obj as Door).keyID == (item as Equipment).Kod)
                         {
-                            (obj as Door).locked = false;
+                            (obj as Door).Locked = false;
                         }
                     }
                 }
-                if (!(obj as Door).locked)
+                if (!(obj as Door).Locked)
                 {
                     obj.Interaction(true);
                     //(obj as Door).door02.GetComponent<Collider> ().isTrigger = true;
@@ -56,16 +58,15 @@ namespace AssemblyCSharp
                     {
                         if ((item is Key) && (obj as Door).keyID == (item as Equipment).Kod)
                         {
-                            (obj as Door).locked = true;
+                            (obj as Door).Locked = true;
                         }
                     }
-                    //(obj as Door).door02.GetComponent<Collider> ().isTrigger = false;
                 }
                 else
                 {
 
-                    this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                    Debug.Log(this.gameObject.GetComponent<Rigidbody>().isKinematic);
+					this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                    //Debug.Log(this.gameObject.GetComponent<Rigidbody>().isKinematic);
                 }
             }
 			

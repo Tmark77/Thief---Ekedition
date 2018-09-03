@@ -25,11 +25,11 @@ NavMeshProjectSettings:
     cost: 1
   - name: 
     cost: 1
-  - name: 
+  - name: Door 10
     cost: 1
   - name: 
     cost: 1
-  - name: 
+  - name: Door 12
     cost: 1
   - name: 
     cost: 1

@@ -22,7 +22,7 @@ public class SavingLoading : MonoBehaviour {
             z = player.transform.position.z,
 
             currentHealth = playerHealth.currentHealth,
-            startingHealth = playerHealth.startingHealth
+			startingHealth = playerHealth.startingHealth
         };
 
         startData = new PlayerData
@@ -32,7 +32,7 @@ public class SavingLoading : MonoBehaviour {
             z = player.transform.position.z,
 
             currentHealth = playerHealth.currentHealth,
-            startingHealth = playerHealth.startingHealth
+			startingHealth = playerHealth.startingHealth
         };
     }
 
@@ -45,7 +45,7 @@ public class SavingLoading : MonoBehaviour {
         data.y = player.transform.position.y;
         data.z = player.transform.position.z;
         data.currentHealth = playerHealth.currentHealth;
-        data.startingHealth = playerHealth.startingHealth;
+		data.startingHealth = playerHealth.startingHealth;
 
         bf.Serialize(stream,data);
         stream.Close();

@@ -15,6 +15,8 @@ namespace AssemblyCSharp
 		{
 			base.Start ();
 			mat.color = Color.yellow;
+			//agent.areaMask =  NavMesh.GetAreaFromName("DOOR");
+			//agent.areaMask = NavMesh.AllAreas;
 
         }
 

@@ -19,7 +19,8 @@ public class Interact : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate () 
+	{
 
         //if (MenuScript.isGameStarted)
         //{
@@ -46,14 +47,14 @@ public class Interact : MonoBehaviour {
 				LastLookedCollectible = null;
 			}
 		}
-            if (Input.GetMouseButtonDown(1))
-            {
-                RightClickInteracting();
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                LeftClickInteracting();
-            }
+        if (Input.GetMouseButtonDown(1))
+        {
+            RightClickInteracting();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            LeftClickInteracting();
+        }
         //}
 	}
 
