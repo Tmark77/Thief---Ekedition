@@ -32,15 +32,13 @@ namespace AssemblyCSharp
         }
 
 		private IEnumerator OpenClose(DynamicFieldObject obj)
-		{
-			Debug.Log ("works");
+        {
             if (this.condition.CanUseThings())
             {
                 if ((obj as Door).Locked)
                 {
                     foreach (Collectible item in e)
                     {
-						//Debug.Log ((item as Equipment).Kod);
                         if ((item is Key) && (obj as Door).keyID == (item as Equipment).Kod)
                         {
                             (obj as Door).Locked = false;

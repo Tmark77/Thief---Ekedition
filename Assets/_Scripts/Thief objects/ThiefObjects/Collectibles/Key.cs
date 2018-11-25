@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Key : Equipment
 {
-    [Range(10,20)]
+    [Range(10,20)] [SerializeField]
     public int keyID;
 	public string KeyName;
 
@@ -27,7 +27,7 @@ public class Key : Equipment
     }
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         kod = keyID;
 		nev = KeyName;
 	}

@@ -44,9 +44,10 @@ public class BlindGuardCondition : AbstractCondition {
 			creature.Suspicion = 130;
 			counter = 10f;
 			creature.condition = creature.condition_suspicious;
-		} 
+		}
+        if (agent.destination != creature.gameObject.transform.position)
+            agent.SetDestination (creature.gameObject.transform.position);
 
-		agent.SetDestination (creature.gameObject.transform.position);
 		counter -= Time.deltaTime;
 		Debug.Log (counter);
 	}

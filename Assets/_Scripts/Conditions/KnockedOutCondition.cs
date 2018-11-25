@@ -18,8 +18,9 @@ public class KnockedOutCondition : AbstractCondition {
 			counter = 60f;
 			creature.Targets.Add (this.gameObject.transform.position);
 			creature.condition = creature.condition_suspicious;
-		} 
-		agent.SetDestination (creature.gameObject.transform.position);
+		}
+        if (agent.destination != creature.gameObject.transform.position)
+            agent.SetDestination (creature.gameObject.transform.position);
 		counter -= Time.deltaTime;
 		//Debug.Log (counter);
 	}

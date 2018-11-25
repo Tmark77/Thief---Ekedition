@@ -44,11 +44,11 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 		index = 0;
 		ReactTime = 1f;
         e.AddRange(this.gameObject.GetComponentsInChildren<Collectible>());
-		for (int i = 0; i < e.Count; i++) 
+        for (int i = 0; i < e.Count; i++) 
 		{
-			if (e [i] is Equipment && ((e [i] as Equipment).Kod >= 10 && (e [i] as Equipment).Kod <= 20)) 
+            if (e [i] is Equipment && ((e [i] as Equipment).Kod >= 10 && (e [i] as Equipment).Kod <= 20)) 
 			{
-				condition.DoorAvaible ((e [i] as Equipment).Kod);
+                condition.DoorAvaible ((e [i] as Equipment).Kod);
 			}
 		}
 
@@ -256,17 +256,17 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 		do
 		{
 			i++;
-		}
-		while((i >= e.Count) || ((e[i] is Equipment) && (e[i] as Equipment).Kod == item.Kod));
-		//Debug.Log (i);
+        }
+		while((i < e.Count) && (!(e[i] is Equipment) || (e[i] as Equipment).Kod != item.Kod));
+
 		if (i < e.Count) 
 		{
-			if (item.Kod >= 10 && item.Kod <= 20) 
-			{
-				//condition.DoorDisable (item.Kod);
+			if (item.Kod >= 10 && item.Kod <= 20)
+            {
 				condition.DoorDisable (item.Kod);
 			}
-			e.RemoveAt (i);
+           
+            e.RemoveAt (i);
 		}
         
     }
@@ -283,7 +283,5 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 		if (i < e.Count)
 			e.RemoveAt (i);
 	}
-
-
 
 }

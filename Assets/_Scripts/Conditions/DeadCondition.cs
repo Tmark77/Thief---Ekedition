@@ -9,7 +9,8 @@ namespace AssemblyCSharp
 
 		public override void PatrolBehaviour (Creature creature,ref int index)
 		{
-			agent.SetDestination (this.gameObject.transform.position);
+            if (agent.destination != this.gameObject.transform.position)
+                agent.SetDestination (this.gameObject.transform.position);
 		}
 
 		public override AbstractCondition ChangeToKnockedOut (Creature creature)

@@ -78,7 +78,7 @@ public class PlayerInventory : MonoBehaviour {
         e.Add(item);
         i = e.Count - 1;
         eqKey = e[i].Kod;
-        if (eq.ContainsKey(item.Kod) && !(item is Key))
+        if (eq.ContainsKey(item.Kod))
         {
             eq[item.Kod] += 1;
         }

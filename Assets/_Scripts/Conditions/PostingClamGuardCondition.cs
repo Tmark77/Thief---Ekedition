@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+// Ezt majd az egészet át akarom írni a sima őrbe, hogy néhány beállítással lehessem megadni meddig álldogáljon, és merre nézzen közben.
 public class PostingClamGuardCondition : AbstractCondition {
 
 	[SerializeField] public Transform LookAtThis;

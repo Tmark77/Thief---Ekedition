@@ -27,23 +27,23 @@ NavMeshProjectSettings:
     cost: 1
   - name: Door 10
     cost: 1
-  - name: 
+  - name: Door 11
     cost: 1
   - name: Door 12
     cost: 1
-  - name: 
+  - name: Door 13
     cost: 1
-  - name: 
+  - name: Door 14
     cost: 1
-  - name: 
+  - name: Door 15
     cost: 1
-  - name: 
+  - name: Door 16
     cost: 1
-  - name: 
+  - name: Door 17
     cost: 1
-  - name: 
+  - name: Door 18
     cost: 1
-  - name: 
+  - name: Door 19
     cost: 1
   - name: 
     cost: 1
@@ -85,5 +85,7 @@ NavMeshProjectSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_SettingNames:
   - Humanoid

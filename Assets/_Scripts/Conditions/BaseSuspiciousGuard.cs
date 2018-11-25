@@ -19,7 +19,9 @@ namespace AssemblyCSharp
             }
             else
             {
-                agent.SetDestination(creature.Targets[creature.Targets.Count - 1]);
+
+                if (agent.destination != creature.Targets[creature.Targets.Count - 1])
+                    agent.SetDestination(creature.Targets[creature.Targets.Count - 1]);
 
                 if (Vector3.Distance(agent.transform.position, creature.Targets[creature.Targets.Count - 1]) < 0.5f)
                 {

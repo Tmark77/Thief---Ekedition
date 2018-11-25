@@ -3,7 +3,7 @@
 --- !u!134 &13400000
 PhysicMaterial:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MaxFriction
   dynamicFriction: 1
@@ -11,6 +11,3 @@ PhysicMaterial:
   bounciness: 0
   frictionCombine: 3
   bounceCombine: 0
-  frictionDirection2: {x: 0, y: 0, z: 0}
-  dynamicFriction2: 0
-  staticFriction2: 0

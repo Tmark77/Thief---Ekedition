@@ -52,7 +52,8 @@ public class BaseAlertedGuard : AbstractCondition
     {
         if (Vector3.Distance(agent.transform.position, creature.player.position) <= 3f)
         {
-            agent.SetDestination(this.gameObject.transform.position);
+            if(agent.destination != this.gameObject.transform.position)
+                agent.SetDestination(this.gameObject.transform.position);
 			Vector3 direction = (creature.player.position - transform.parent.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
 			transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
@@ -64,7 +65,8 @@ public class BaseAlertedGuard : AbstractCondition
         }
         else
         {
-            agent.destination = creature.Targets[creature.Targets.Count - 1];
+            if(agent.destination != creature.Targets[creature.Targets.Count - 1])
+            agent.SetDestination(creature.Targets[creature.Targets.Count - 1]);
         }
         hitCooldown -= Time.deltaTime;
 

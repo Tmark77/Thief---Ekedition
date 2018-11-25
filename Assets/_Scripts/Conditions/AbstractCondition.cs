@@ -57,7 +57,7 @@ public abstract class AbstractCondition : MonoBehaviour {
 	public void DoorAvaible (int doorID)
 	{
 		this.Start ();
-		if ((agent.areaMask & (int)Math.Pow (2, doorID)) != (int)Math.Pow(2, doorID))
+		if (CanUseThings() && ((agent.areaMask & (int)Math.Pow (2, doorID)) != (int)Math.Pow(2, doorID)))
 		{
 			agent.areaMask = agent.areaMask + (int)Math.Pow (2, doorID);
 			Debug.Log ("avaible: "+ doorID);

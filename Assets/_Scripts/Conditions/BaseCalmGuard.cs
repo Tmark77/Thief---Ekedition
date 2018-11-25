@@ -81,7 +81,10 @@ namespace AssemblyCSharp
 					index = 0;
 				}
 			}
-			else agent.SetDestination (creature.Targets [index]);
+            if (agent.destination != creature.Targets[index])
+            {
+                agent.SetDestination(creature.Targets[index]);
+            }
 
 
 		}

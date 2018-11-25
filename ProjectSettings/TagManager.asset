@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Mesh
   - Door
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - 
   - 
   - Glass
-  - 
-  - 
-  - 
+  - Door
+  - Collectibles
+  - Player
   - 
   - 
   - 
