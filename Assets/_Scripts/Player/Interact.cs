@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class Interact : MonoBehaviour {
+public class Interact : MonoBehaviour
+{
 
 	[SerializeField] public PlayerInventory inventory;
 	public Camera mainCam;
@@ -13,12 +14,11 @@ public class Interact : MonoBehaviour {
 	public GameObject hand;
 	ThiefObject LastLookedCollectible; //ez a név szar
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () 
 	{
 
@@ -78,9 +78,9 @@ public class Interact : MonoBehaviour {
 					this.gameObject.GetComponent<FirstPersonController> ().carriing = (obj as Creature).Carry ();
 					if (this.gameObject.GetComponent<FirstPersonController> ().carriing) 
 					{
-						//itt még felvesszük a bácsit
+						//itt felvesszük a bácsit
 						PickedUpCreature = obj;
-						PickedUpCreature.gameObject.SetActive (false);
+						PickedUpCreature.transform.parent.gameObject.SetActive (false);
 						//PickedUpCreature.GetComponent<Rigidbody> ().isKinematic = true;
 					}
 				}
@@ -89,9 +89,9 @@ public class Interact : MonoBehaviour {
 		else 
 		{
 			//itt most ledobjuk a bácsit
-			PickedUpCreature.gameObject.transform.position = this.gameObject.transform.position+this.gameObject.transform.forward*2;
+			PickedUpCreature.transform.parent.position = this.gameObject.transform.position+this.gameObject.transform.forward*2;
 			this.gameObject.GetComponent<FirstPersonController> ().carriing = false;
-			PickedUpCreature.gameObject.SetActive (true);
+            PickedUpCreature.transform.parent.gameObject.SetActive (true);
 		}
 	}
 
@@ -99,7 +99,14 @@ public class Interact : MonoBehaviour {
 	{
 		if (!this.gameObject.GetComponent<FirstPersonController> ().carriing) 
 		{
-			this.gameObject.GetComponent<PlayerInventory> ().UseItem ();
+            try
+            {
+                this.gameObject.GetComponent<PlayerInventory>().UseItem();
+            }
+            catch //hát ja, ennek nem try-catch-ben kéne lenni.
+            {
+                Debug.Log("You don't have any item to use.");
+            }
 		}
 			
 	}

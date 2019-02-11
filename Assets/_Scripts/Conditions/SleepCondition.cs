@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SleepCondition : AbstractCondition {
 	
@@ -29,19 +30,20 @@ public class SleepCondition : AbstractCondition {
 	{
 		throw new System.NotImplementedException ();
 	}
-	#endregion
+    #endregion
 
-	// Use this for initialization
-	void Start () {
-		base.Start ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-	public override int DamageMultiplier ()
+    //public SleepCondition(NavMeshAgent agent) : base(agent)
+    //{
+
+    //}
+
+    //public void Start()
+    //{
+    //    base.Start();        
+    //}
+
+    public override int DamageMultiplier ()
 	{
 		return 3;
 	}

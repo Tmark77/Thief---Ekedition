@@ -16,11 +16,9 @@ public class IsInShadow : MonoBehaviour {
 
     int i; //index
     int fullDark; //full shadow
-    public int range;
 
 	float distance; //distance of two objects
 	public Renderer mesh;
-	public Material mat;
 
 	public Light[] lights; //array of Lights
     public bool fullHide; //character is in shadow or not
@@ -115,7 +113,7 @@ public class IsInShadow : MonoBehaviour {
 
     /// <summary>
     /// ide kerül a képlet, amivel kiszámoljuk milyen erősséggel világít meg a fény. 
-    /// Egyelőre csak egy egyszerű % számírás van benne.
+    /// Egyelőre csak egy egyszerű % számítás van benne.
     ///paraméterei a fényforrás intetnzitása, a távolságunk a fénytől
     ///kimenő paramétere a vizsgált ponthoz (fej, test, láb) tartozó megvilágítottság
     /// </summary>

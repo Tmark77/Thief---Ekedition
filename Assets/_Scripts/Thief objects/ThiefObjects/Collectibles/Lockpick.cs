@@ -12,7 +12,7 @@ public class Lockpick : Equipment {
 
     public override bool Use(GameObject hand)
     {
-        if (this.gameObject.active == false)
+        if (!this.gameObject.activeInHierarchy)
         {
             this.gameObject.SetActive(true);
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;

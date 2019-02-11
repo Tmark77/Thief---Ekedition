@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Collectible : ThiefObject, I_Highlightable {
+public abstract class Collectible : ThiefObject, I_Highlightable
+{
 
 	public abstract void PickUp (PlayerInventory inv);
 
@@ -31,5 +33,4 @@ public abstract class Collectible : ThiefObject, I_Highlightable {
 			item.material.SetColor ("_EmissionColor", Color.black);
 		}
 	}
-
 }

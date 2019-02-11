@@ -27,8 +27,7 @@ public class PlayerHealth : MonoBehaviour
         restart = false;
         deadText.SetActive(false);
         currentHealth = startingHealth;
-        counter = 3f; // ez majd később a nehézség függvénye lesz
-		Debug.Log(maximumHealth.ToString());
+        counter = 3f;
 		setHealthSlider ();
 	}
 

@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 33642453332552146}
   - component: {fileID: 65659814340662690}
   - component: {fileID: 23331260820345776}
-  - component: {fileID: 114510528942311708}
   - component: {fileID: 114970578726059472}
   - component: {fileID: 114858401134072796}
   - component: {fileID: 114008298556098658}
@@ -106,6 +105,7 @@ GameObject:
   - component: {fileID: 114710866786601934}
   - component: {fileID: 54670556861253662}
   - component: {fileID: 82800132729954610}
+  - component: {fileID: 114298598985478334}
   m_Layer: 0
   m_Name: ENEMY
   m_TagString: Untagged
@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310700264817968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.8, y: 1, z: -0.32}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4871935197626950}
@@ -596,6 +596,17 @@ MonoBehaviour:
   material: {fileID: 114389850273724372}
   keyID: 12
   KeyName: "Semmihez se j\xF3 kulcs"
+--- !u!114 &114298598985478334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606812837119922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86f859cf5cbdb94eaa8079931914df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114380280367457272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,17 +644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 4e64b7e1861b0b04f8cf75b4837fcf2d, type: 2}
---- !u!114 &114510528942311708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606812837119922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86f859cf5cbdb94eaa8079931914df7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114600251927449936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,10 +666,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa0e5c82fe128d42b2dd8a8d3a87f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 114510528942311708}
+  material: {fileID: 114298598985478334}
   deadSound: {fileID: 82800132729954610}
   NoiseSensitivity: 1
   SuspicionDecrease: 10
+  RangeOfVision: 20
   KnownObjects: []
   Targets:
   - {x: 8, y: 1, z: 0}

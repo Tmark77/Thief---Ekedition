@@ -10,13 +10,13 @@ public class KnockedOutCondition : AbstractCondition {
 	{
 		if (counter == 60f) 
 		{
-			this.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+            creature.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 		}
 		
 		if (counter < 0f) {
 			creature.Suspicion = 130;
 			counter = 60f;
-			creature.Targets.Add (this.gameObject.transform.position);
+			creature.Targets.Add (creature.gameObject.transform.position);
 			creature.condition = creature.condition_suspicious;
 		}
         if (agent.destination != creature.gameObject.transform.position)
@@ -50,13 +50,18 @@ public class KnockedOutCondition : AbstractCondition {
 	#endregion
 	float counter;
 
-	void Start()
-	{
-		counter = 60f;
-		base.Start ();
-	}
+    //public KnockedOutCondition(NavMeshAgent agent) : base(agent)
+    //{
+    //    counter = 60f;
+    //}
 
-	public override int DamageMultiplier ()
+    public new void Start()
+    {
+        counter = 60f;
+        base.Start();
+    }
+
+    public override int DamageMultiplier ()
 	{
 		return 3;
 	}

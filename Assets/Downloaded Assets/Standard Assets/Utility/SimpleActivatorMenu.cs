@@ -7,7 +7,9 @@ namespace UnityStandardAssets.Utility
     {
         // An incredibly simple menu which, when given references
         // to gameobjects in the scene
+#pragma warning disable CS0618 // Type or member is obsolete
         public GUIText camSwitchButton;
+#pragma warning restore CS0618 // Type or member is obsolete
         public GameObject[] objects;
 
 

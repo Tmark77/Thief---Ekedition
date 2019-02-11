@@ -36,7 +36,6 @@ public class PlayerInventory : MonoBehaviour {
 		i = 0;
 
         eqKey = 0;
-
         
 	}
 	

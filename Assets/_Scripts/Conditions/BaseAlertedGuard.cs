@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using AssemblyCSharp;
 
 public class BaseAlertedGuard : AbstractCondition
 {
@@ -52,11 +51,11 @@ public class BaseAlertedGuard : AbstractCondition
     {
         if (Vector3.Distance(agent.transform.position, creature.player.position) <= 3f)
         {
-            if(agent.destination != this.gameObject.transform.position)
-                agent.SetDestination(this.gameObject.transform.position);
-			Vector3 direction = (creature.player.position - transform.parent.position).normalized;
+            if(agent.destination != creature.gameObject.transform.position)
+                agent.SetDestination(creature.gameObject.transform.position);
+			Vector3 direction = (creature.player.position - creature.transform.parent.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-			transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
+            creature.transform.parent.rotation = Quaternion.Slerp(creature.transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
             if (hitCooldown < 0f)
             {
                 hitCooldown = 2f;
@@ -73,15 +72,15 @@ public class BaseAlertedGuard : AbstractCondition
     }
 
 
-    // Use this for initialization
-    void Start()
-    {
-		base.Start ();
-    }
+    //public BaseAlertedGuard(NavMeshAgent agent) : base(agent)
+    //{
 
-    // Update is called once per frame
-    void Update()
-    {
+    //}
 
-    }
+    //public void Start()
+    //{
+    //    base.Start();
+    //}
+
+    
 }

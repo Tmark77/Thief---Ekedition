@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BlindGuardCondition : AbstractCondition {
+public class BlindGuardCondition : AbstractCondition
+{
 	
 	public override AbstractCondition ChangeToKnockedOut (Creature creature)
 	{
@@ -36,8 +37,8 @@ public class BlindGuardCondition : AbstractCondition {
 	{
 		if (counter == 10f) 
 		{
-			this.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
-			creature.Targets.Add(this.gameObject.transform.position);
+			creature.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			creature.Targets.Add(creature.gameObject.transform.position);
 		}
 
 		if (counter < 0f) {
@@ -59,16 +60,16 @@ public class BlindGuardCondition : AbstractCondition {
 
 	float counter;
 
-	// Use this for initialization
-	void Start () {
-		counter = 10f;
-		base.Start ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //public BlindGuardCondition(NavMeshAgent agent) : base(agent)
+    //{
+    //    counter = 10f;
+    //}
+
+    public new void Start()
+    {
+        counter = 10f;
+        base.Start();
+    }
 
     public override bool CanUseThings()
     {

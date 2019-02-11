@@ -9,19 +9,17 @@ public class PostingClamGuardCondition : AbstractCondition {
 
 	public Material mat;
 
-	void Start ()
-	{
-		mat.color = Color.yellow;
-		base.Start ();
+    //public PostingClamGuardCondition(NavMeshAgent agent) : base(agent)
+    //{
+    //    mat.color = Color.yellow;
+    //}
+    public new void Start()
+    {
+        mat.color = Color.yellow;
+        base.Start();
+    }
 
-	}
-
-	void Update()
-	{
-
-	}
-
-	public override int DamageMultiplier ()
+    public override int DamageMultiplier ()
 	{
 		return 3;
 	}
@@ -72,9 +70,9 @@ public class PostingClamGuardCondition : AbstractCondition {
 	{
 		if (Vector3.Distance(agent.transform.position,creature.Targets[index]) < 0.5f ) 
 		{
-			Vector3 direction = (LookAtThis.position - transform.parent.position).normalized;
+			Vector3 direction = (LookAtThis.position - creature.transform.parent.position).normalized;
 			Quaternion lookRotation = Quaternion.LookRotation(direction);
-			transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed/100);
+            creature.transform.parent.rotation = Quaternion.Slerp(creature.transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed/100);
 			//index++;
 		}
 		else agent.SetDestination (creature.Targets[index]);

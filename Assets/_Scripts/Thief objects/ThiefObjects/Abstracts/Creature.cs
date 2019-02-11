@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Creature : ThiefObject, I_Highlightable {
+public abstract class Creature : ThiefObject, I_Highlightable
+{
 	
 	[System.NonSerialized] public Transform player;
 	[System.NonSerialized] public Transform head;
@@ -16,7 +18,7 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 	private int vC;
 	private int vF;
 
-	protected int RangeOfVision;
+	[SerializeField][Range(0,100)] public int RangeOfVision; //protectedbe jobb lenne, lehet írok hozzá propertyt meg propertydrawert
 	private float ReactTime;
 
     public List<Collectible> KnownObjects = new List<Collectible>();
@@ -25,14 +27,14 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 	public List<Vector3> Targets = new List<Vector3> ();
 	int index;
 
-    public AbstractCondition condition;
-	public AbstractCondition condition_calm;
-	public AbstractCondition condition_suspicious;
-	public AbstractCondition condition_alert;
-	public AbstractCondition condition_dead;
-	public AbstractCondition condition_knockeddown;
-	public AbstractCondition condition_blind;
-	public AbstractCondition condition_sleep;
+    [HideInInspector] public AbstractCondition condition;
+	[HideInInspector] public AbstractCondition condition_calm;
+	[HideInInspector] public AbstractCondition condition_suspicious;
+	[HideInInspector] public AbstractCondition condition_alert;
+	[HideInInspector] public AbstractCondition condition_dead;
+	[HideInInspector] public AbstractCondition condition_knockeddown;
+	[HideInInspector] public AbstractCondition condition_blind;
+	[HideInInspector] public AbstractCondition condition_sleep;
 
     void Start()
 	{
@@ -110,18 +112,9 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 	{
 		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", Color.black);
 	}
-	#endregion
 
-	void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.red;
-		Vector3 Direction = transform.TransformDirection (Vector3.forward);
-		Gizmos.DrawRay (this.transform.position, Direction*20);
-		Direction = transform.TransformDirection(new Vector3(20f,0,0));
-		Gizmos.DrawRay (this.transform.position, Direction);
-		Direction = transform.TransformDirection(new Vector3(-20f,0,0));
-		Gizmos.DrawRay (this.transform.position, Direction);
-	}
+    public abstract float VisionAngle(); //igen, propertyként kéne...
+	#endregion
 		
 	bool IsInLineOfSight(Transform obj)
 	{
@@ -249,7 +242,6 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 		}
 	}
 		
-
     public void DetachEquipment(Equipment item)
     {
 		int i = -1;
@@ -283,5 +275,5 @@ public abstract class Creature : ThiefObject, I_Highlightable {
 		if (i < e.Count)
 			e.RemoveAt (i);
 	}
-
+    
 }
