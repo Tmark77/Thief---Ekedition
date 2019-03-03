@@ -13,9 +13,9 @@ public class CreatureEditor : Editor
 
         for (int i = 0; i < creature.Targets.Count; i++)
         {
-            creature.Targets[i] = Handles.PositionHandle(creature.Targets[i], Quaternion.identity);
+            creature.Targets[i].position = Handles.PositionHandle(creature.Targets[i].position, Quaternion.identity);
             Handles.BeginGUI();
-            var rectMin = Camera.current.WorldToScreenPoint(creature.Targets[i]);
+            var rectMin = Camera.current.WorldToScreenPoint(creature.Targets[i].position);
             var rect = new Rect();
             rect.xMin = rectMin.x;
             rect.yMin = SceneView.currentDrawingSceneView.position.height - rectMin.y;
@@ -34,128 +34,91 @@ public class CreatureEditor : Editor
         Handles.DrawSolidArc(creature.transform.position, creature.transform.up, StartPoint, 2 * creature.VisionAngle(), creature.RangeOfVision);
     }
 
-
     //nem tom hogy fog működni egy olyan creature-nél, akinek nincs sebzése
     //SerializedProperty damageProp;
     Creature c;
     List<Type> conditions;
-    static List<string> conditionNames = new List<string>();
+    //static List<string> conditionNames = new List<string>();
 
     void OnEnable()
     {
-        LookForConditions();
+        //LookForConditions();
         //damageProp = serializedObject.FindProperty("damage"); 
         
         c = (Creature)target;
     }
 
-    private void LookForConditions()
-    {
-        conditions = ReflectiveEnumerator.GetEnumerableOfType<AbstractCondition>();
-        for (int i = 0; i < conditions.Count; i++)
-        {
-            conditionNames.Add(conditions[i].ToString());
-        }
-        ActualCond = 0;
-        CalmCond = 0;
-        SuspiciousCond = 0;
-        AlertedCond = 0;
-        KnockedOutCond = 0;
-        BlindCond = 0;
-        SleepCond = 0;
-        DeadCond = 0;
-        ActualCond = 0;
+    //private void LookForConditions()
+    //{
+    //    conditions = ReflectiveEnumerator.GetEnumerableOfType<AbstractCondition>();
+    //    SelectedConditions = new List<int>();
 
-    }
+    //    for (int i = 0; i < conditions.Count; i++)
+    //    {
+    //        conditionNames.Add(conditions[i].ToString());
+    //        SelectedConditions.Add(0);
+    //    }
+
+
+    //    //ActualCond = 0;
+    //    //CalmCond = 0;
+    //    //SuspiciousCond = 0;
+    //    //AlertedCond = 0;
+    //    //KnockedOutCond = 0;
+    //    //BlindCond = 0;
+    //    //SleepCond = 0;
+    //    //DeadCond = 0;
+    //    //ActualCond = 0;
+
+    //}
+
+    //List<int> SelectedConditions;
 
 
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        serializedObject.Update();
+        //serializedObject.Update();
 
         
-        //EditorGUILayout.IntSlider(damageProp, 0, 100, new GUIContent("Damage"));
-        //if (!damageProp.hasMultipleDifferentValues)
-        //    ProgressBarDarkening(damageProp.intValue / 100.0f, "Damage");
+
 
         serializedObject.ApplyModifiedProperties();
 
         ProgressBar(c.Suspicion / 200.0f, c.Suspicion.ToString()); //ezzel nem tökéletes, majd finomítok rajta
 
         GUI.changed = false;
-        ActualCond = EditorGUILayout.Popup("Actual condition", ActualCond, conditionNames.ToArray());
-        CalmCond = EditorGUILayout.Popup("Calm condition", CalmCond, conditionNames.ToArray());
-        SuspiciousCond = EditorGUILayout.Popup("Suspicious condition", SuspiciousCond, conditionNames.ToArray());
-        AlertedCond = EditorGUILayout.Popup("Alerted condition", AlertedCond, conditionNames.ToArray());
-        BlindCond = EditorGUILayout.Popup("Blind condition", BlindCond, conditionNames.ToArray());
-        KnockedOutCond = EditorGUILayout.Popup("Knocked Out condition", KnockedOutCond, conditionNames.ToArray());
-        DeadCond = EditorGUILayout.Popup("Dead condition", DeadCond, conditionNames.ToArray());
-        SleepCond = EditorGUILayout.Popup("Sleep condition", SleepCond, conditionNames.ToArray());
+        //SelectedConditions[0] = EditorGUILayout.Popup("Actual condition", SelectedConditions[0], conditionNames.ToArray());
+        //SelectedConditions[1] = EditorGUILayout.Popup("Calm condition", SelectedConditions[1], conditionNames.ToArray());
+        //SelectedConditions[2] = EditorGUILayout.Popup("Suspicious condition", SelectedConditions[2], conditionNames.ToArray());
+        //SelectedConditions[3] = EditorGUILayout.Popup("Alerted condition", SelectedConditions[3], conditionNames.ToArray());
+        //SelectedConditions[4] = EditorGUILayout.Popup("Blind condition", SelectedConditions[4], conditionNames.ToArray());
+        //SelectedConditions[5] = EditorGUILayout.Popup("Knocked Out condition", SelectedConditions[5], conditionNames.ToArray());
+        //SelectedConditions[6] = EditorGUILayout.Popup("Dead condition", SelectedConditions[6], conditionNames.ToArray());
+        //SelectedConditions[7] = EditorGUILayout.Popup("Sleep condition", SelectedConditions[7], conditionNames.ToArray());
 
-        if (GUI.changed) //fúj, ez de szar. Meg kéne listázni
-        {
-            if (!c.gameObject.GetComponent(conditions[ActualCond]))
-            {
-                c.gameObject.AddComponent(conditions[ActualCond]);
-            }
-            c.condition = (AbstractCondition)c.gameObject.GetComponent(conditions[ActualCond]);
+        //if (GUI.changed)
+        //{
 
-            if (!c.gameObject.GetComponent(conditions[CalmCond]))
-            {
-                c.gameObject.AddComponent(conditions[CalmCond]);
-            }
-            c.condition_calm = (AbstractCondition)c.gameObject.GetComponent(conditions[CalmCond]);
+        //    for (int i = 0; i < SelectedConditions.Count; i++)
+        //    {
+        //        if (!c.gameObject.GetComponent(conditions[SelectedConditions[i]]))
+        //        {
+        //            c.gameObject.AddComponent(conditions[SelectedConditions[i]]);
+        //        }
+        //    }
+           
+        //    c.condition = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[0]]);
+        //    c.condition_calm = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[1]]);
+        //    c.condition_suspicious = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[2]]);
+        //    c.condition_alert = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[3]]);
+        //    c.condition_knockeddown = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[4]]);
+        //    c.condition_blind = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[5]]);
+        //    c.condition_dead = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[6]]);
+        //    c.condition_sleep = (AbstractCondition)c.gameObject.GetComponent(conditions[SelectedConditions[7]]);
 
-            if (!c.gameObject.GetComponent(conditions[SuspiciousCond]))
-            {
-                c.gameObject.AddComponent(conditions[SuspiciousCond]);
-            }
-            c.condition_suspicious = (AbstractCondition)c.gameObject.GetComponent(conditions[SuspiciousCond]);
-
-            if (!c.gameObject.GetComponent(conditions[AlertedCond]))
-            {
-                c.gameObject.AddComponent(conditions[AlertedCond]);
-            }
-            c.condition_alert = (AbstractCondition)c.gameObject.GetComponent(conditions[AlertedCond]);
-
-            if (!c.gameObject.GetComponent(conditions[KnockedOutCond]))
-            {
-                c.gameObject.AddComponent(conditions[KnockedOutCond]);
-            }
-            c.condition_knockeddown = (AbstractCondition)c.gameObject.GetComponent(conditions[KnockedOutCond]);
-
-            if (!c.gameObject.GetComponent(conditions[BlindCond]))
-            {
-                c.gameObject.AddComponent(conditions[BlindCond]);
-            }
-            c.condition_blind = (AbstractCondition)c.gameObject.GetComponent(conditions[BlindCond]);
-
-            if (!c.gameObject.GetComponent(conditions[SleepCond]))
-            {
-                c.gameObject.AddComponent(conditions[SleepCond]);
-            }
-            c.condition_sleep = (AbstractCondition)c.gameObject.GetComponent(conditions[SleepCond]);
-
-            if (!c.gameObject.GetComponent(conditions[DeadCond]))
-            {
-                c.gameObject.AddComponent(conditions[DeadCond]);
-            }
-            c.condition_dead = (AbstractCondition)c.gameObject.GetComponent(conditions[DeadCond]);
-
-        }
-
-
+        //}
     }
-
-    int CalmCond;
-    int SuspiciousCond;
-    int AlertedCond;
-    int KnockedOutCond;
-    int BlindCond;
-    int SleepCond;
-    int DeadCond;
-    int ActualCond;
 
     // Custom GUILayout progress bar.
     void ProgressBar(float value, string label)

@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class KnockedOutCondition : AbstractCondition {
-	#region implemented abstract members of AbstractCondition
+public class KnockedOutCondition : AbstractCondition
+{
+	
+	float counter;
 
-	public override void PatrolBehaviour (Creature creature,ref int index)
-	{
-		if (counter == 60f) 
-		{
-            creature.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
-		}
-		
+    public override void Init(Creature creature)
+    {
+        counter = 60f;
+        creature.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    public override void PatrolBehaviour (Creature creature,ref int index)
+    {
 		if (counter < 0f) {
 			creature.Suspicion = 130;
-			counter = 60f;
-			creature.Targets.Add (creature.gameObject.transform.position);
-			creature.condition = creature.condition_suspicious;
+			creature.Targets.Add (new PatrolPost(creature.gameObject.transform.position));
+			creature.Condition = creature.condition_suspicious;
 		}
         if (agent.destination != creature.gameObject.transform.position)
             agent.SetDestination (creature.gameObject.transform.position);
@@ -46,20 +48,6 @@ public class KnockedOutCondition : AbstractCondition {
 	public override void ReactToView (Creature creature,int H, int C, int F)
 	{
 	}
-		
-	#endregion
-	float counter;
-
-    //public KnockedOutCondition(NavMeshAgent agent) : base(agent)
-    //{
-    //    counter = 60f;
-    //}
-
-    public new void Start()
-    {
-        counter = 60f;
-        base.Start();
-    }
 
     public override int DamageMultiplier ()
 	{
@@ -71,5 +59,5 @@ public class KnockedOutCondition : AbstractCondition {
 		return true;
 	}
 
-
+   
 }

@@ -54,7 +54,7 @@ public class QuestManagerScript : MonoBehaviour {
         sumDeadGuards = 0;
         foreach (Creature g in guards)
         {
-            if (g.condition == g.condition_dead)
+            if (g.Condition == g.condition_dead)
             {
                 sumDeadGuards++;
             }

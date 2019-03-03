@@ -18,10 +18,7 @@ public class PlayerHealth : MonoBehaviour
                         
 	public static bool isDead = false;                                                
 	bool damaged;
-
     
-
-
 	void Start ()
 	{
         restart = false;

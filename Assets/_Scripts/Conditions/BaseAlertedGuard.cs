@@ -5,6 +5,13 @@ using UnityEngine.AI;
 
 public class BaseAlertedGuard : AbstractCondition
 {
+    private float hitCooldown = 0f;
+
+    public override void Init(Creature creature)
+    {
+        creature.runSpeed.SetToNavMeshAgent(agent);
+        //hitCooldown = 0f;
+    }
 
     public override AbstractCondition ChangeToKnockedOut(Creature creature)
     {
@@ -26,14 +33,13 @@ public class BaseAlertedGuard : AbstractCondition
     {
         if ((H > 0 || C > 0 || F > 0))
         {
-            creature.Targets[creature.Targets.Count - 1] = creature.player.position;
-            //agent.SetDestination (creature.Targets [creature.Targets.Count - 1]);
+            creature.Targets[creature.Targets.Count - 1].position = creature.player.position;
         }
         else
         {
             if (Vector3.Distance(agent.transform.position, creature.player.position) > 2f)
             {
-                creature.condition = creature.condition_suspicious;
+                creature.Condition = creature.condition_suspicious;
             }
 
         }
@@ -45,14 +51,14 @@ public class BaseAlertedGuard : AbstractCondition
 		creature.Suspicion += 2 * creature.SuspicionDecrease;
     }
 
-    private float hitCooldown = 0f;
-
     public override void PatrolBehaviour(Creature creature, ref int index)
     {
         if (Vector3.Distance(agent.transform.position, creature.player.position) <= 3f)
         {
-            if(agent.destination != creature.gameObject.transform.position)
+            if (agent.destination != creature.gameObject.transform.position)
+            {
                 agent.SetDestination(creature.gameObject.transform.position);
+            }
 			Vector3 direction = (creature.player.position - creature.transform.parent.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             creature.transform.parent.rotation = Quaternion.Slerp(creature.transform.parent.rotation, lookRotation, Time.deltaTime * agent.angularSpeed);
@@ -64,23 +70,10 @@ public class BaseAlertedGuard : AbstractCondition
         }
         else
         {
-            if(agent.destination != creature.Targets[creature.Targets.Count - 1])
-            agent.SetDestination(creature.Targets[creature.Targets.Count - 1]);
+            if(agent.destination != creature.Targets[creature.Targets.Count - 1].position)
+            agent.SetDestination(creature.Targets[creature.Targets.Count - 1].position);
         }
         hitCooldown -= Time.deltaTime;
 
     }
-
-
-    //public BaseAlertedGuard(NavMeshAgent agent) : base(agent)
-    //{
-
-    //}
-
-    //public void Start()
-    //{
-    //    base.Start();
-    //}
-
-    
 }

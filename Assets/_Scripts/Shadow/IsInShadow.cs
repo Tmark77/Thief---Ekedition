@@ -18,7 +18,7 @@ public class IsInShadow : MonoBehaviour {
     int fullDark; //full shadow
 
 	float distance; //distance of two objects
-	public Renderer mesh;
+	public Renderer lightgemMesh;
 
 	public Light[] lights; //array of Lights
     public bool fullHide; //character is in shadow or not
@@ -70,11 +70,11 @@ public class IsInShadow : MonoBehaviour {
         }
 
 		//LightGemTemp.text = "Head: " + vH + " Chest: " + vC + " Foot: " + vF + "Overall: "+ (vH+vC+vF)/3;
-		mesh.material.SetFloat ("_Emission", (((vH + vC + vF) / 3) * 0.02f));
+		lightgemMesh.material.SetFloat ("_Emission", ((vH + vC + vF) / 3) * 0.01f); //0.02f ----ez lenne az, ami eredetileg jó lenne, de a legészlelhetőbb változás 0-0.5 között van
 
-		if (mesh.material.GetFloat ("_Emission") == 0) 
+        if (lightgemMesh.material.GetFloat ("_Emission") == 0) 
 		{
-			mesh.material.SetFloat ("_Emission", 0.02f);
+			lightgemMesh.material.SetFloat ("_Emission", 0.01f); //ezt se felejtsük el átállítani módosításkor!
 		}
         //Debug.Log (mesh.material.GetFloat ("_Emission"));
 	
@@ -114,7 +114,7 @@ public class IsInShadow : MonoBehaviour {
     /// <summary>
     /// ide kerül a képlet, amivel kiszámoljuk milyen erősséggel világít meg a fény. 
     /// Egyelőre csak egy egyszerű % számítás van benne.
-    ///paraméterei a fényforrás intetnzitása, a távolságunk a fénytől
+    ///paraméterei a fényforrás intetnzitása és a távolságunk a fénytől
     ///kimenő paramétere a vizsgált ponthoz (fej, test, láb) tartozó megvilágítottság
     /// </summary>
     /// <param name="light_range"></param>

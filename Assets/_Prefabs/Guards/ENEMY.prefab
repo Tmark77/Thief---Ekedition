@@ -581,7 +581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04903525ee4063642aeb41f9c3b0b118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: 4e64b7e1861b0b04f8cf75b4837fcf2d, type: 2}
 --- !u!114 &114251358947924864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -643,7 +642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92b45705b16b9b40b1ada09f228c7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: 4e64b7e1861b0b04f8cf75b4837fcf2d, type: 2}
 --- !u!114 &114600251927449936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -673,8 +671,13 @@ MonoBehaviour:
   RangeOfVision: 20
   KnownObjects: []
   Targets:
-  - {x: 8, y: 1, z: 0}
-  - {x: -9, y: 1, z: 0}
+  - position: {x: 0, y: 0, z: 0}
+    rotation: 0
+    waitTime: 0
+  - position: {x: 0, y: 0, z: 0}
+    rotation: 0
+    waitTime: 0
+  index: 0
   condition: {fileID: 114008298556098658}
   condition_calm: {fileID: 114008298556098658}
   condition_suspicious: {fileID: 114405486179819288}

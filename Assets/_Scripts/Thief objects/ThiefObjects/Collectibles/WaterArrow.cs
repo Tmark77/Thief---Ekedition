@@ -2,43 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterArrow : Equipment {
-
-    Rigidbody Rig;
-    public AudioSource shot;
+public class WaterArrow : Arrow
+{
     public AudioSource hitWood;
     public AudioSource hit;
     public AudioSource water;
-    bool played;
-	bool IsShooted;
 
-    // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		kod = 1;
-        played = false;
-		IsShooted = false;
-		nev = "Water Arrow";
+        nev = "Water Arrow";
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-		
-    public override bool Use(GameObject hand)
-    {
-        this.gameObject.SetActive(true);
-        Shoot(hand);
-        return true;
-    }
-
-
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
             ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
-			Arrow a = this.gameObject.AddComponent<Arrow>();
+			NormalArrow a = this.gameObject.AddComponent<NormalArrow>();
 
 			if ((obj as ThiefObject).material.Soft())
             {
@@ -47,8 +28,9 @@ public class WaterArrow : Equipment {
                 Rig.isKinematic = true;
                 hitWood.Play();
                 (obj as ThiefObject).material.NoiseGeneration(1f);
-				//új sorok!!!!!!!!!!!!!!!!!!!!!!!!!
-				if (obj is Creature) {
+				
+				if (obj is Creature)
+                {
 					a.transform.parent = obj.transform;
 				}
             }
@@ -88,22 +70,5 @@ public class WaterArrow : Equipment {
 			Destroy(this);
         }
     }
-
-
-    void Shoot(GameObject hand)
-    {
-        //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
-        played = false;
-        shot.Play();
-        this.gameObject.transform.position = hand.transform.position;
-        this.gameObject.transform.rotation = hand.transform.rotation;
-        Rig = this.gameObject.GetComponent<Rigidbody>();
-        Rig.useGravity = true;
-        Rig.isKinematic = false;
-        Rig.AddForce(transform.forward * 1500f);
-        this.gameObject.transform.Translate(hand.transform.forward, Space.World);
-        this.gameObject.SetActive(true);
-		IsShooted = true;
-    }
-
+    
 }

@@ -2,34 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MossArrow : Equipment
+public class MossArrow : Arrow
 {
-    Rigidbody Rig;
     public GameObject plane;
-    public AudioSource shot;
     public AudioSource moss;
-	bool IsShooted;
-
-    public override bool Use(GameObject hand)
+	
+    void Start ()
     {
-        this.gameObject.SetActive(true);
-        Shoot(hand);
-        return true;
-    }
-
-    // Use this for initialization
-    void Start () {
         kod = 3;
-		IsShooted = false;
 		nev = "Moss Arrow";
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
@@ -48,19 +32,4 @@ public class MossArrow : Equipment
         }
     }
 
-
-    void Shoot(GameObject hand)
-    {
-        //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
-        shot.Play();
-        this.gameObject.transform.position = hand.transform.position;
-        this.gameObject.transform.rotation = hand.transform.rotation;
-        Rig = this.gameObject.GetComponent<Rigidbody>();
-        Rig.useGravity = true;
-        Rig.isKinematic = false;
-        Rig.AddForce(transform.forward * 1500f);
-        this.gameObject.transform.Translate(hand.transform.forward, Space.World);
-        this.gameObject.SetActive(true);
-		IsShooted = true;
-    }
 }

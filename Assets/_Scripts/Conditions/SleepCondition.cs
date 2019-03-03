@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SleepCondition : AbstractCondition {
-	
-	#region implemented abstract members of AbstractCondition
-	public override AbstractCondition ChangeToKnockedOut (Creature creature)
+public class SleepCondition : AbstractCondition
+{
+
+    public override void Init(Creature creature)
+    {
+        
+    }
+
+    public override AbstractCondition ChangeToKnockedOut (Creature creature)
 	{
 		throw new System.NotImplementedException ();
 	}
@@ -30,18 +35,7 @@ public class SleepCondition : AbstractCondition {
 	{
 		throw new System.NotImplementedException ();
 	}
-    #endregion
 
-
-    //public SleepCondition(NavMeshAgent agent) : base(agent)
-    //{
-
-    //}
-
-    //public void Start()
-    //{
-    //    base.Start();        
-    //}
 
     public override int DamageMultiplier ()
 	{
@@ -52,4 +46,6 @@ public class SleepCondition : AbstractCondition {
     {
         return false;
     }
+
+   
 }

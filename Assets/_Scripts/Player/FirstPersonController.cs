@@ -78,6 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         private PlayerHealth playerHealth;
+        public Transform deadCam;
 
 
         // Use this for initialization
@@ -113,8 +114,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //Debug.Log("firstperson awake");
         }
 
-        public Transform deadCam;
-        // Update is called once per frame
+
         private void Update()
 		{
             if (!PlayerHealth.isDead)
@@ -165,6 +165,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				sneaking = true;
 			else
 				sneaking = false;
+
 			if (Input.GetKeyDown(GameManager.GM.crouch) && m_CharacterController.isGrounded && !carriing) {
 				crouching = !crouching;
 				actuallyCrouched = true;
@@ -198,11 +199,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			currentSpeed = m_WalkSpeed;
 
-			if (crouching) {
-				currentSpeed += crouchSpeed;
-				m_CharacterController.height = 0.6f;
-			} else
-				m_CharacterController.height = 1.8f;
+            if (crouching)
+            {
+                currentSpeed += crouchSpeed;
+                m_CharacterController.height = 0.6f;
+            }
+            else
+            {
+                m_CharacterController.height = 1.8f;
+            }
 			if (sneaking)
 				currentSpeed += sneakSpeed;
 			if (running)
@@ -247,16 +252,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
+            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+                               m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            m_MoveDir.x = desiredMove.x * speed;
+            m_MoveDir.z = desiredMove.z * speed;
 
 
 
@@ -267,22 +272,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (m_Jump)
                 {
-					if (crouching) {
-						crouching = false;
-						m_Jump = false;
-					} else {
-						m_MoveDir.y = m_JumpSpeed;
-						PlayJumpSound ();
-						m_Jump = false;
-						m_Jumping = true;
-					}
+                    if (crouching)
+                    {
+                        crouching = false;
+                        m_Jump = false;
+                    }
+                    else
+                    {
+                        m_MoveDir.y = m_JumpSpeed;
+                        PlayJumpSound();
+                        m_Jump = false;
+                        m_Jumping = true;
+                    }
                 }
             }
             else
             {
-                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
+                m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
@@ -339,7 +347,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		{
 			RaycastHit hit;
 			Physics.Raycast (transform.position, Vector3.down, out hit);
-			ThiefObject thiefObj = hit.collider.gameObject.GetComponent<ThiefObject> ();
+            GameObject go = hit.collider.gameObject;
+            while (go.GetComponent<ThiefObject>() == null && go.transform.parent != null)
+            {
+                go = go.transform.parent.gameObject;
+            }
+            if (go.GetComponent<ThiefObject>() == null)
+            {
+                Debug.Log("This shit that you stand on is not ThiefObject!");
+                return;
+            }
+                
+			ThiefObject thiefObj = go.GetComponent<ThiefObject>();
 			float noise = thiefObj.material.NoiseGeneration (vehemencia);//a vehemecia az az érték, hogy milyen erősen léptünk a felületre
 
 			Collider[] colliders = Physics.OverlapSphere(transform.position, noise);

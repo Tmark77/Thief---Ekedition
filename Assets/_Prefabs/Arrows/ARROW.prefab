@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2eaae50f1e1f9246b189afa03e0f6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 114758662952309532}
+  material: {fileID: 0}
   shot: {fileID: 82586695336061428}
   hitWood: {fileID: 82344694176744326}
   hit: {fileID: 82562456469877206}

@@ -6,16 +6,12 @@ using System;
 
 public abstract class AbstractCondition : MonoBehaviour
 {
-
-    //public AbstractCondition(NavMeshAgent agent)
-    //{
-    //    this.agent = agent;
-    //}
-
-    public void Start()
+    public void Awake()
     {
         this.agent = this.transform.parent.GetComponent<NavMeshAgent>();
     }
+
+    public abstract void Init(Creature creature);
 
     protected NavMeshAgent agent;
 
@@ -27,12 +23,6 @@ public abstract class AbstractCondition : MonoBehaviour
     public virtual bool CarryAble()
     {
         return false;
-    }
-
-    public AbstractCondition ChangeToDead(Creature creature)
-    {
-        creature.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        return creature.condition_dead;
     }
 
     //--------------------------------------------------
@@ -57,11 +47,11 @@ public abstract class AbstractCondition : MonoBehaviour
 
     public void DoorAvaible(int doorID)
     {
-        this.Start();
+        this.Awake();
         if (CanUseThings() && ((agent.areaMask & (int)Math.Pow(2, doorID)) != (int)Math.Pow(2, doorID)))
         {
             agent.areaMask = agent.areaMask + (int)Math.Pow(2, doorID);
-            Debug.Log("avaible: " + doorID);
+            //Debug.Log("avaible: " + doorID);
         }
 
     }

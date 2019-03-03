@@ -5,7 +5,6 @@ using UnityEngine;
 
 public abstract class Creature : ThiefObject, I_Highlightable
 {
-	
 	[System.NonSerialized] public Transform player;
 	[System.NonSerialized] public Transform head;
 	[System.NonSerialized] public Transform chest;
@@ -24,17 +23,33 @@ public abstract class Creature : ThiefObject, I_Highlightable
     public List<Collectible> KnownObjects = new List<Collectible>();
 	[System.NonSerialized] public List<Collectible> e = new List<Collectible>();
 	//ezen targetek módosíthatóak, ezekre a célpontokra fog menni az őr, támadni stb.
-	public List<Vector3> Targets = new List<Vector3> ();
-	int index;
+	public List<PatrolPost> Targets = new List<PatrolPost> ();
+    [HideInInspector]
+	public int index; //public, hogy rohadjon meg
 
-    [HideInInspector] public AbstractCondition condition;
-	[HideInInspector] public AbstractCondition condition_calm;
-	[HideInInspector] public AbstractCondition condition_suspicious;
-	[HideInInspector] public AbstractCondition condition_alert;
-	[HideInInspector] public AbstractCondition condition_dead;
-	[HideInInspector] public AbstractCondition condition_knockeddown;
-	[HideInInspector] public AbstractCondition condition_blind;
-	[HideInInspector] public AbstractCondition condition_sleep;
+    /*[HideInInspector] */public AbstractCondition condition; //nem kéne h publik legyen gec
+    [HideInInspector] public AbstractCondition Condition
+    {
+        get { return condition; }
+        set
+        {
+            condition = value;
+            condition.Init(this);
+        }
+    }
+
+    /*[HideInInspector]*/ public AbstractCondition condition_calm;
+	/*[HideInInspector]*/ public AbstractCondition condition_suspicious;
+	/*[HideInInspector]*/ public AbstractCondition condition_alert;
+	/*[HideInInspector]*/ public AbstractCondition condition_dead;
+	/*[HideInInspector]*/ public AbstractCondition condition_knockeddown;
+	/*[HideInInspector]*/ public AbstractCondition condition_blind;
+	/*[HideInInspector]*/ public AbstractCondition condition_sleep;
+
+    //értéket kell nekik adni a gyerek osztályokban!
+    public Speed walkSpeed;
+    public Speed runSpeed;
+
 
     void Start()
 	{
@@ -50,7 +65,7 @@ public abstract class Creature : ThiefObject, I_Highlightable
 		{
             if (e [i] is Equipment && ((e [i] as Equipment).Kod >= 10 && (e [i] as Equipment).Kod <= 20)) 
 			{
-                condition.DoorAvaible ((e [i] as Equipment).Kod);
+                Condition.DoorAvaible ((e [i] as Equipment).Kod);
 			}
 		}
 
@@ -58,8 +73,7 @@ public abstract class Creature : ThiefObject, I_Highlightable
 
 	void Update()
 	{
-		
-		condition.PatrolBehaviour (this,ref index);
+		Condition.PatrolBehaviour (this,ref index);
 		//----------------------------------------------------------------------------------------
 		if(ReactTime < 0f)
 		{
@@ -95,7 +109,7 @@ public abstract class Creature : ThiefObject, I_Highlightable
 					vF = 0;
 				}
 					
-				condition.ReactToView (this,vH,vC,vF);
+				Condition.ReactToView (this,vH,vC,vF);
 			}
 		}
 		ReactTime -= Time.deltaTime;
@@ -104,14 +118,33 @@ public abstract class Creature : ThiefObject, I_Highlightable
 	#region I_Highlightable implementation
 	public void Highlight()
 	{
-		if(condition.CarryAble())
-			this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", new Color(0.3f,0.3f,0.3f));
+        if (Condition.CarryAble())
+        {
+            if (this.gameObject.GetComponent<Renderer>() != null)
+            {
+                this.gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                this.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f, 0.3f, 0.3f));
+            }
+            Renderer[] rend = this.gameObject.transform.GetComponentsInChildren<Renderer>();
+            foreach (Renderer item in rend)
+            {
+                item.material.SetColor("_EmissionColor", new Color(0.3f, 0.3f, 0.3f));
+            }
+        }
 	}
 
 	public void DeHighlight()
 	{
-		this.gameObject.GetComponent<Renderer> ().material.SetColor ("_EmissionColor", Color.black);
-	}
+        if (this.gameObject.GetComponent<Renderer>() != null)
+        {
+            this.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+        }
+        Renderer[] rend = this.gameObject.transform.GetComponentsInChildren<Renderer>();
+        foreach (Renderer item in rend)
+        {
+            item.material.SetColor("_EmissionColor", Color.black);
+        }
+    }
 
     public abstract float VisionAngle(); //igen, propertyként kéne...
 	#endregion
@@ -194,15 +227,16 @@ public abstract class Creature : ThiefObject, I_Highlightable
 		}
 	}
 		
+    //átgondolni  jelenlegi működést zombikra (asszem szar)
     public void TakeDamage(int damage)
 	{
 		if(damage > 0)
-			Health = Health - (damage * condition.DamageMultiplier());
+			Health = Health - (damage * Condition.DamageMultiplier());
 		if (Health <= 0) 
 		{
-			if(condition!=condition_dead)
+			if(Condition!=condition_dead)
 				deadSound.Play();
-			condition = condition.ChangeToDead(this);
+			Condition = condition_dead;
             
 			//Debug.Log ("Meghaltam, segítség!");
 		}
@@ -211,22 +245,22 @@ public abstract class Creature : ThiefObject, I_Highlightable
 		
 	public void KnockOut()
 	{
-		condition = condition.ChangeToKnockedOut (this);
+		Condition = Condition.ChangeToKnockedOut (this);
 	}
 
 	public void Blinding()
 	{
-		condition = condition.ChangeToBlind (this);
+		Condition = Condition.ChangeToBlind (this);
 	}
 
 	public bool Carry()
 	{
-		return (condition.CarryAble ());
+		return (Condition.CarryAble ());
 	}
 
 	public void GetNoise(int noiseMeter, Vector3 location)
 	{
-		condition.ReactToNoise (this, noiseMeter, location);
+		Condition.ReactToNoise (this, noiseMeter, location);
 	}
 
 	public void DecreaseSuspicion()
@@ -234,7 +268,7 @@ public abstract class Creature : ThiefObject, I_Highlightable
 		//Debug.Log ("Suspicion: " + Suspicion);
 		if (Suspicion > 0) {
 			Suspicion -= (int)SuspicionDecrease;
-			condition.SuspicionDecreaseOverTime (this);
+			Condition.SuspicionDecreaseOverTime (this);
 		} 
 		else 
 		{
@@ -255,7 +289,7 @@ public abstract class Creature : ThiefObject, I_Highlightable
 		{
 			if (item.Kod >= 10 && item.Kod <= 20)
             {
-				condition.DoorDisable (item.Kod);
+				Condition.DoorDisable (item.Kod);
 			}
            
             e.RemoveAt (i);

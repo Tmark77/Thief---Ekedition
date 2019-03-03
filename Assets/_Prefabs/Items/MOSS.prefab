@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 65430124914351288}
   - component: {fileID: 23671957677263508}
   - component: {fileID: 114083674997111678}
-  - component: {fileID: 114439782348245076}
   - component: {fileID: 54283010256514068}
+  - component: {fileID: 114102400453960398}
   m_Layer: 0
   m_Name: MOSS
   m_TagString: Untagged
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31c54e3228e39a4a99a129353df7341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 114439782348245076}
---- !u!114 &114439782348245076
+  material: {fileID: 114102400453960398}
+--- !u!114 &114102400453960398
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

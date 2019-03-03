@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class DeadCondition : AbstractCondition
 {
+    public override void Init(Creature creature)
+    {
+        creature.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+    }
 
     public override void PatrolBehaviour(Creature creature, ref int index)
     {
@@ -26,16 +30,6 @@ public class DeadCondition : AbstractCondition
     {
     }
 
-    //public DeadCondition(NavMeshAgent agent) : base(agent)
-    //{
-
-    //}
-
-    //public void Start()
-    //{
-    //    base.Start();
-    //}
-
     public override void ReactToNoise(Creature creature, int noiseMeter, Vector3 location)
     {
     }
@@ -53,6 +47,7 @@ public class DeadCondition : AbstractCondition
     {
         return false;
     }
+
 }
 
 

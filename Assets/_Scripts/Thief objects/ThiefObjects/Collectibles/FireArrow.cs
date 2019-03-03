@@ -2,37 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireArrow : Equipment {
-
-    Rigidbody Rig;
-    public AudioSource shot;
+public class FireArrow : Arrow
+{
     public AudioSource hitWood;
     public AudioSource hit;
     public AudioSource fire;
-    bool played;
-	bool IsShooted;
-
-    public override bool Use(GameObject hand)
-    {
-        this.gameObject.SetActive(true);
-        Shoot(hand);
-        return true;
-    }
-
-    // Use this for initialization
+ 
     void Start () {
         kod = 2;
-        played = false;
-		IsShooted = false;
 		nev = "Fire Arrow";
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnTriggerEnter(Collider other)
+    
+    protected override void OnTriggerEnter(Collider other)
     {
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
         {
@@ -56,7 +37,7 @@ public class FireArrow : Equipment {
             }
 
             fire.Play();
-			Arrow a = this.gameObject.AddComponent<Arrow>();
+			NormalArrow a = this.gameObject.AddComponent<NormalArrow>();
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
             foreach (Collider nearbyObjects in colliders)
@@ -86,22 +67,5 @@ public class FireArrow : Equipment {
 			IsShooted = false;
 			Destroy(this);
         }
-    }
-
-
-    void Shoot(GameObject hand)
-    {
-        //GameObject arr = Instantiate(this.gameObject, hand.transform.position, hand.transform.rotation);
-        played = false;
-        shot.Play();
-        this.gameObject.transform.position = hand.transform.position;
-        this.gameObject.transform.rotation = hand.transform.rotation;
-        Rig = this.gameObject.GetComponent<Rigidbody>();
-        Rig.useGravity = true;
-        Rig.isKinematic = false;
-        Rig.AddForce(transform.forward * 1500f);
-        this.gameObject.transform.Translate(hand.transform.forward, Space.World);
-        this.gameObject.SetActive(true);
-		IsShooted = true;
     }
 }

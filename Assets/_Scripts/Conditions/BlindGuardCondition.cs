@@ -5,10 +5,18 @@ using UnityEngine.AI;
 
 public class BlindGuardCondition : AbstractCondition
 {
-	
-	public override AbstractCondition ChangeToKnockedOut (Creature creature)
+	float counter;
+
+    public override void Init(Creature creature)
+    {
+        counter = 10f;
+        creature.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        creature.Targets.Add(new PatrolPost(creature.gameObject.transform.position));
+    }
+
+    public override AbstractCondition ChangeToKnockedOut (Creature creature)
 	{
-		return creature.condition = creature.condition_knockeddown;
+		return creature.Condition = creature.condition_knockeddown;
 	}
 
 	public override AbstractCondition ChangeToBlind (Creature creature)
@@ -19,7 +27,7 @@ public class BlindGuardCondition : AbstractCondition
 	public override void ReactToNoise (Creature creature, int noiseMeter, Vector3 location)
 	{
 		creature.Targets.RemoveAt(creature.Targets.Count - 1);
-		creature.Targets.Add(location);
+		creature.Targets.Add(new PatrolPost(location));
 		creature.Suspicion += (int)(noiseMeter * creature.NoiseSensitivity);
 	}
 
@@ -35,16 +43,10 @@ public class BlindGuardCondition : AbstractCondition
 
 	public override void PatrolBehaviour (Creature creature, ref int index)
 	{
-		if (counter == 10f) 
-		{
-			creature.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
-			creature.Targets.Add(creature.gameObject.transform.position);
-		}
-
-		if (counter < 0f) {
+		if (counter < 0f)
+        {
 			creature.Suspicion = 130;
-			counter = 10f;
-			creature.condition = creature.condition_suspicious;
+			creature.Condition = creature.condition_suspicious;
 		}
         if (agent.destination != creature.gameObject.transform.position)
             agent.SetDestination (creature.gameObject.transform.position);
@@ -57,19 +59,6 @@ public class BlindGuardCondition : AbstractCondition
 	{
 		return 2;
 	}
-
-	float counter;
-
-    //public BlindGuardCondition(NavMeshAgent agent) : base(agent)
-    //{
-    //    counter = 10f;
-    //}
-
-    public new void Start()
-    {
-        counter = 10f;
-        base.Start();
-    }
 
     public override bool CanUseThings()
     {

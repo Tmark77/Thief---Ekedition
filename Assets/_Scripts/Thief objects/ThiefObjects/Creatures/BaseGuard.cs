@@ -9,13 +9,14 @@ public class BaseGuard : Creature
         RangeOfVision = 20;
         MaxHealth = 100;
         Health = MaxHealth;
+        walkSpeed = new Speed(2, 1000, 20);
+        runSpeed = new Speed(4, 500, 50);
     }
 
     public override bool IsInFieldOfView(float angle)
     {
         return Vector3.Distance(player.position, this.transform.position) < RangeOfVision && angle < VisionAngle();
     }
-
     
     public int damage;
 
@@ -27,12 +28,11 @@ public class BaseGuard : Creature
             StartCoroutine(OpenClose(other.gameObject.GetComponent<DynamicFieldObject>()));
         }
 
-
     }
 
     private IEnumerator OpenClose(DynamicFieldObject obj)
     {
-        if (this.condition.CanUseThings())
+        if (this.Condition.CanUseThings())
         {
             if ((obj as Door).Locked)
             {

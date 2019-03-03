@@ -2,51 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoiseArrow : Equipment {
-	Rigidbody Rig;
-	public AudioSource shot;
+public class NoiseArrow : Arrow
+{
+	
 	public AudioSource hitWood;
 	public AudioSource hit;
-	bool played;
-	bool IsShooted;
+	
 	float counter = 0;
 
-	// Use this for initialization
-	void Start () {
-		kod = 4;
-		played = false;
-		IsShooted = false;
+	void Start ()
+    {
+        kod = 4;
 		nev = "Noise Arrow";
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-
-	public override bool Use (GameObject hand)
-	{
-		this.gameObject.SetActive(true);
-		Shoot(hand);
-        return true;
-    }
-
-
-	private void OnTriggerEnter(Collider other)
+	
+	protected override void OnTriggerEnter(Collider other)
 	{
 		if (IsShooted && other.gameObject.GetComponent<ThiefObject>() != null)
 		{
 			ThiefObject obj = other.gameObject.GetComponent<ThiefObject>();
-			//if ((obj as ThiefObject).material.Soft())
-			//{
-			//	Rig = this.gameObject.GetComponent<Rigidbody>();
-			//	Rig.useGravity = false;
-			//	Rig.isKinematic = true;
-			//	hitWood.Play();
-			//
-			//}
-			//else
 			{
 				if (!played)
 				{
@@ -89,22 +64,5 @@ public class NoiseArrow : Equipment {
 				}
 			}
 		}
-
-	}
-
-
-	void Shoot(GameObject hand)
-	{
-		played = false;
-		shot.Play();
-		this.gameObject.transform.position = hand.transform.position;
-		this.gameObject.transform.rotation = hand.transform.rotation;
-		Rig = this.gameObject.GetComponent<Rigidbody>();
-		Rig.useGravity = true;
-		Rig.isKinematic = false;
-		Rig.AddForce(transform.forward * 1500f);
-		this.gameObject.transform.Translate(hand.transform.forward, Space.World);
-		this.gameObject.SetActive(true);
-		IsShooted = true;
 	}
 }

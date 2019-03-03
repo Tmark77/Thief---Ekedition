@@ -9,7 +9,6 @@ using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 //[DefaultExecutionOrder(-102)]
 public class Door : DynamicFieldObject
 {
-
     bool opened;
 
     [SerializeField]
@@ -30,7 +29,6 @@ public class Door : DynamicFieldObject
     }
     public bool canBeLockPicked;
     Quaternion newRot;
-    public GameObject door02;
     public AudioSource openingAudio;
     public AudioSource closingingAudio;
     private float baseRotation;
@@ -74,12 +72,7 @@ public class Door : DynamicFieldObject
                 closingingAudio.Play();
 
         }
-
-        //if (opened) {
-        //	door02.GetComponent<Collider> ().isTrigger = true;
-        //} else {
-        //	door02.GetComponent<Collider> ().isTrigger = false;
-        //}
+        
 
     }
 
